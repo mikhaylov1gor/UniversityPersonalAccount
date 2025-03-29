@@ -16,6 +16,26 @@ function AppRouter() {
                     path={RouteName.PROFILE_PAGE}
                     element= {<ProfilePage/>}
                 />
+
+                <Route
+                    path={RouteName.USEFUL_SERVICES_PAGE}
+                    element= {<ProfilePage/>}
+                />
+
+                <Route
+                    path={RouteName.CERTIFICATES_PAGE}
+                    element= {<ProfilePage/>}
+                />
+
+                <Route
+                    path={RouteName.EVENTS_PAGE}
+                    element= {<ProfilePage/>}
+                />
+
+                <Route
+                    path={RouteName.ADMIN_PAGE}
+                    element= {<ProfilePage/>}
+                />
             </Routes>
         </>
     )
