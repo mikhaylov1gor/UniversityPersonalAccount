@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import i18n from '../../../shared/libs/i18n';
+import i18n from '../../../shared/lib/i18n';
 import {LanguageCode, LANGUAGES} from "../../../shared/config/languages.ts";
 
 const LanguageSelector = () => {

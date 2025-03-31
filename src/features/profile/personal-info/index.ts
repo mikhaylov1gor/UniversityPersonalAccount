@@ -1,0 +1,1 @@
+export {PersonalInfoCard} from "./ui/PersonalInfoCard.tsx"
