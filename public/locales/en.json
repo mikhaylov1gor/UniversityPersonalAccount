@@ -5,5 +5,27 @@
     "password": "Password",
     "rememberMe": "Remember me",
     "loginButton": "LOG IN"
+  },
+  "profilePage": {
+    "title": "Profile",
+    "personalData": {
+      "title": "Personal Information",
+      "gender": "Gender",
+      "birthDate": "Date of Birth",
+      "citizenship": "Citizenship",
+      "snils": "SNILS",
+      "email": "E-mail"
+    },
+    "contacts": {
+      "title": "Contacts",
+      "phone": "Phone",
+      "phone2": "Phone 2",
+      "additionalEmail": "Additional E-mail",
+      "address": "Address"
+    },
+    "tabs": {
+      "education": "Education",
+      "work": "Work"
+    }
   }
 }

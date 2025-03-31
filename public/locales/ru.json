@@ -5,5 +5,27 @@
     "password": "Пароль",
     "rememberMe": "Запомнить меня",
     "loginButton": "ВОЙТИ"
+  },
+  "profilePage": {
+    "title": "Профиль",
+    "personalData": {
+      "title": "Личные данные",
+      "gender": "Пол",
+      "birthDate": "Дата рождения",
+      "citizenship": "Гражданство",
+      "snils": "СНИЛС",
+      "email": "E-mail"
+    },
+    "contacts": {
+      "title": "Контакты",
+      "phone": "Телефон",
+      "phone2": "Телефон 2",
+      "additionalEmail": "Дополнительный E-mail",
+      "address": "Адрес"
+    },
+    "tabs": {
+      "education": "Образование",
+      "work": "Работа"
+    }
   }
 }
