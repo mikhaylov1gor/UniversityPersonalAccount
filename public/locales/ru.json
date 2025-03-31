@@ -1,0 +1,9 @@
+{
+  "loginPage": {
+    "title": "Вход в аккаунт",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "rememberMe": "Запомнить меня",
+    "loginButton": "ВОЙТИ"
+  }
+}

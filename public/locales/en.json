@@ -1,0 +1,9 @@
+{
+  "loginPage": {
+    "title": "Account Login",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "loginButton": "LOG IN"
+  }
+}
