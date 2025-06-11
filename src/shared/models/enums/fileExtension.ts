@@ -1,0 +1,19 @@
+export enum FileExtension{
+    NotDefined,
+    Doc,
+    Docx,
+    Bmp,
+    Gif,
+    Jpeg,
+    Jpg,
+    Png,
+    Pdf,
+    Rar,
+    Xls,
+    Xlsx,
+    Zip,
+    Txt,
+    Heic,
+    Heif,
+    Sig
+}

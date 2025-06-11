@@ -25,7 +25,6 @@ export function ProfilePage() {
                     <ProfileHeader desktopOnly/>
 
                     <EducationAndWorkCard/>
-
                 </div>
             </div>
         </div>
