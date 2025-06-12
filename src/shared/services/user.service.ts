@@ -19,12 +19,12 @@ export const UserStoreApi = {
             pageSize: pageSize == null ? 5 : pageSize,
         }
 
-        let data: ProfileShortDtoPagedListWithMetadata = await axiosInstance.get(`${userController}/list`, {params});
+        const data: ProfileShortDtoPagedListWithMetadata = await axiosInstance.get(`${userController}/list`, {params});
         return data;
     },
 
     getSpecificUserProfileForAdmin: async (userId: string)=>{
-        let data: ProfileDto = await axiosInstance.get(`${userController}/${userId}`);
+        const data: ProfileDto = await axiosInstance.get(`${userController}/${userId}`);
         return data;
     },
 
@@ -37,12 +37,12 @@ export const UserStoreApi = {
     },
 
     getSpecificUserStudentForAdmin: async (userId: string)=>{
-        let data: StudentDto = await axiosInstance.get(`${userController}/${userId}/student`);
+        const data: StudentDto = await axiosInstance.get(`${userController}/${userId}/student`);
         return data;
     },
 
     getSpecificUserEmployeeForAdmin: async (userId: string)=>{
-        let data: EmployeeDto = await axiosInstance.get(`${userController}/${userId}/employee`);
+        const data: EmployeeDto = await axiosInstance.get(`${userController}/${userId}/employee`);
         return data;
     },
 

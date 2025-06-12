@@ -14,7 +14,7 @@ export const usefulServiceStoreApi = {
             pageSize: pageSize == null ? 5 : pageSize,
         }
 
-        let data: UsefulServiceDtoPagedListWithMetadata = await axiosInstance.get(`${usefulServicesController}`, {params})
+        const data: UsefulServiceDtoPagedListWithMetadata = await axiosInstance.get(`${usefulServicesController}`, {params})
         return data;
     },
 

@@ -4,9 +4,13 @@ import {LoginDto} from "@/shared/models/requests/loginDto.ts";
 import {LoginResultDto} from "@/shared/models/responses/loginResultDto.ts";
 
 export const AuthStoreApi = {
-    login: async (credentials: LoginDto) =>{
-        let data: LoginResultDto = await axiosInstance.post(`${authController}/login, credentials`);
-        return data;
+    login: async (credentials: LoginDto):Promise<LoginResultDto> =>{
+        const response = await axiosInstance.post(`${authController}/login`, credentials, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data;
     },
 
     logout: async () =>{

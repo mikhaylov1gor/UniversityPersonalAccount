@@ -3,7 +3,7 @@ import {filesController} from "@/shared/api/endpoints.ts";
 
 export const FilesStoreApi = {
     getFileById: async (id: string)=>{
-        let data = await axiosInstance.get(`${filesController}/${id}`);
+        const data = await axiosInstance.get(`${filesController}/${id}`);
         return data;
     },
 

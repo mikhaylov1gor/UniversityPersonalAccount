@@ -1,18 +1,55 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
+import { toast } from "react-toastify";
+import {AuthStoreApi} from "@/shared/services/auth.service.ts";
+import {LoginDto} from "@/shared/models/requests/loginDto.ts";
+import {useNavigate} from "react-router-dom";
+import {RouteName} from "@/shared/config/router";
 
 export function LoginCredentialsCard(){
     const [rememberMe, setRememberMe] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { t } = useTranslation();
+    const navigate = useNavigate();
+
+
+    const submit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const dto: LoginDto = {
+            email: email,
+            password: password,
+            rememberMe: rememberMe
+        };
+
+        try {
+            const response = await AuthStoreApi.login(dto);
+
+            if (response.loginSucceeded && response.accessToken && response.refreshToken) {
+                localStorage.setItem('accessToken', response.accessToken);
+                localStorage.setItem('refreshToken', response.refreshToken);
+                toast.success(t("toast.login.successMessage"));
+
+                navigate(RouteName.PROFILE_PAGE)
+            } else {
+                toast.error(t("toast.login.invalidCredentials"));
+            }
+
+        } catch (error) {
+            toast.error(
+                error.response?.data?.message ||
+                t("loginPage.errorMessage")
+            );
+        }
+    };
 
     return(
         <>
             <div className="w-full md:w-1/2 bg-white rounded-xl shadow-lg p-8">
                 <h2 className="text-2xl font-semibold text-center mb-6">{t("loginPage.title")}</h2>
 
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={submit}>
                     <div className="relative">
                         <input
                             type="email"

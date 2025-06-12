@@ -27,5 +27,12 @@
       "education": "Education",
       "work": "Work"
     }
+  },
+  "toast": {
+    "login": {
+      "successMessage": "Login is successful" ,
+      "errorMessage": "Unhandled exception",
+      "invalidCredentials": "Invalid login credentials"
+    }
   }
 }

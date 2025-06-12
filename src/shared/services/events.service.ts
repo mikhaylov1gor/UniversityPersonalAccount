@@ -36,17 +36,17 @@ export const EventsStoreApi = {
             page: page == null ? 1 : page,
             pageSize: pageSize == null ? 5 : pageSize
         }
-        let data: EventShortDtoPagedListWithMetadata = await axiosInstance.get(`${eventsController}/public/auth`, {params})
+        const data: EventShortDtoPagedListWithMetadata = await axiosInstance.get(`${eventsController}/public/auth`, {params})
         return data;
     },
 
     getPublicEventDetails: async (id: string)=>{
-        let data: EventDto = await axiosInstance.get(`${eventsController}/public/${id}`)
+        const data: EventDto = await axiosInstance.get(`${eventsController}/public/${id}`)
         return data;
     },
 
     checkIsUserParticipantOfEvent: async (id: string)=>{
-        let data = await axiosInstance.get(`${eventsController}/is_participant/${id}`)
+        const data = await axiosInstance.get(`${eventsController}/is_participant/${id}`)
         return data;
     },
 
@@ -79,7 +79,7 @@ export const EventsStoreApi = {
             pageSize: pageSize == null ? 5 : pageSize
         }
 
-        let data: EventShortDtoPagedListWithMetadata = await axiosInstance.get(`${eventsController}`, {params})
+        const data: EventShortDtoPagedListWithMetadata = await axiosInstance.get(`${eventsController}`, {params})
         return data;
     },
 
@@ -106,13 +106,13 @@ export const EventsStoreApi = {
         return await axiosInstance.delete(`${eventsController}`, {params})
     },
 
-    retrieveFullDetilsForAdmin: async (id: string)=>{
-        let data: EventDto = await axiosInstance.get(`${eventsController}/${id}`)
+    retrieveFullDetailsForAdmin: async (id: string)=>{
+        const data: EventDto = await axiosInstance.get(`${eventsController}/${id}`)
         return data;
     },
 
     editEventStatusForAdmin: async (dto: EventEditStatusDto)=>{
-        let data = await axiosInstance.put(`${eventsController}/status`, dto, {
+        const data = await axiosInstance.put(`${eventsController}/status`, dto, {
             headers:{
                 'Content-Type': 'application/json'
             }
