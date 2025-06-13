@@ -39,7 +39,7 @@ export function LoginCredentialsCard(){
         } catch (error) {
             toast.error(
                 error.response?.data?.message ||
-                t("loginPage.errorMessage")
+                t("toast.login.errorMessage")
             );
         }
     };

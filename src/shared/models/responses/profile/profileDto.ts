@@ -1,8 +1,8 @@
 import {Gender} from "@/shared/models/enums/gender.ts";
-import {FileDto} from "@/shared/api/models/responses/fileDto.ts";
-import {CountryDto} from "@/shared/api/models/responses/countryDto.ts";
-import {ContactDto} from "@/shared/api/models/responses/contactDto.ts";
 import {UserType} from "@/shared/models/enums/userType.ts";
+import {FileDto} from "@/shared/models/responses/fileDto.ts";
+import {CountryDto} from "@/shared/models/responses/countryDto.ts";
+import {ContactDto} from "@/shared/models/responses/contactDto.ts";
 
 export interface ProfileDto{
     id: string,
@@ -13,7 +13,7 @@ export interface ProfileDto{
     birthDate: string,
     gender: Gender,
     avatar: FileDto,
-    citizenShip: CountryDto,
+    citizenship: CountryDto,
     address: string | null,
     contacts: ContactDto[] | null,
     userTypes: UserType[] | null,

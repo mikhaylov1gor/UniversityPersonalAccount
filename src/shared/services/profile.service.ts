@@ -7,8 +7,8 @@ import {AvatarUpdateDto} from "@/shared/models/requests/avatarUpdateDto.ts";
 
 export const ProfileStoreApi = {
     getCurrentUserProfile: async () =>{
-        const data: ProfileDto = await axiosInstance.get(`${profileController}`)
-        return data;
+        const response = await axiosInstance.get<ProfileDto>(`${profileController}`)
+        return response.data;
     },
 
     getCurrentUserStudent: async () =>{

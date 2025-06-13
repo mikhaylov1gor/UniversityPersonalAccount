@@ -21,7 +21,8 @@
       "phone": "Телефон",
       "phone2": "Телефон 2",
       "additionalEmail": "Дополнительный E-mail",
-      "address": "Адрес"
+      "address": "Адрес",
+      "socialMedia": "Социальные сети"
     },
     "tabs": {
       "education": "Образование",
@@ -34,5 +35,12 @@
       "errorMessage": "Непредвиденная ошибка",
       "invalidCredentials": "Неверный логин или пароль"
     }
+  },
+  "menu": {
+    "profile": "Профиль",
+    "administration": "Администрирование",
+    "certificates": "Справки",
+    "usefulServices": "Полезные сервисы",
+    "events": "Мероприятия"
   }
 }

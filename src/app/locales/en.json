@@ -21,7 +21,8 @@
       "phone": "Phone",
       "phone2": "Phone 2",
       "additionalEmail": "Additional E-mail",
-      "address": "Address"
+      "address": "Address",
+      "socialMedia": "Social Media"
     },
     "tabs": {
       "education": "Education",
@@ -34,5 +35,12 @@
       "errorMessage": "Unhandled exception",
       "invalidCredentials": "Invalid login credentials"
     }
+  },
+  "menu": {
+    "profile": "Profile",
+    "administration": "Administration",
+    "certificates": "Certificates",
+    "usefulServices": "Useful Services",
+    "events": "Events"
   }
 }

@@ -3,8 +3,9 @@ import {filesController} from "@/shared/api/endpoints.ts";
 
 export const FilesStoreApi = {
     getFileById: async (id: string)=>{
-        const data = await axiosInstance.get(`${filesController}/${id}`);
-        return data;
+        return await axiosInstance.get(`${filesController}/${id}`, {
+            responseType: 'arraybuffer',
+        });
     },
 
     postFile: async (file: FormData)=>{

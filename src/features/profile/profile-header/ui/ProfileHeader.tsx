@@ -3,11 +3,13 @@ import {cn} from "@/shared/lib/cn/cn.ts";
 interface ProfileHeaderProps{
     mobileOnly?: boolean;
     desktopOnly?: boolean;
+    fullName: string;
 }
 
 export function ProfileHeader({
     mobileOnly = false,
     desktopOnly = false,
+    fullName
 }: ProfileHeaderProps){
     return (
         <div className={cn(
@@ -21,7 +23,7 @@ export function ProfileHeader({
             'font-small text-gray-900'
         )}>
 
-        Кузнецова Анна Георгиевна
+            {fullName}
         </h2>
     </div>
     );

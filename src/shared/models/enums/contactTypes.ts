@@ -1,5 +1,5 @@
 export enum ContactTypes{
-    Phone,
-    Email,
-    SocialMedia
+    Phone = "Phone",
+    Email = "Email",
+    SocialMedia = "SocialMedia"
 }
