@@ -22,7 +22,8 @@
       "phone2": "Телефон 2",
       "additionalEmail": "Дополнительный E-mail",
       "address": "Адрес",
-      "socialMedia": "Социальные сети"
+      "socialMedia": "Социальные сети",
+      "noAddress": "Адрес не указан"
     },
     "tabs": {
       "education": "Образование",

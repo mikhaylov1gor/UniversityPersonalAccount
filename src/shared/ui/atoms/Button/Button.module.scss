@@ -1,0 +1,90 @@
+@use '../../design/tokens' as tokens;
+
+.root {
+  height: 19px;
+
+  font-family: Raleway, 'sans-serif';
+  font-style: normal;
+  font-weight: 500;
+  font-size: tokens.$font-p1-size;
+  line-height: 19px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  @include tokens.respond(xs) {
+    font-size: tokens.$font-p1-m-size;
+    line-height: tokens.$font-p1-m-line;
+  }
+
+
+  &:focus {
+    outline: none;
+  }
+  border-radius: 8px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: tokens.$space-3 tokens.$space-5;
+  cursor: pointer;
+
+  vertical-align: middle;
+  min-width: 236px;
+  min-height: 49px;
+
+  &--primary {
+    background-color: tokens.$color-accent;
+    color: #fff;
+    border: none;
+
+    &:hover:not(:disabled) {
+      background-color: tokens.$color-button-hover;
+    }
+    &:active:not(:disabled) {
+      background-color: tokens.$color-active;
+    }
+    &:disabled {
+      background-color: tokens.$color-button-disabled;
+      cursor: unset;
+    }
+  }
+
+  &--outline {
+    font-weight: 400;
+    background: none;
+    color: tokens.$color-text;
+    border: 1px solid tokens.$color-text;
+    text-decoration-color: tokens.$color-text;
+
+    &:hover:not(:disabled) {
+      border: 1px solid tokens.$color-text;
+      box-shadow: tokens.$color-text 0 0 0 1px;
+    }
+    &:active:not(:disabled) {
+      border: 1px solid tokens.$color-active;
+      color: tokens.$color-active;
+      box-shadow: tokens.$color-active 0 0 0 1px;
+    }
+    &:disabled {
+      border-color: tokens.$color-button-disabled;
+      color: tokens.$color-button-disabled;
+      cursor: unset;
+    }
+  }
+
+  &--sm {
+    padding: tokens.$space-1;
+    min-width: 114px;
+    max-height: 32px;
+    min-height: 30px;
+    font-size: tokens.$font-p1-m-size;
+    text-transform: none;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    fill: none !important;
+    //display: inline-flex;
+  }
+}

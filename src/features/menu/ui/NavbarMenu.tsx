@@ -1,17 +1,12 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import { Menu, ChevronLeft, ChevronRight, User, Shield, FileText, Link, Map } from "lucide-react";
 import {useTranslation} from "react-i18next";
-import {FilesStoreApi} from "@/shared/services/files.service.ts";
 
-const menuItems = [
-    { icon: <User />, label: "{t(\"profilePage.personalData.gender\")}" },
-    { icon: <Shield />, label: "Администрирование" },
-    { icon: <FileText />, label: "Справки" },
-    { icon: <Link />, label: "Полезные сервисы" },
-    { icon: <Map />, label: "Мероприятия" },
-];
+interface NavbarMenuProps {
+    avatarUrl: string
+}
 
-export function NavbarMenu() {
+export function NavbarMenu({avatarUrl}: NavbarMenuProps) {
     const [open, setOpen] = useState(true);
     const [mobileMenu, setMobileMenu] = useState(false);
     const {t} = useTranslation();
@@ -35,23 +30,26 @@ export function NavbarMenu() {
                 </button>
             </div>
 
-            {/* Боковая панель */}
             <div className={`fixed top-0 left-0 h-full bg-white shadow-lg transition-all duration-300 
                 ${mobileMenu ? "w-64 z-50" : open ? "w-64" : "w-16"} hidden md:block`}>
 
                 <div className="flex justify-between items-center p-4">
                     <img
+                        src={avatarUrl ?? "https://via.placeholder.com/500x400?text=Profile+Photo"}
                         alt="avatar"
                         className="rounded-full w-12 h-12"
+                        onError={(e) => {
+                            (e.target as HTMLImageElement).src = "https://via.placeholder.com/500x400?text=Profile+Photo";
+                        }}
                     />
                     {open && (
                         <button onClick={toggleSidebar}>
-                            <ChevronLeft />
+                            <ChevronLeft/>
                         </button>
                     )}
                     {!open && (
                         <button onClick={toggleSidebar}>
-                            <ChevronRight />
+                            <ChevronRight/>
                         </button>
                     )}
                 </div>

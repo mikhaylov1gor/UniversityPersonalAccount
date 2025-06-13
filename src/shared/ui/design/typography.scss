@@ -1,0 +1,62 @@
+@use 'tokens' as tokens;
+
+// 1) Определяем CSS-переменные под все текстовые роли
+:root {
+  --font-h1: #{tokens.$font-h1-size};
+  --font-h2: #{tokens.$font-h2-size};
+  --font-h3: #{tokens.$font-h3-size};
+  --font-h4: #{tokens.$font-h4-size};
+  --font-p1: #{tokens.$font-p1-size};
+  --font-p2: #{tokens.$font-p2-size};
+  //--font-btn: tokens.$font-button-size;
+}
+
+// 2) Перекрываем переменные для мобильных (<=375px)
+@media (max-width: #{tokens.$bp-xs}) {
+  :root {
+    --font-h1: #{tokens.$font-h1-m-size};
+    --font-h2: #{tokens.$font-h2-m-size};
+    --font-p1: #{tokens.$font-p1-m-size};
+    --font-p2: #{tokens.$font-p2-m-size};
+    //--font-btn: #{tokens.$font-button-m-size};
+  }
+}
+
+// 3) Глобальные селекторы (можно заменить <h1> → .text-h1, если не любите глобальные теги)
+h1 {
+  font-size: var(--font-h1);
+  line-height: tokens.$font-h1-line;
+  //font-weight: tokens.$fw-medium;
+}
+h2 {
+  font-size: var(--font-h2);
+  line-height: tokens.$font-h2-line;
+  //font-weight: tokens.$fw-medium;
+}
+h3 {
+  font-size: var(--font-h3);
+  line-height: tokens.$font-h2-line;
+  //font-weight: tokens.$fw-regular;
+}
+h4 {
+  font-size: var(--font-h4);
+  line-height: tokens.$font-p1-line;
+  //font-weight: tokens.$fw-regular;
+}
+
+p, .text-p1 {
+  font-size: var(--font-p1);
+  line-height: tokens.$font-p1-line;
+  //font-weight: tokens.$fw-regular;
+}
+.small, .text-p2 {
+  font-size: var(--font-p2);
+  line-height: tokens.$font-p1-line;
+  font-weight: tokens.$fw-regular;
+}
+
+button, .text-button {
+  font-size: var(--font-btn);
+  line-height: tokens.$font-p1-line;
+  //font-weight: tokens.$fw-regular;
+}

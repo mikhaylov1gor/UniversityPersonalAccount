@@ -22,7 +22,8 @@
       "phone2": "Phone 2",
       "additionalEmail": "Additional E-mail",
       "address": "Address",
-      "socialMedia": "Social Media"
+      "socialMedia": "Social Media",
+      "noAddress": "Address undefined"
     },
     "tabs": {
       "education": "Education",

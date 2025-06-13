@@ -34,7 +34,6 @@ export function ProfilePage() {
         </div>
     }
 
-    console.log(profileData)
     return (
         <div className="min-h-screen bg-gray-100">
 
@@ -47,15 +46,17 @@ export function ProfilePage() {
 
                     <ProfileHeader
                         mobileOnly
-                        fullName={ `${profileData.lastName} ${profileData.firstName} ${profileData.patronymic}`}
+                        fullName={ `${profileData.lastName == null ? "undefined" : profileData.lastName} 
+                                    ${profileData.firstName == null ? "undefined" : profileData.firstName} 
+                                    ${profileData.patronymic == null ? "undefined" : profileData.patronymic}`}
                     />
 
                     <PersonalInfoCard
-                        gender={profileData.gender as string}
-                        birthDate={profileData.birthDate}
-                        citizenship={profileData.citizenship.name}
+                        gender={profileData.gender == null ? "undefined" : profileData.gender as string}
+                        birthDate={profileData.birthDate == null ? "undefined" : profileData.birthDate}
+                        citizenship={profileData.citizenship == null ? "undefined" : profileData.citizenship.name}
                         snils="000 000 000 000"
-                        email={profileData.email}
+                        email={profileData.email == null ? "undefined" : profileData.email}
                         avatarId={profileData.avatar.id}
                     />
 
@@ -68,7 +69,9 @@ export function ProfilePage() {
                 <div className="md:col-span-2 space-y-3">
                     <ProfileHeader
                         desktopOnly
-                        fullName={ `${profileData.lastName} ${profileData.firstName} ${profileData.patronymic}`}
+                        fullName={ `${profileData.lastName == null ? "undefined" : profileData.lastName} 
+                                    ${profileData.firstName == null ? "undefined" : profileData.firstName} 
+                                    ${profileData.patronymic == null ? "undefined" : profileData.patronymic}`}
                     />
 
                     <EducationAndWorkCard/>

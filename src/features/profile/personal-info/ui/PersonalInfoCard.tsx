@@ -21,11 +21,9 @@ export function PersonalInfoCard({gender, birthDate, citizenship, snils, email, 
             try {
                 setLoading(true);
                 const response = await FilesStoreApi.getFileById(avatarId);
-                console.log(response)
                 const blob = new Blob([response.data], { type: response.headers['content-type'] || 'image/jpeg' });
                 const url = URL.createObjectURL(blob);
 
-                console.log(url);
                 setAvatarUrl(url);
             } catch (error) {
                 console.error("Avatar loading error:", error);
