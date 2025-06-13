@@ -19,6 +19,10 @@ function AppRouter() {
     return (
         <Routes>
             <Route
+                path="/"
+                element={<Navigate to={RouteName.LOGIN_PAGE} replace />}
+            />
+            <Route
                 path={RouteName.LOGIN_PAGE}
                 element={<LoginPage />}
             />

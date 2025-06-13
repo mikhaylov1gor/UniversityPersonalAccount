@@ -41,11 +41,11 @@ export function PersonalInfoCard({gender, birthDate, citizenship, snils, email, 
         <>
             <div className="flex justify-center">
                 <img
-                    src={avatarUrl ?? "https://via.placeholder.com/500x400?text=Profile+Photo"}
+                    src={avatarUrl ?? "src/shared/assets/test/photo_profile.png"}
                     alt="Photo"
                     className="w-full max-w-xs sm:max-w-md object-cover"
                     onError={(e) => {
-                        (e.target as HTMLImageElement).src = "https://via.placeholder.com/500x400?text=Profile+Photo";
+                        (e.target as HTMLImageElement).src = "src/shared/assets/test/photo_profile.png";
                     }}
                 />
             </div>
