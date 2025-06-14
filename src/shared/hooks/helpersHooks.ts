@@ -11,8 +11,3 @@ export function useWindowWidth() {
 
     return width;
 }
-
-export function useIsMobile(breakpoint = 1200) {
-    const width = useWindowWidth();
-    return width <= breakpoint;
-}
