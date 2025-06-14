@@ -1,92 +1,159 @@
-import {useState} from "react";
-import {Menu} from "lucide-react";
-import {useTranslation} from "react-i18next";
-
-import {Icon} from "@/shared/ui/atoms/Icon/Icon.tsx";
-import {RouteName} from "@/shared/config/router";
-import {useLocation, useNavigate} from "react-router-dom";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { RouteName } from "@/shared/config/router";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Icon } from "@/shared/ui/atoms/Icon/Icon";
+import { Menu, X } from "lucide-react";
+import styles from "./NavbarMenu.module.scss";
 
 interface NavbarMenuProps {
-    avatarUrl: string
+    avatarUrl: string;
+    open: boolean;
+    mobileOverlay: boolean;
+    onToggleOpen: () => void;
+    onToggleMobileOverlay: () => void;
+    isDesktop: boolean;
 }
 
-export function NavbarMenu({avatarUrl}: NavbarMenuProps) {
-    const [open, setOpen] = useState(true);
-    const [mobileMenu, setMobileMenu] = useState(false);
-    const {t} = useTranslation();
+export function NavbarMenu({
+                               avatarUrl,
+                               open,
+                               mobileOverlay,
+                               onToggleOpen,
+                               onToggleMobileOverlay,
+                               isDesktop,
+                           }: NavbarMenuProps) {
+    const { t } = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
 
     const menuItems = [
-        { icon: <Icon name="user-black" size={40} fill={'none'}/>, label: t("menu.profile"), path: RouteName.PROFILE_PAGE},
-        { icon: <Icon name="administrator-black" size={40} fill={'none'}/>, label: t("menu.administration"), path: RouteName.ADMIN_PAGE },
-        { icon: <Icon name="document-black" size={40} fill={'none'} />, label: t("menu.certificates"), path: RouteName.CERTIFICATES_PAGE },
-        { icon: <Icon name="link-black" size={40} fill={'none'}/>, label: t("menu.usefulServices"), path: RouteName.USEFUL_SERVICES_PAGE },
-        { icon: <Icon name="map-black" size={40} fill={'none'}/>, label: t("menu.events"), path: RouteName.EVENTS_PAGE },
+        {
+            iconName: "user-black",
+            label: t("menu.profile"),
+            path: RouteName.PROFILE_PAGE
+        },
+        {
+            iconName: "administrator-black",
+            label: t("menu.administration"),
+            path: RouteName.ADMIN_PAGE
+        },
+        {
+            iconName: "document-black",
+            label: t("menu.certificates"),
+            path: RouteName.CERTIFICATES_PAGE
+        },
+        {
+            iconName: "link-black",
+            label: t("menu.usefulServices"),
+            path: RouteName.USEFUL_SERVICES_PAGE
+        },
+        {
+            iconName: "map-black",
+            label: t("menu.events"),
+            path: RouteName.EVENTS_PAGE
+        },
     ];
-
-    const toggleSidebar = () => setOpen(!open);
-    const toggleMobile = () => setMobileMenu(!mobileMenu);
 
     return (
         <>
-            <div className="md:hidden p-4">
-                <button onClick={toggleMobile}>
-                    <Menu />
+            {!isDesktop && (
+                <button
+                    className={styles.mobileBurger}
+                    aria-label={mobileOverlay ? "Закрыть меню" : "Открыть меню"}
+                    onClick={onToggleMobileOverlay}
+                >
+                    {mobileOverlay ? <X /> : <Menu />}
                 </button>
-            </div>
+            )}
 
-            <div className={`fixed top-0 left-0 h-full bg-white shadow-lg transition-all duration-300 
-                ${mobileMenu ? "block w-64 z-50 md:hidden" : open ? "hidden md:block w-64" : "hidden md:block w-24"}`}>
+            {!isDesktop && mobileOverlay && (
+                <div
+                    className={styles.mobileOverlayBackdrop}
+                    onClick={onToggleMobileOverlay}
+                />
+            )}
 
-                <div className="flex justify-between items-center p-4">
+            <aside
+                className={[
+                    styles.sidebar,
+                    isDesktop
+                        ? open
+                            ? styles["sidebar--expanded"]
+                            : styles["sidebar--collapsed"]
+                        : mobileOverlay
+                            ? styles["sidebar--mobile-visible"]
+                            : styles["sidebar--mobile-hidden"],
+                ]
+                    .filter(Boolean)
+                    .join(" ")}
+            >
+                <div className={styles.sidebar__header}>
                     <img
-                        src="src/shared/assets/test/photo_profile.png"
+                        src={avatarUrl}
                         alt="avatar"
-                        className="rounded-full w-12 h-12 mb-4"
+                        className={styles.sidebar__avatar}
                         onError={(e) => {
-                            (e.target as HTMLImageElement).src = "src/shared/assets/test/photo_profile.png\"";
+                            (e.target as HTMLImageElement).src =
+                                "src/shared/assets/test/photo_profile.png";
                         }}
                     />
-                    <button
-                        onClick={toggleSidebar}
-                        className="absolute right-[-12px] transform -translate-y-1/2 bg-white shadow-md rounded-full p-1 hidden md:block"
-                    >
-                        {open
-                            ? <Icon name="chevron-left-red" size={24} fill={'none'}/>
-                            : <Icon name="chevron-right-red" size={24} fill={'none'}/>}
-                    </button>
+                    {isDesktop && (
+                        <button
+                            onClick={onToggleOpen}
+                            className={styles.sidebar__toggleBtn}
+                            aria-label={open ? "Свернуть меню" : "Развернуть меню"}
+                        >
+                            {open ? (
+                                <Icon name="chevron-left-red" size={26} fill={"none"} />
+                            ) : (
+                                <Icon name="chevron-right-red" size={26} fill={"none"} />
+                            )}
+                        </button>
+                    )}
                 </div>
 
-                <ul className="mt-8">
-                    {menuItems.map((item, index) => {
+                <ul className={styles.sidebar__menu}>
+                    {menuItems.map((item, idx) => {
                         const isActive = location.pathname === item.path;
-                        const iconName = item.icon.props.name.replace("-black", isActive ? "-red" : "-black");
-
+                        const iconName = item.iconName.replace(
+                            "-black",
+                            isActive ? "-red" : "-black"
+                        );
                         return (
                             <li
-                                key={index}
+                                key={idx}
                                 onClick={() => {
                                     navigate(item.path);
-                                    setMobileMenu(false);
+                                    if (!isDesktop) {
+                                        onToggleMobileOverlay();
+                                    }
                                 }}
-                                className={`flex items-center gap-4 p-4 cursor-pointer hover:bg-blue-100 
-                                            ${isActive ? "bg-blue-100" : ""}`}
+                                className={[
+                                    styles.sidebar__menuItem,
+                                    isActive ? styles["sidebar__menuItem--active"] : "",
+                                    isDesktop
+                                        ? open
+                                            ? styles["sidebar__menuItem--expanded"]
+                                            : styles["sidebar__menuItem--collapsed"]
+                                        : styles["sidebar__menuItem--expanded"], // mobile overlay — покажем икон+текст
+                                ]
+                                    .filter(Boolean)
+                                    .join(" ")}
                             >
                                 <Icon name={iconName} size={40} fill="none" />
-                                {open && <span className="text-sm">{item.label}</span>}
+                                {(isDesktop ? open : true) && (
+                                    <span className={styles.sidebar__menuLabel}>
+                                        {item.label}
+                                    </span>
+                                )}
                             </li>
                         );
                     })}
                 </ul>
-            </div>
-
-            {mobileMenu && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-40 z-40 md:hidden"
-                    onClick={() => setMobileMenu(false)}
-                />
-            )}
+            </aside>
         </>
     );
 }
+
+export default NavbarMenu;

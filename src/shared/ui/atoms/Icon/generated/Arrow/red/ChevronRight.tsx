@@ -10,7 +10,7 @@ const SvgChevronRight = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#375FFF"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
