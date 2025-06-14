@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { LANGUAGES, LanguageCode } from '@/shared/config/languages.ts';
+import { LANGUAGES, LanguageCode } from '@/shared/config/languages.tsx';
 
 type ContextType = {
     language: LanguageCode;

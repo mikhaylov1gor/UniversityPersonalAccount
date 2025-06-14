@@ -1,29 +1,54 @@
-import React, {useState} from "react";
-import i18n from '../../../shared/lib/i18n';
-import {LanguageCode, LANGUAGES} from "@/shared/config/languages.ts";
+import React, {ChangeEvent, useState} from 'react'
+import i18n from '@/shared/lib/i18n'
+import {LanguageCode, LANGUAGES} from '@/shared/config/languages'
 
-const LanguageSelector = () => {
+export const LanguageSelector: React.FC = () => {
+    const [language, setLanguage] = useState<LanguageCode>(
+        i18n.language as LanguageCode
+    )
 
-    const [language, setLanguage] = useState(i18n.language);
-
-    const chooseLanguage = (e) => {
-        e.preventDefault();
-        i18n.changeLanguage(e.target.value);
-        setLanguage(e.target.value);
+    const chooseLanguage = (e: ChangeEvent<HTMLSelectElement>) => {
+        const newLang = e.target.value as LanguageCode
+        i18n.changeLanguage(newLang)
+        setLanguage(newLang)
     }
 
     return (
-        <div className="w-full flex justify-end p-4 bg-gray-100">
-            <select defaultValue={language} onChange={chooseLanguage}
-                    className="border border-gray-300 rounded-md p-1 bg-transparent text-sm">
-                {Object.entries(LANGUAGES).map(([code, lang]) => (
+        <div className="relative inline-flex items-center">
+            <select
+                value={language}
+                onChange={chooseLanguage}
+                className="focus:outline-none appearance-none pl-0 pr-0 py-1 text-transparent opacity-0 mr-2"
+            >
+                {Object.entries(LANGUAGES).map(([code, {name}]) => (
                     <option key={code} value={code}>
-                        {lang.name} {lang.flag}
+                        {name}
                     </option>
                 ))}
             </select>
-        </div>
-    );
-};
 
-export default LanguageSelector;
+            <div className="pointer-events-none absolute left-2 top-1/2 transform -translate-y-1/2">
+                {LANGUAGES[language].flag}
+            </div>
+
+            <div className="pointer-events-none absolute left-10 top-1/2 transform -translate-y-1/2">
+                <svg
+                    width="10"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L5 5L9 1"
+                        stroke="#555"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                    />
+                </svg>
+            </div>
+        </div>
+    )
+}
+
+export default LanguageSelector
