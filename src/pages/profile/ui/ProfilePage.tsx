@@ -26,7 +26,7 @@ export function ProfilePage() {
         };
 
         fetchProfile();
-    }, [t]);
+    }, []);
 
     if (loading){
         return <div>
