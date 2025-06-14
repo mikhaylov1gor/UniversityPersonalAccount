@@ -6,7 +6,12 @@
   ],
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] }
+    "types": ["vite/client", "node"],
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "src/vite-env.d.ts", "src/**/*"],
+
 }
