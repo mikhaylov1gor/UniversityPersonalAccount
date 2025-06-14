@@ -1,9 +1,9 @@
-import React, { JSX } from 'react';
-import { useSelector } from 'react-redux';
+import {type JSX } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { RouteName } from "@/shared/config/router";
 import { LoginPage } from "@/pages/login";
 import { ProfilePage } from "@/pages/profile";
+import {Layout} from "@/pages/layout/Layout";
 
 function AppRouter() {
     const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
@@ -31,7 +31,11 @@ function AppRouter() {
                 path={RouteName.PROFILE_PAGE}
                 element={
                     <ProtectedRoute>
-                        <ProfilePage />
+                        <Layout
+                            title="Профиль"
+                        >
+                            <ProfilePage />
+                        </Layout>
                     </ProtectedRoute>
                 }
             />
@@ -40,7 +44,11 @@ function AppRouter() {
                 path={RouteName.USEFUL_SERVICES_PAGE}
                 element={
                     <ProtectedRoute>
-                        <ProfilePage />
+                        <Layout
+                            title="Профиль"
+                        >
+                            <ProfilePage />
+                        </Layout>
                     </ProtectedRoute>
                 }
             />
@@ -49,7 +57,11 @@ function AppRouter() {
                 path={RouteName.CERTIFICATES_PAGE}
                 element={
                     <ProtectedRoute>
-                        <ProfilePage />
+                        <Layout
+                            title="Профиль"
+                        >
+                            <ProfilePage />
+                        </Layout>
                     </ProtectedRoute>
                 }
             />
@@ -58,7 +70,11 @@ function AppRouter() {
                 path={RouteName.EVENTS_PAGE}
                 element={
                     <ProtectedRoute>
-                        <ProfilePage />
+                        <Layout
+                            title="Профиль"
+                        >
+                            <ProfilePage />
+                        </Layout>
                     </ProtectedRoute>
                 }
             />

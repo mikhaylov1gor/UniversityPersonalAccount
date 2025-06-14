@@ -1,0 +1,74 @@
+@use "@/shared/ui/design/_tokens" as tokens;
+
+.layoutRoot {
+  display: flex;
+}
+
+.contentWrapper {
+  position: relative;
+  flex: 1;
+  margin-left: var(--side-spacing);
+  width: calc(100% - var(--side-spacing) * 1 - var(--side-spacing) * 1);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  //background-color: #fff;
+  padding: tokens.$space-2 tokens.$space-0;
+  z-index: 10;
+
+  &__innerDesktop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: tokens.$space-4;
+  }
+  &__title {
+    font-size: tokens.$font-h1-size;
+    line-height: tokens.$font-h1-line;
+    margin: 0;
+    font-weight: 500;
+  }
+  &__breadcrumbs {
+    font-size: tokens.$font-p2-size;
+    color: tokens.$color-text-p2;
+  }
+  &__right {
+    /* селектор языка */
+  }
+
+  &__innerMobileTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__spacer {
+    width: tokens.$space-4;
+  }
+  &__innerMobileBottom {
+    margin-top: tokens.$space-2;
+    display: flex;
+    flex-direction: column;
+    gap: tokens.$space-1;
+  }
+}
+
+.main {
+  flex: 1;
+  overflow: auto;
+  padding: tokens.$space-4 0;
+}
+
+.pageContainer {
+  width: 100%;
+  max-width: 94%;
+  margin: 0 auto;
+  padding: 0 tokens.$space-4;
+}

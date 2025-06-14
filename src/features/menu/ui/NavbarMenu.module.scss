@@ -1,0 +1,117 @@
+@use "@/shared/ui/design/_tokens" as tokens;
+
+.mobileBurger {
+  position: fixed;
+  top: tokens.$space-2;
+  left: tokens.$space-2;
+  z-index: 60;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobileOverlayBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 50;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  z-index: 55;
+  display: flex;
+  flex-direction: column;
+  min-width: 86px;
+  transition: width 0.3s ease, transform 0.3s ease;
+
+  &__header {
+    position: relative;
+    padding: tokens.$space-2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  &__toggleBtn {
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: tokens.$color-active;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    //box-shadow: 0 0 4px rgba(0,0,0,0.2);
+    border-radius: 50%;
+    padding: 5px;
+  }
+
+  &__menu {
+    flex: 1;
+    margin-top: tokens.$space-4;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__menuItem {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: tokens.$space-2;
+    transition: background-color 0.2s;
+
+    &--active {
+      background-color: rgba(tokens.$color-accent, 0.1);
+    }
+    &:hover {
+      background-color: rgba(tokens.$color-accent, 0.05);
+    }
+    &--collapsed {
+      justify-content: center;
+    }
+    &--expanded {
+      justify-content: flex-start;
+      gap: tokens.$space-2;
+    }
+  }
+  &__menuLabel {
+    font-size: tokens.$font-p1-size;
+    color: tokens.$color-text;
+  }
+
+  &--expanded {
+    width: 240px; // expand width
+    transform: translateX(0);
+  }
+  &--collapsed {
+    width: 64px; // collapse width
+    transform: translateX(0);
+  }
+  &--mobile-visible {
+    width: 240px;
+    transform: translateX(0);
+  }
+  &--mobile-hidden {
+    width: 240px;
+    transform: translateX(-100%);
+  }
+}

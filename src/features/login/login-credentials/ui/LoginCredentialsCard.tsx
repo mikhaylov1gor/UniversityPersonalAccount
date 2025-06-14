@@ -5,6 +5,7 @@ import {AuthStoreApi} from "@/shared/services/auth.service.ts";
 import {LoginDto} from "@/shared/models/requests/loginDto.ts";
 import {useNavigate} from "react-router-dom";
 import {RouteName} from "@/shared/config/router";
+import Input from "@/shared/ui/atoms/Input/Input";
 
 export function LoginCredentialsCard(){
     const [rememberMe, setRememberMe] = useState(false);
@@ -36,7 +37,7 @@ export function LoginCredentialsCard(){
                 toast.error(t("toast.login.invalidCredentials"));
             }
 
-        } catch (error) {
+        } catch (error: any) {
             toast.error(
                 error.response?.data?.message ||
                 t("toast.login.errorMessage")
@@ -51,24 +52,13 @@ export function LoginCredentialsCard(){
 
                 <form className="space-y-5" onSubmit={submit}>
                     <div className="relative">
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2
-                                               focus:ring-blue-200 focus:border-blue-500 peer"
-                            placeholder=" "
-                        />
-                        <label
-                            htmlFor="email"
-                            className="absolute left-3 -top-2.5 bg-white px-1 text-sm text-gray-600
-                                               transition-all peer-placeholder-shown:text-base
-                                               peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3
-                                               peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-gray-600"
-                        >
-                            {t("loginPage.email")}
-                        </label>
+                        <div style={{margin: '20px'}}>
+                            <Input value={email}
+                                   onInput={(e: React.FormEvent<HTMLInputElement>) =>
+                                       setEmail(e.currentTarget.value)
+                                   } label={t("loginPage.email")}>
+                            </Input>
+                        </div>
                     </div>
 
                     <div className="relative">
