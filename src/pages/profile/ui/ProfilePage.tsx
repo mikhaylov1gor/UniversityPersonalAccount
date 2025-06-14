@@ -19,7 +19,6 @@ export function ProfilePage() {
                 const data = await ProfileStoreApi.getCurrentUserProfile();
                 setProfileData(data);
             } catch (err) {
-                console.error("Failed to load profile:", err);
             } finally {
                 setLoading(false);
             }

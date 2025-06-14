@@ -8,17 +8,6 @@ const App = () => {
         <>
             <NavbarMenu avatarUrl={"123"}/>
             <AppRouter/>
-            <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
         </>
     );
 };
