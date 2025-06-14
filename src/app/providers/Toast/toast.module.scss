@@ -1,0 +1,33 @@
+// toast.module.scss
+
+$blue: #2196F3;
+$blue-bg: #2196F34D;
+
+$green: #3C763D;
+$green-bg: #39882C4D;
+
+$red: #F44336;
+$red-bg: #FF57574D;
+
+$orange: #FF9800;
+$orange-bg: #E784004D;
+
+.toast-info {
+  background-color: $blue-bg;
+  color: $blue;
+}
+
+.toast-success {
+  background-color: $green-bg;
+  color: $green;
+}
+
+.toast-error {
+  background-color: $red-bg;
+  color: $red;
+}
+
+.toast-warning {
+  background-color: $orange-bg;
+  color: $orange;
+}

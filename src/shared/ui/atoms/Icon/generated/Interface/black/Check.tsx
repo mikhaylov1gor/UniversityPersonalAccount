@@ -10,7 +10,7 @@ const SvgCheck = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#3A3A3A"
+        stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
