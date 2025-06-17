@@ -6,7 +6,7 @@ export function Banner(){
                     <img
                         src="/src/shared/assets/images/welcome-banner.svg"
                         alt="Welcome"
-                        className="w-full max-w-md object-contain"
+                        className="w-full max-w-lg object-contain"
                         onError={(e) => {
                             (e.target as HTMLImageElement).src = "https://via.placeholder.com/500x400?text=Welcome+Illustration";
                         }}

@@ -6,6 +6,7 @@ import {LoginDto} from "@/shared/models/requests/loginDto.ts";
 import {useNavigate} from "react-router-dom";
 import {RouteName} from "@/shared/config/router";
 import Input from "@/shared/ui/atoms/Input/Input";
+import Button from "@/shared/ui/atoms/Button/Button";
 
 export function LoginCredentialsCard(){
     const [rememberMe, setRememberMe] = useState(false);
@@ -48,11 +49,15 @@ export function LoginCredentialsCard(){
     return(
         <>
             <div className="w-full md:w-1/2 bg-white rounded-xl shadow-lg p-8">
-                <h2 className="text-2xl font-semibold text-center mb-6">{t("loginPage.title")}</h2>
+                <div className="relative">
+                    <div style={{margin: '2rem'}}>
+                        <h2 className="text-2xl font-semibold text-center mb-6">{t("loginPage.title")}</h2>
+                    </div>
+                </div>
 
                 <form className="space-y-5" onSubmit={submit}>
                     <div className="relative">
-                        <div style={{margin: '20px'}}>
+                        <div style={{margin: '2rem'}}>
                             <Input value={email}
                                    onInput={(e: React.FormEvent<HTMLInputElement>) =>
                                        setEmail(e.currentTarget.value)
@@ -62,51 +67,67 @@ export function LoginCredentialsCard(){
                     </div>
 
                     <div className="relative">
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="w-full p-3 border border-gray-300 rounded-lg
-                                               focus:ring-2 focus:ring-blue-200 focus:border-blue-500 peer"
-                            placeholder=" "/>
-                        <label
-                            htmlFor="password"
-                            className="absolute left-3 -top-2.5 bg-white px-1 text-sm text-gray-600
-                                               transition-all peer-placeholder-shown:text-base
-                                               peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3
-                                               peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-gray-600">
-                            {t("loginPage.password")}
+                        <div style={{margin: '2rem'}}>
+                            <Input value={password} type="password"
+                                   onInput={(e: React.FormEvent<HTMLInputElement>) =>
+                                       setPassword(e.currentTarget.value)
+                                   } label={t("loginPage.password")}>
+                            </Input>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center" style={{margin: '2rem'}}>
+                        <button
+                            type="button"
+                            onClick={() => setRememberMe(!rememberMe)}
+                            style={{
+                                position: 'relative',
+                                width: '40px',
+                                height: '20px',
+                                borderRadius: '9999px',
+                                backgroundColor: rememberMe ? '#2563eb' : '#e5e7eb',
+                                border: 'none',
+                                transition: 'background-color 0.3s ease',
+                                cursor: 'pointer',
+                                padding: 0,
+                            }}
+                        >
+                        <span
+                            style={{
+                                position: 'absolute',
+                                top: '2px',
+                                left: rememberMe ? '22px' : '2px',
+                                width: '16px',
+                                height: '16px',
+                                backgroundColor: 'white',
+                                borderRadius: '50%',
+                                transition: 'left 0.2s ease',
+                            }}
+                        />
+                        </button>
+                        <label className="ml-3 block text-sm text-gray-700">
+                            {t("loginPage.rememberMe")}
                         </label>
                     </div>
 
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                            <button
-                                type="button"
-                                className={`relative inline-flex h-6 w-11 items-center rounded-full 
-                                                    transition-colors focus:outline-none focus:ring-2 
-                                                    focus:ring-blue-500 focus:ring-offset-2 
-                                                    ${rememberMe ? 'bg-blue-600' : 'bg-gray-200'}`}
-                                onClick={() => setRememberMe(!rememberMe)}>
-                                    <span
-                                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform 
-                                                    ${rememberMe ? 'translate-x-6' : 'translate-x-1'}`}/>
-                            </button>
-                            <label htmlFor="remember-me" className="ml-3 block text-sm text-gray-700">
-                                {t("loginPage.rememberMe")}
-                            </label>
+
+                    <div className="relative">
+                        <div style={{margin: '2rem'}}>
+                            <Button
+                                type="submit"
+                                variant="primary"
+                                width="100%"
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.backgroundColor = '#1d4ed8';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.backgroundColor = '#2563eb';
+                                }}
+                            >
+                                {t("loginPage.loginButton")}
+                            </Button>
                         </div>
-
                     </div>
-
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-600 text-white p-3 rounded-lg
-                                           hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2
-                                           focus:ring-blue-500 focus:ring-offset-2">
-                        {t("loginPage.loginButton")}
-                    </button>
                 </form>
             </div>
         </>
