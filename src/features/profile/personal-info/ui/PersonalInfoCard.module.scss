@@ -1,0 +1,66 @@
+.personal-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__avatar-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__avatar {
+    width: 100%;
+    max-width: 20rem; // ~320px
+    object-fit: cover;
+
+    @media (min-width: 640px) {
+      max-width: 28rem; // ~448px
+    }
+  }
+
+  &__content {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  &__field {
+    border-bottom: 1px solid #D9D9D9;
+    margin-bottom: 0.5rem;
+
+    &-label {
+      font-size: 0.875rem;
+      color: #666666;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    &-value {
+      font-size: 1rem;
+      padding-bottom: 0.5rem;
+      display: block;
+
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+    }
+  }
+}

@@ -1,13 +1,14 @@
-import {useTranslation} from "react-i18next";
-import {ContactDto} from "@/shared/models/responses/contactDto.ts";
-import {ContactTypes} from "@/shared/models/enums/contactTypes.ts";
+import { useTranslation } from "react-i18next";
+import { ContactDto } from "@/shared/models/responses/contactDto.ts";
+import { ContactTypes } from "@/shared/models/enums/contactTypes.ts";
+import styles from "./ContactsCard.module.scss";
 
 interface ContactsCardProps {
     contacts: ContactDto[],
     address: string
 }
 
-export function ContactsCard({contacts, address}: ContactsCardProps){
+export function ContactsCard({ contacts, address }: ContactsCardProps) {
     const { t } = useTranslation();
 
     const getContactsByType = (type: ContactTypes) => {
@@ -21,12 +22,12 @@ export function ContactsCard({contacts, address}: ContactsCardProps){
         if (!contacts.length) return null;
 
         return (
-            <div>
-                <p className="text-sm text-gray-500">{label}</p>
+            <div className={styles['contacts-card__contact-group']}>
+                <p className={styles['contacts-card__label']}>{label}</p>
                 {contacts.map((contact, index) => (
                     <p
                         key={`${contact.type}-${index}`}
-                        className="pb-2 border-b border-gray-200 text-gray-900"
+                        className={styles['contacts-card__value']}
                     >
                         {contact.value}
                     </p>
@@ -36,53 +37,51 @@ export function ContactsCard({contacts, address}: ContactsCardProps){
     };
 
     return (
-        <div className="bg-white rounded-lg shadow p-4">
-            <div className="flex justify-between items-center mb-2">
-                <h2 className="text-xl font-semibold text-gray-900">
+        <div className={styles['contacts-card']}>
+            <div className={styles['contacts-card__header']}>
+                <h3 className={styles['contacts-card__title']}>
                     {t("profilePage.contacts.title")}
-                </h2>
+                </h3>
             </div>
 
-            <div className="grid grid-cols-1 gap-2">
+            <div className={styles['contacts-card__grid']}>
                 {/* Телефоны */}
                 {phones.length > 0 && (
-                    <>
-                        <div>
-                            <p className="text-sm text-gray-500">
-                                {t("profilePage.contacts.phone")}
+                    <div className={styles['contacts-card__contact-group']}>
+                        <p className={styles['contacts-card__label']}>
+                            {t("profilePage.contacts.phone")}
+                        </p>
+                        {phones.map((phone, index) => (
+                            <p
+                                key={`phone-${index}`}
+                                className={styles['contacts-card__value']}
+                            >
+                                {phone.value}
                             </p>
-                            {phones.map((phone, index) => (
-                                <p
-                                    key={`phone-${index}`}
-                                    className="pb-2 border-b border-gray-200 text-gray-900"
-                                >
-                                    {phone.value}
-                                </p>
-                            ))}
-                        </div>
-                    </>
+                        ))}
+                    </div>
                 )}
 
                 {phones.length > 1 && phones.slice(1).map((phone, index) => (
-                    <div key={`additional-phone-${index}`}>
-                        <p className="text-sm text-gray-500">
+                    <div key={`additional-phone-${index}`} className={styles['contacts-card__contact-group']}>
+                        <p className={styles['contacts-card__label']}>
                             {t("profilePage.contacts.phone")}
                         </p>
-                        <p className="pb-2 border-b border-gray-200 text-gray-900">
+                        <p className={styles['contacts-card__value']}>
                             {phone.value}
                         </p>
                     </div>
                 ))}
 
                 {socialMedias.length > 0 && (
-                    <div>
-                        <p className="text-sm text-gray-500">
+                    <div className={styles['contacts-card__contact-group']}>
+                        <p className={styles['contacts-card__label']}>
                             {t("profilePage.contacts.socialMedia")}
                         </p>
                         {socialMedias.map((social, index) => (
                             <p
                                 key={`social-${index}`}
-                                className="pb-2 border-b border-gray-200 text-gray-900"
+                                className={styles['contacts-card__value']}
                             >
                                 {social.value}
                             </p>
@@ -90,11 +89,11 @@ export function ContactsCard({contacts, address}: ContactsCardProps){
                     </div>
                 )}
 
-                <div>
-                    <p className="text-sm text-gray-500">
+                <div className={styles['contacts-card__contact-group']}>
+                    <p className={styles['contacts-card__label']}>
                         {t("profilePage.contacts.address")}
                     </p>
-                    <p className="text-gray-900">
+                    <p className={styles['contacts-card__value']}>
                         {address || t("profilePage.contacts.noAddress")}
                     </p>
                 </div>

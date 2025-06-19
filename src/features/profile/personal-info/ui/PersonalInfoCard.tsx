@@ -1,6 +1,7 @@
-import {useTranslation} from "react-i18next";
-import {useEffect, useState} from "react";
-import {FilesStoreApi} from "@/shared/services/files.service.ts";
+import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { FilesStoreApi } from "@/shared/services/files.service.ts";
+import styles from "./PersonalInfoCard.module.scss";
 
 interface PersonalInfoCardProps {
     gender: string;
@@ -11,8 +12,8 @@ interface PersonalInfoCardProps {
     avatarId: string;
 }
 
-export function PersonalInfoCard({gender, birthDate, citizenship, snils, email, avatarId}: PersonalInfoCardProps) {
-    const {t} = useTranslation();
+export function PersonalInfoCard({ gender, birthDate, citizenship, snils, email, avatarId }: PersonalInfoCardProps) {
+    const { t } = useTranslation();
     const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -38,49 +39,50 @@ export function PersonalInfoCard({gender, birthDate, citizenship, snils, email, 
     }, [avatarId]);
 
     return (
-        <>
-            <div className="flex justify-center">
+        <div className={styles['personal-info-card']}>
+            <div className={styles['personal-info-card__avatar-container']}>
                 <img
                     src={avatarUrl ?? "src/shared/assets/test/photo_profile.png"}
                     alt="Photo"
-                    className="w-full max-w-xs sm:max-w-md object-cover"
+                    className={styles['personal-info-card__avatar']}
                     onError={(e) => {
                         (e.target as HTMLImageElement).src = "src/shared/assets/test/photo_profile.png";
                     }}
                 />
             </div>
-            <div className="bg-white rounded-lg shadow p-4">
-                <div className="flex justify-between items-center mb-2">
-                    <h2 className="text-xl font-semibold text-gray-900">{t("profilePage.personalData.title")}</h2>
+
+            <div className={styles['personal-info-card__content']}>
+                <div className={styles['personal-info-card__header']}>
+                    <h3 className={styles['personal-info-card__title']}>{t("profilePage.personalData.title")}</h3>
                 </div>
 
-                <div className="grid grid-cols-1 gap-2">
-                    <div>
-                        <p className="text-sm text-gray-500">{t("profilePage.personalData.gender")}</p>
-                        <p className="pb-2 border-b border-gray-200 text-gray-900">{gender}</p>
+                <div className={styles['personal-info-card__grid']}>
+                    <div className={styles['personal-info-card__field']}>
+                        <p2 className={styles['personal-info-card__field-label']}>{t("profilePage.personalData.gender")}</p2>
+                        <p1 className={styles['personal-info-card__field-value']}>{gender}</p1>
                     </div>
 
-                    <div>
-                        <p className="text-sm text-gray-500">{t("profilePage.personalData.birthDate")}</p>
-                        <p className="pb-2 border-b border-gray-200 text-gray-900">{birthDate}</p>
+                    <div className={styles['personal-info-card__field']}>
+                        <p2 className={styles['personal-info-card__field-label']}>{t("profilePage.personalData.birthDate")}</p2>
+                        <p1 className={styles['personal-info-card__field-value']}>{birthDate}</p1>
                     </div>
 
-                    <div>
-                        <p className="text-sm text-gray-500">{t("profilePage.personalData.citizenship")}</p>
-                        <p className="pb-2 border-b border-gray-200 text-gray-900">{citizenship}</p>
+                    <div className={styles['personal-info-card__field']}>
+                        <p2 className={styles['personal-info-card__field-label']}>{t("profilePage.personalData.citizenship")}</p2>
+                        <p1 className={styles['personal-info-card__field-value']}>{citizenship}</p1>
                     </div>
 
-                    <div>
-                        <p className="text-sm text-gray-500">{t("profilePage.personalData.snils")}</p>
-                        <p className="pb-2 border-b border-gray-200 text-gray-900">{snils}</p>
+                    <div className={styles['personal-info-card__field']}>
+                        <p2 className={styles['personal-info-card__field-label']}>{t("profilePage.personalData.snils")}</p2>
+                        <p1 className={styles['personal-info-card__field-value']}>{snils}</p1>
                     </div>
 
-                    <div>
-                        <p className="text-sm text-gray-500">{t("profilePage.personalData.email")}</p>
-                        <p className="text-gray-900">{email}</p>
+                    <div className={styles['personal-info-card__field']}>
+                        <p2 className={styles['personal-info-card__field-label']}>{t("profilePage.personalData.email")}</p2>
+                        <p1 className={styles['personal-info-card__field-value']}>{email}</p1>
                     </div>
                 </div>
             </div>
-        </>
-    )
+        </div>
+    );
 }
