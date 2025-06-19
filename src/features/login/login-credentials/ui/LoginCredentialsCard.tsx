@@ -51,7 +51,7 @@ export function LoginCredentialsCard(){
             <div className="w-full md:w-1/2 bg-white rounded-xl shadow-lg p-8">
                 <div className="relative">
                     <div style={{margin: '2rem'}}>
-                        <h1 className="text-2xl font-semibold text-center mb-6">{t("loginPage.title")}</h1>
+                        <h1 className="text-2xl text-center mb-6">{t("loginPage.title")}</h1>
                     </div>
                 </div>
 
