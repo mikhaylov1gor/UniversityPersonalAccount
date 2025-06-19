@@ -1,5 +1,5 @@
-import {UsefulServiceDto} from "@/shared/api/models/responses/usefulService/usefulServiceDto.ts";
-import {PagedListMetaData} from "@/shared/api/models/responses/pagedListMetaData.ts";
+import {UsefulServiceDto} from "@/shared/models/responses/usefulService/usefulServiceDto.ts";
+import {PagedListMetaData} from "@/shared/models/responses/pagedListMetaData.ts";
 
 export interface UsefulServiceDtoPagedListWithMetadata{
     result: UsefulServiceDto[] | null,

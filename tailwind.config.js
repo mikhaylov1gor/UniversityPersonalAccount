@@ -30,13 +30,6 @@ const tokens = require('./src/shared/ui/design/tokens.js');
     spacing: tokens.spacing,
 
     fontSize: tokens.fontSize,
-
-
-    extend: {
-      fontFamily: {
-        raleway: ['Raleway', 'sans-serif'],
-      },
-    },
   },
   plugins: [],
 }

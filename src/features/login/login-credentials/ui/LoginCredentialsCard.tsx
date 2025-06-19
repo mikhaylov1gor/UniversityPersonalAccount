@@ -51,7 +51,7 @@ export function LoginCredentialsCard(){
             <div className="w-full md:w-1/2 bg-white rounded-xl shadow-lg p-8">
                 <div className="relative">
                     <div style={{margin: '2rem'}}>
-                        <h2 className="text-2xl font-semibold text-center mb-6">{t("loginPage.title")}</h2>
+                        <h1 className="text-2xl font-semibold text-center mb-6">{t("loginPage.title")}</h1>
                     </div>
                 </div>
 
@@ -117,12 +117,6 @@ export function LoginCredentialsCard(){
                                 type="submit"
                                 variant="primary"
                                 width="100%"
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.backgroundColor = '#1d4ed8';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.backgroundColor = '#2563eb';
-                                }}
                             >
                                 {t("loginPage.loginButton")}
                             </Button>

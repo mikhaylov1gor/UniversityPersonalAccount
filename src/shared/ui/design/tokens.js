@@ -10,12 +10,12 @@ module.exports = {
     },
 
     spacing: {
-        0: '4px',   // space-0
-        1: '8px',   // space-1
-        2: '16px',  // space-2
-        3: '15px',  // space-3
-        4: '24px',  // space-4
-        5: '40px',  // space-5
+        0: '4px',
+        1: '8px',
+        2: '16px',
+        3: '15px',
+        4: '24px',
+        5: '40px',
     },
 
     fontSize: {
@@ -28,10 +28,10 @@ module.exports = {
     },
 
     screens: {
-        xs: '375px',   // mobile
-        sm: '600px',   // small tablet
-        md: '900px',   // large tablet
-        lg: '1200px',  // laptop
-        xl: '1536px',  // desktop
+        xs: '375px',
+        sm: '600px',
+        md: '900px',
+        lg: '1200px',
+        xl: '1536px',
     }
 }

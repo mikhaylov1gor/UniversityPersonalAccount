@@ -1,54 +1,90 @@
-import {useState} from "react";
-import {useTranslation} from "react-i18next";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { UserType } from "@/shared/models/enums/userType";
+import {StudentDto} from "@/shared/models/responses/studentDto.ts";
+import {EmployeeDto} from "@/shared/models/responses/employeeDto.ts";
+import {ProfileStoreApi} from "@/shared/services/profile.service.ts";
+import {EducationSection} from "@/features/profile/education-and-work/ui/EducationSection.tsx";
+import {WorkSection} from "@/features/profile/education-and-work/ui/WorkSection.tsx";
 
-export function EducationAndWorkCard(){
-    const [activeTab, setActiveTab] = useState<'education' | 'work'>('education');
+interface EducationAndWorkCardProps {
+    userId: string;
+    userTypes: UserType[];
+}
+
+export function EducationAndWorkCard({ userId, userTypes }: EducationAndWorkCardProps) {
     const { t } = useTranslation();
+
+    const hasStudent = userTypes.includes("Student");
+    const hasEmployee = userTypes.includes("Employee");
+
+    const [student, setStudent] = useState<StudentDto | null>(null);
+    const [employee, setEmployee] = useState<EmployeeDto | null>(null);
+
+    const [loading, setLoading] = useState<boolean>(true);
+
+    const [activeTab, setActiveTab] = useState<'education' | 'work'>(
+        hasStudent ? 'education' : 'work'
+    );
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+
+                if (!student && hasStudent) {
+                    const data = await ProfileStoreApi.getCurrentUserStudent();
+                    console.log("Student Data: ",data);
+                    setStudent(data);
+                }
+                if (!employee && hasEmployee) {
+                    const data = await ProfileStoreApi.getCurrentUserEmployee();
+                    console.log("Employee Data: ",data);
+                    setEmployee(data);
+                }
+
+            } catch (err) {
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchData();
+
+    }, []);
+
+
     return (
         <>
-            <div className="bg-white rounded-lg shadow p-2">
-                <div className="flex border-b border-gray-200 mb-6">
-                    <button className={`py-2 px-4 font-medium 
-                                    ${activeTab === 'education' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
-                            onClick={() => setActiveTab('education')}>
+        <div className="bg-white rounded-lg shadow p-2">
+            <div className="flex gap-4 border-b mb-4">
+                {hasStudent && (
+                    <button
+                        className={`py-2 px-4 font-medium
+                                ${activeTab === 'education' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                        onClick={() => setActiveTab('education')}
+                    >
                         {t("profilePage.tabs.education")}
                     </button>
-
-                    <button className={`py-2 px-4 font-medium 
-                                    ${activeTab === 'work' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
-                            onClick={() => setActiveTab('work')}>
+                )}
+                {hasEmployee && (
+                    <button
+                        className={`py-2 px-4 font-medium
+                                ${activeTab === 'work' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                        onClick={() => setActiveTab('work')}
+                    >
                         {t("profilePage.tabs.work")}
                     </button>
-                </div>
-
-                <div className="tab-content">
-                    {activeTab === 'education' ? (
-                        <div className="education-content">
-                            <h3 className="text-lg font-semibold mb-4">Моё образование</h3>
-
-                            <div className="space-y-4">
-                                <div className="border-l-4 border-blue-500 pl-4 py-2">
-                                    <h4 className="font-medium">МГУ им. Ломоносова</h4>
-                                    <p className="text-gray-600">Факультет компьютерных наук</p>
-                                    <p className="text-sm text-gray-500">2015 - 2019</p>
-                                </div>
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="work-content">
-                            <h3 className="text-lg font-semibold mb-4">Мой опыт работы</h3>
-
-                            <div className="space-y-4">
-                                <div className="border-l-4 border-blue-500 pl-4 py-2">
-                                    <h4 className="font-medium">Frontend Developer в Яндекс</h4>
-                                    <p className="text-gray-600">Разработка интерфейсов</p>
-                                    <p className="text-sm text-gray-500">2020 - настоящее время</p>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
+                )}
             </div>
+
+            {activeTab === 'education' && hasStudent && !loading && (
+                <EducationSection student={student} />
+            )}
+            {activeTab === 'work' && hasEmployee && !loading && (
+                <WorkSection employee={employee} />
+            )}
+        </div>
         </>
-    )
+    );
 }

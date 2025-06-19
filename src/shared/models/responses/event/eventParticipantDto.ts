@@ -1,5 +1,6 @@
-import {UserShortDto} from "@/shared/api/models/responses/userShortDto.ts";
+import {UserShortDto} from "@/shared/models/responses/userShortDto.ts";
 import {EventParticipantType} from "@/shared/models/enums/event/eventParticipantType.ts";
+
 
 export interface EventParticipantDto{
     id: string,

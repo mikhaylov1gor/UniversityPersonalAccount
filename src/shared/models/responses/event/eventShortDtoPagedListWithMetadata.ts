@@ -1,5 +1,5 @@
-import {EventShortDto} from "@/shared/api/models/responses/event/eventShortDto.ts";
-import {PagedListMetaData} from "@/shared/api/models/responses/pagedListMetaData.ts";
+import {EventShortDto} from "@/shared/models/responses/event/eventShortDto.ts";
+import {PagedListMetaData} from "@/shared/models/responses/pagedListMetaData.ts";
 
 export interface EventShortDtoPagedListWithMetadata{
     results: EventShortDto[] | null,

@@ -1,10 +1,11 @@
 import {CertificateStatus} from "@/shared/models/enums/certificate/certificateStatus.ts";
-import {EnumDto} from "@/shared/api/models/responses/enumDto.ts";
+import {EnumDto} from "@/shared/models/responses/enumDto.ts";
 import {CertificateType} from "@/shared/models/enums/certificate/certificateType.ts";
 import {CertificateStaffType} from "@/shared/models/enums/certificate/certificateStaffType.ts";
 import {CertificateUserType} from "@/shared/models/enums/certificate/certificateUserType.ts";
-import {FileDto} from "@/shared/api/models/responses/fileDto.ts";
+import {FileDto} from "@/shared/models/responses/fileDto.ts";
 import {CertificateReceiveType} from "@/shared/models/enums/certificate/certificateReceiveType.ts";
+
 
 export interface CertificateDto{
     id: string,

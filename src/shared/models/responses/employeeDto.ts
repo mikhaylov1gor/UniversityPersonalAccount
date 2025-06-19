@@ -1,5 +1,5 @@
-import {ExperienceDto} from "@/shared/api/models/responses/experienceDto.ts";
-import {EmployeePostDto} from "@/shared/api/models/responses/employeePostDto.ts";
+import {ExperienceDto} from "@/shared/models/responses/experienceDto.ts";
+import {EmployeePostDto} from "@/shared/models/responses/employeePostDto.ts";
 
 export interface EmployeeDto{
     id: string,

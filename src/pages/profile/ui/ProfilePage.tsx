@@ -16,8 +16,11 @@ export function ProfilePage() {
         const fetchProfile = async () => {
             try {
                 setLoading(true);
-                const data = await ProfileStoreApi.getCurrentUserProfile();
-                setProfileData(data);
+                if (!profileData) {
+                    const data = await ProfileStoreApi.getCurrentUserProfile();
+                    console.log("Запрос на получение юзер профиля")
+                    setProfileData(data);
+                }
             } catch (err) {
             } finally {
                 setLoading(false);
@@ -35,10 +38,6 @@ export function ProfilePage() {
 
     return (
         <div className="min-h-screen bg-gray-100">
-
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="font-raleway text-2xl lg:text-3xl font-small">Профиль</h2>
-            </div>
 
             <div className="max-w-6xl mx-auto px-4 py-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div className="md:col-span-1 space-y-3">
@@ -73,7 +72,10 @@ export function ProfilePage() {
                                     ${profileData.patronymic == null ? "undefined" : profileData.patronymic}`}
                     />
 
-                    <EducationAndWorkCard/>
+                    <EducationAndWorkCard
+                        userId={profileData.id}
+                        userTypes={profileData.userTypes}
+                    />
                 </div>
             </div>
         </div>

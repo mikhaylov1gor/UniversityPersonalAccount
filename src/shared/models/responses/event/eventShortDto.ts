@@ -1,4 +1,4 @@
-import {FileDto} from "@/shared/api/models/responses/fileDto.ts";
+import {FileDto} from "@/shared/models/responses/fileDto.ts";
 import {EventType} from "@/shared/models/enums/event/eventType.ts";
 import {EventFormat} from "@/shared/models/enums/event/eventFormat.ts";
 import {EventAuditory} from "@/shared/models/enums/event/eventAuditory.ts";

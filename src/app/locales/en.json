@@ -27,7 +27,30 @@
     },
     "tabs": {
       "education": "Education",
-      "work": "Work"
+      "work": "Work",
+
+      "educationTab": {
+        "educationYears": "Education years",
+        "creditBookNumber": "Credit book number",
+        "educationForm": "Education form",
+        "educationBase": "Base",
+        "faculty": "Faculty",
+        "educationDirection": "Direction",
+        "educationProfile": "Profile",
+        "course": "Course",
+        "group": "Group"
+      },
+
+      "workTab": {
+        "experience": "Experience",
+        "dateStart": "Date of employment",
+        "dateEnd": "Date of dismissal",
+        "employmentType": "Type of employment",
+        "rate": "Rate",
+        "workPlace": "Place of work",
+        "noDepartments": "The place of work is not specified",
+        "workType": "Type of job position"
+      }
     }
   },
   "toast": {

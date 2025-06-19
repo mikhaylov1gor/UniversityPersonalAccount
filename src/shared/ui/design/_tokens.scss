@@ -38,11 +38,11 @@ $space-4: 24px !default;
 $space-5: 40px !default;
 
 // Breakpoints
-$bp-xs: 375px !default; // mobile
-$bp-sm: 600px !default; // small tablet
-$bp-md: 900px !default; // large tablet
-$bp-lg: 1200px !default; // laptop
-$bp-xl: 1536px !default; // desktop
+$bp-xs: 375px !default;
+$bp-sm: 600px !default;
+$bp-md: 900px !default;
+$bp-lg: 1200px !default;
+$bp-xl: 1536px !default;
 
 $clamp-h1: clamp($font-h1-m-size, 4vw, $font-h1-size) !default;
 $clamp-h2: clamp($font-h2-m-size, 3vw, $font-h2-size) !default;

@@ -1,6 +1,6 @@
-import {EducationEntryDto} from "@/shared/api/models/responses/educationEntryDto.ts";
+import {EducationEntryDto} from "@/shared/models/responses/educationEntryDto.ts";
 
-export interface StudentDto{
-    id: string,
-    educationEntries: EducationEntryDto[] | null,
+export interface StudentDto {
+    id: string;
+    educationEntries: EducationEntryDto[] | null;
 }

@@ -42,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
     return (
         <button className={classNames} disabled={disabled} style={mergedStyle} {...rest}>
             {iconLeft && <Icon name={iconLeft} size={24} className={styles.root__icon}/>}
-            <span>{children}</span>
+            <p>{children}</p>
             {iconRight && <Icon name={iconRight} size={24} className={styles.root__icon}/>}
         </button>
     );

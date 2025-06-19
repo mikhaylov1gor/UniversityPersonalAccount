@@ -3,8 +3,8 @@ import {EventType} from "../../enums/event/eventType.ts";
 import {EventFormat} from "../../enums/event/eventFormat.ts";
 import {EventAuditory} from "../../enums/event/eventAuditory.ts";
 import {EventStatus} from "@/shared/models/enums/event/eventStatus.ts";
-import {UserShortDto} from "@/shared/api/models/responses/userShortDto.ts";
-import {EventParticipantDto} from "@/shared/api/models/responses/event/eventParticipantDto.ts";
+import {EventParticipantDto} from "@/shared/models/responses/event/eventParticipantDto.ts";
+import {UserShortDto} from "@/shared/models/responses/userShortDto.ts";
 
 export interface EventDto{
     id: string;

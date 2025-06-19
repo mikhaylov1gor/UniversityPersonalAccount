@@ -1,6 +1,6 @@
-import {DepartmentDto} from "@/shared/api/models/responses/departmentDto.ts";
-import {BaseDictionaryDto} from "@/shared/api/models/responses/baseDictionaryDto.ts";
 import {EmploymentTypes} from "@/shared/models/enums/employmentTypes.ts";
+import {DepartmentDto} from "@/shared/models/responses/departmentDto.ts";
+import {BaseDictionaryDto} from "@/shared/models/responses/baseDictionaryDto.ts";
 
 export interface EmployeePostDto {
     id: string,

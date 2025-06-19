@@ -27,7 +27,30 @@
     },
     "tabs": {
       "education": "Образование",
-      "work": "Работа"
+      "work": "Работа",
+
+      "educationTab": {
+        "educationYears": "Годы образования",
+        "creditBookNumber": "Номер зачетной книжки",
+        "educationForm": "Форма обучения",
+        "educationBase": "База",
+        "faculty": "Факультет",
+        "educationDirection": "Направление",
+        "educationProfile": "Профиль",
+        "course": "Курс",
+        "group": "Группа"
+      },
+
+      "workTab": {
+        "experience": "Стаж",
+        "dateStart": "Дата приема на работу",
+        "dateEnd": "Дата увольнения",
+        "employmentType": "Вид занятости",
+        "rate": "Ставка",
+        "workPlace": "Место работы",
+        "noDepartments": "Место работы не указано",
+        "workType": "Тип должности"
+      }
     }
   },
   "toast": {

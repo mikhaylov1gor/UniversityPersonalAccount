@@ -10,7 +10,7 @@ const SvgCaretDownMd = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#fff"
+        stroke="#3A3A3A"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}

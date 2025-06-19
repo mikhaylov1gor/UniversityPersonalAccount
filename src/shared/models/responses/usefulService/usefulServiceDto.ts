@@ -1,5 +1,5 @@
 import {UsefulServiceCategory} from "@/shared/models/enums/usefulServiceCategory.ts";
-import {FileDto} from "@/shared/api/models/responses/fileDto.ts";
+import {FileDto} from "@/shared/models/responses/fileDto.ts";
 
 export interface UsefulServiceDto {
     id: string,

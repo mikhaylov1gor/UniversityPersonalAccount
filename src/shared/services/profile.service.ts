@@ -12,13 +12,13 @@ export const ProfileStoreApi = {
     },
 
     getCurrentUserStudent: async () =>{
-        const data: StudentDto = await axiosInstance.get(`${profileController}/student`)
-        return data;
+        const response = await axiosInstance.get<StudentDto>(`${profileController}/student`)
+        return response.data;
     },
 
     getCurrentUserEmployee: async () =>{
-        const data: EmployeeDto = await axiosInstance.get(`${profileController}/employee`)
-        return data;
+        const response = await axiosInstance.get<EmployeeDto>(`${profileController}/employee`)
+        return response.data;
     },
 
     updateAvatar: async (dto: AvatarUpdateDto) =>{

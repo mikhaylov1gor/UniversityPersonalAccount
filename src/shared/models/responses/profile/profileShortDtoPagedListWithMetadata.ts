@@ -1,5 +1,5 @@
-import {ProfileShortDto} from "@/shared/api/models/responses/profile/profileShortDto.ts";
-import {PagedListMetaData} from "@/shared/api/models/responses/pagedListMetaData.ts";
+import {ProfileShortDto} from "@/shared/models/responses/profile/profileShortDto.ts";
+import {PagedListMetaData} from "@/shared/models/responses/pagedListMetaData.ts";
 
 export interface ProfileShortDtoPagedListWithMetadata{
     results: ProfileShortDto[] | null,

@@ -30,7 +30,7 @@ Object.entries(modules).forEach(([filePath, mod]) => {
     icons[key] = mod.default
 })
 
-console.log('Available icons:', Object.keys(icons))
+/*console.log('Available icons:', Object.keys(icons))*/
 // → ['arrow-left-md-black','arrow-left-md-red', …]
 
 export type IconName = keyof typeof icons
