@@ -60,6 +60,16 @@
       "invalidCredentials": "Invalid login credentials"
     }
   },
+  "admin": {
+    "nav": {
+      "users": "Users",
+      "usefulServices": "Useful services",
+      "events": "Events",
+      "usersDesc": "View users and update their personal information",
+      "usefulServicesDesc": "Manage the useful services page: add, remove, and update services",
+      "eventsDesc": "Manage the events page: view, edit, and create new events"
+    }
+  },
   "menu": {
     "profile": "Profile",
     "administration": "Administration",
