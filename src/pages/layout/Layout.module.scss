@@ -30,12 +30,7 @@
     align-items: center;
     gap: tokens.$space-4;
   }
-  &__title {
-    font-size: tokens.$font-h1-size;
-    line-height: tokens.$font-h1-line;
-    margin: 0;
-    font-weight: 500;
-  }
+
   &__breadcrumbs {
     font-size: tokens.$font-p2-size;
     color: tokens.$color-text-p2;

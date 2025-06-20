@@ -1,0 +1,35 @@
+@use "src/shared/ui/design/tokens" as tokens;
+
+.card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: tokens.$space-4;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$space-1;
+  height: 100%;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(28, 28, 28, 0.15);
+  }
+}
+
+.titleIcon {
+  align-items: center;
+  margin-right: 0.5rem;
+  display: inline-flex;
+}
+
+.card__icon {
+  margin-right: 0.5rem;
+}
+
+.card__description {
+  line-height: tokens.$font-p1-line;
+  flex: 1;
+  color: tokens.$color-text-p2;
+  margin: 0;
+}
