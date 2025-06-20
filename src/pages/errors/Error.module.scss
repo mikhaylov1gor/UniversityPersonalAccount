@@ -1,0 +1,89 @@
+.wrapper {
+  display: flex;
+}
+
+.content {
+  text-align: left;
+  margin-left: 5rem;
+  margin-bottom: 5rem;
+}
+
+.code {
+  font-weight: 400;
+  font-size: 300px;
+  color: #375FFF;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.button {
+  background-color: #2962ff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 30px;
+  display: inline-block;
+
+  &:hover {
+    background-color: #0039cb;
+  }
+}
+
+.tape {
+  position: fixed;
+  background-color: #375FFF;
+  color: white;
+  font-weight: 700;
+  font-size: 38px;
+  width: 5000px;
+  height: 58px;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  &::before {
+    content: "Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка Ошибка";
+    white-space: nowrap;
+    width: 100%;
+    text-align: justify;
+    text-justify: inter-word;
+    word-spacing: 50px; /* дополнительный промежуток между словами */
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+}
+
+.tape1 {
+  transform: rotate(35deg);
+  top: 500px;
+  left: calc(100vw - 2500px);
+}
+
+.tape2 {
+  transform: rotate(-35deg);
+  top: 300px;
+  left: calc(100vw - 2500px);
+}
+
+@media (max-width: 1000px) {
+  .tape {
+    display: none;
+  }
+}

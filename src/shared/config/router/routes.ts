@@ -5,5 +5,6 @@ export const RouteName = {
     CERTIFICATES_PAGE: '/certificates',
     EVENTS_PAGE: '/events',
     ADMIN_PAGE: '/admin',
-
+    ERROR500: '/500',
+    ERROR404: '*'
 }

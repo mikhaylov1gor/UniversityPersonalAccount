@@ -3,7 +3,9 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { RouteName } from "@/shared/config/router";
 import { LoginPage } from "@/pages/login";
 import { ProfilePage } from "@/pages/profile";
+import { AdminPage } from "@/pages/admin"
 import {Layout} from "@/pages/layout/Layout";
+import {Error404, Error500} from "@/pages/errors";
 
 function AppRouter() {
     const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
@@ -83,9 +85,23 @@ function AppRouter() {
                 path={RouteName.ADMIN_PAGE}
                 element={
                     <ProtectedRoute>
-                        <ProfilePage />
+                        <Layout
+                            title="Администрирование"
+                        >
+                            <AdminPage />
+                        </Layout>
                     </ProtectedRoute>
                 }
+            />
+
+            <Route
+                path={RouteName.ERROR404}
+                element={<Error404/>}
+            />
+
+            <Route
+                path={RouteName.ERROR500}
+                element={<Error500/>}
             />
         </Routes>
     );
