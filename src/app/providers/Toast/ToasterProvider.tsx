@@ -1,6 +1,15 @@
-import React, {createContext, JSX, ReactNode, useContext, useState} from "react";
+import React, {
+    createContext,
+    JSX,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState
+} from "react";
 import {Icon} from "@/shared/ui/atoms/Icon/Icon.tsx";
 import styles from './toast.module.scss';
+import {useTranslation} from "react-i18next";
+import {registerToast} from "@/app/providers/Toast/ToastController.ts";
 
 type ToastType = "info" | "success" | "error" | "warning";
 
@@ -8,12 +17,12 @@ type Toast = {
     id: number;
     title: string;
     message: string;
-    type: ToastType
-}
+    type: ToastType;
+};
 
 type ToasterContextType = {
     showToast: (title: string, message: string, type: ToastType) => void;
-}
+};
 
 const ToasterContext = createContext<ToasterContextType | undefined>(undefined);
 
@@ -23,8 +32,13 @@ export const useToaster = () => {
     return context;
 };
 
-export const ToasterProvider = ({ children }: { children: ReactNode }) => {
+export const ToasterProvider = ({children}: { children: ReactNode }) => {
     const [toasts, setToasts] = useState<Toast[]>([]);
+    const {t} = useTranslation();
+
+    useEffect(() => {
+        registerToast(showToast, t);
+    }, []);
 
     const showToast = (title: string, message: string, type: ToastType) => {
         const newToast: Toast = {
@@ -46,47 +60,48 @@ export const ToasterProvider = ({ children }: { children: ReactNode }) => {
     const typeInfo: Record<ToastType, { icon: JSX.Element; title: string }> = {
         info: {
             icon: <Icon name="info-black" size={20} fill={'none'}/>,
-            title: "Информация",
+            title: t("toast.info"),
         },
         success: {
             icon: <Icon name="check-black" size={20} fill={'none'}/>,
-            title: "Успех",
+            title: t("toast.success"),
         },
         error: {
-            icon: <Icon name="close-circle-black" size={20} fill={'none'} />,
-            title: "Ошибка",
+            icon: <Icon name="close-circle-black" size={20} fill={'none'}/>,
+            title: t("toast.error"),
         },
         warning: {
             icon: <Icon name="circle-warning-black" size={20} fill={'none'}/>,
-            title: "Предупреждение",
+            title: t("toast.warning"),
         },
     };
 
     return (
-        <ToasterContext.Provider value={{ showToast }}>
+        <ToasterContext.Provider value={{showToast}}>
             {children}
-            <div className="fixed bottom-5 right-5 space-y-3 z-50 w-[300px]">
+            <div className={styles.toastContainer}>
                 {toasts.map((toast) => {
                     const info = typeInfo[toast.type];
                     return (
                         <div
                             key={toast.id}
-                            className="rounded-lg shadow-md overflow-hidden"
+                            className={styles.toastWrapper}
                         >
                             <div
-                                className={`flex items-center justify-between px-4 py-2 ${styles[`toast-${toast.type}`]}`}>
+                                className={`${styles.toastHeader} ${styles[`toast-${toast.type}`]}`}
+                            >
                                 <div className="flex items-center gap-2">
                                     {info.icon}
-                                    <span className="font-semibold">{info.title}</span>
+                                    <span>{info.title}</span>
                                 </div>
                                 <button
                                     onClick={() => removeToast(toast.id)}
-                                    className="text-inherit hover:opacity-70"
+                                    className={styles["toast-close-button"]}
                                 >
                                     <Icon name="close-md-black" size={20} fill={'none'}/>
                                 </button>
                             </div>
-                            <div className="px-4 py-3 text-sm text-gray-800">{toast.message}</div>
+                            <div className={styles.toastMessage}>{toast.message}</div>
                         </div>
                     );
                 })}

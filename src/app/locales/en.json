@@ -54,11 +54,10 @@
     }
   },
   "toast": {
-    "login": {
-      "successMessage": "Login is successful" ,
-      "errorMessage": "Unhandled exception",
-      "invalidCredentials": "Invalid login credentials"
-    }
+    "info": "Information",
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning"
   },
   "admin": {
     "nav": {

@@ -64,11 +64,10 @@
     }
   },
   "toast": {
-    "login": {
-      "successMessage": "Вход выполнен успешно",
-      "errorMessage": "Непредвиденная ошибка",
-      "invalidCredentials": "Неверный логин или пароль"
-    }
+    "info": "Информация",
+    "success": "Успех",
+    "error": "Ошибка",
+    "warning": "Предупреждение"
   },
   "menu": {
     "profile": "Профиль",

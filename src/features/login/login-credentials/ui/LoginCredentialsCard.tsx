@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
-import { toast } from "react-toastify";
 import {AuthStoreApi} from "@/shared/services/auth.service.ts";
 import {LoginDto} from "@/shared/models/requests/loginDto.ts";
 import {useNavigate} from "react-router-dom";
 import {RouteName} from "@/shared/config/router";
 import Input from "@/shared/ui/atoms/Input/Input";
 import Button from "@/shared/ui/atoms/Button/Button";
+import {toast} from "@/app/providers/Toast/ToastController.ts";
 
 export function LoginCredentialsCard(){
     const [rememberMe, setRememberMe] = useState(false);
@@ -31,18 +31,15 @@ export function LoginCredentialsCard(){
             if (response.loginSucceeded && response.accessToken && response.refreshToken) {
                 localStorage.setItem('accessToken', response.accessToken);
                 localStorage.setItem('refreshToken', response.refreshToken);
-                toast.success(t("toast.login.successMessage"));
+                toast.success("Вход выполнен успешно");
 
                 navigate(RouteName.PROFILE_PAGE)
-            } else {
-                toast.error(t("toast.login.invalidCredentials"));
+            }
+            else{
+                toast.error("Неверный логин или пароль");
             }
 
         } catch (error: any) {
-            toast.error(
-                error.response?.data?.message ||
-                t("toast.login.errorMessage")
-            );
         }
     };
 

@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { authController } from './endpoints';
 import { RefreshDto } from '@/shared/models/requests/refreshDto.ts';
 import { TokenPairDto } from '@/shared/models/responses/tokenPairDto.ts';
+import {toast} from "@/app/providers/Toast/ToastController.ts";
 
 const axiosInstance = axios.create({
     baseURL: '/',
@@ -82,6 +83,19 @@ axiosInstance.interceptors.response.use(
                     resolve(axiosInstance(originalRequest));
                 });
             });
+        }
+
+        if (error.response) {
+            const status = error.response.status;
+            const message = error.response.data?.message || 'Произошла ошибка';
+
+            if (status >= 500) {
+                toast.error(message || 'Ошибка сервера');
+            } else if (status >= 400) {
+                toast.warning(message || 'Ошибка запроса');
+            }
+        } else {
+            toast.error("Нет подключения к серверу");
         }
 
         return Promise.reject(error);
