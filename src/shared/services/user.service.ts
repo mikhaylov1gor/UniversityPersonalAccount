@@ -1,5 +1,5 @@
 import axiosInstance from '../api/axiosInstance';
-import {userController} from "@/shared/api/endpoints.ts";
+import {profileController, userController} from "@/shared/api/endpoints.ts";
 import {
     ProfileShortDtoPagedListWithMetadata
 } from "@/shared/models/responses/profile/profileShortDtoPagedListWithMetadata.ts";
@@ -19,13 +19,13 @@ export const UserStoreApi = {
             pageSize: pageSize == null ? 5 : pageSize,
         }
 
-        const data: ProfileShortDtoPagedListWithMetadata = await axiosInstance.get(`${userController}/list`, {params});
-        return data;
+        const response= await axiosInstance.get<ProfileShortDtoPagedListWithMetadata>(`${userController}/list`, {params});
+        return response.data;
     },
 
     getSpecificUserProfileForAdmin: async (userId: string)=>{
-        const data: ProfileDto = await axiosInstance.get(`${userController}/${userId}`);
-        return data;
+        const response = await axiosInstance.get<ProfileDto>(`${userController}/${userId}`);
+        return response.data;
     },
 
     updateSpecificUserProfileForAdmin: async (userId: string, dto: ProfileUpdateDto)=>{
@@ -37,13 +37,13 @@ export const UserStoreApi = {
     },
 
     getSpecificUserStudentForAdmin: async (userId: string)=>{
-        const data: StudentDto = await axiosInstance.get(`${userController}/${userId}/student`);
-        return data;
+        const response = await axiosInstance.get<StudentDto>(`${userController}/${userId}/student`);
+        return response.data;
     },
 
     getSpecificUserEmployeeForAdmin: async (userId: string)=>{
-        const data: EmployeeDto = await axiosInstance.get(`${userController}/${userId}/employee`);
-        return data;
+        const response = await axiosInstance.get<EmployeeDto>(`${userController}/${userId}/employee`);
+        return response.data;
     },
 
     updateSpecificUserAvatarForAdmin: async (userId: string, dto: AvatarUpdateDto)=>{

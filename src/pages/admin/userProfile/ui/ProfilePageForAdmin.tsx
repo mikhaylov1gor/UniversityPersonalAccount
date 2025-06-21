@@ -4,21 +4,24 @@ import {ContactsCard} from "@/features/profile/contacts";
 import {EducationAndWorkCard} from "@/features/profile/education-and-work";
 import {useEffect, useState} from "react";
 import {ProfileDto} from "@/shared/models/responses/profile/profileDto.ts";
-import {ProfileStoreApi} from "@/shared/services/profile.service.ts";
 import {useTranslation} from "react-i18next";
+import {UserStoreApi} from "@/shared/services/user.service.ts";
+import {useParams} from "react-router-dom";
 
-export function ProfilePage() {
+export function ProfilePageForAdmin() {
     const [profileData, setProfileData] = useState<ProfileDto | null>(null);
     const [loading, setLoading] = useState(true);
     const { t } = useTranslation();
+    const { id } = useParams<{ id: string }>();
 
+    console.log(id);
     useEffect(() => {
         const fetchProfile = async () => {
             try {
                 setLoading(true);
                 if (!profileData) {
-                    const data = await ProfileStoreApi.getCurrentUserProfile();
-                    console.log("Запрос на получение юзер профиля")
+                    const data = await UserStoreApi.getSpecificUserProfileForAdmin(id);
+                    console.log("Запрос на получение юзер профиля: ", data)
                     setProfileData(data);
                 }
             } catch (err) {
@@ -56,8 +59,8 @@ export function ProfilePage() {
                         citizenship={profileData.citizenship == null ? "undefined" : profileData.citizenship.name}
                         snils="000 000 000 000"
                         email={profileData.email == null ? "undefined" : profileData.email}
-                        avatarId={profileData.avatar.id}
-                        isAdmin={false}
+                        avatarId={profileData.avatar == null ? null : profileData.avatar.id}
+                        isAdmin={true}
                     />
 
                     <ContactsCard
@@ -77,7 +80,7 @@ export function ProfilePage() {
                     <EducationAndWorkCard
                         userId={profileData.id}
                         userTypes={profileData.userTypes}
-                        isAdmin={false}
+                        isAdmin={true}
                     />
                 </div>
             </div>

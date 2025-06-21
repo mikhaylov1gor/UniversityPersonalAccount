@@ -75,5 +75,12 @@
     "certificates": "Справки",
     "usefulServices": "Полезные сервисы",
     "events": "Мероприятия"
+  },
+  "titles": {
+    "profile": "Профиль",
+    "administration": "Администрирование",
+    "certificates": "Справки",
+    "usefulServices": "Полезные сервисы",
+    "events": "Мероприятия"
   }
 }

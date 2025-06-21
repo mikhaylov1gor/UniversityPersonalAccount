@@ -1,0 +1,42 @@
+@use "@/shared/ui/design/_tokens" as tokens;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: tokens.$space-1;
+  margin-top: tokens.$space-4;
+}
+
+.pageBtn {
+  background: none;
+  border: none;
+  padding: tokens.$space-1 tokens.$space-2;
+  font-size: tokens.$font-p1-size;
+  color: tokens.$color-text;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+
+  &:disabled {
+    color: tokens.$color-text-p2;
+    cursor: default;
+  }
+
+  &:not(:disabled):hover {
+    background-color: rgba(tokens.$color-accent, 0.1);
+  }
+
+  &--active {
+    background-color: tokens.$color-accent;
+    color: #fff;
+    cursor: default;
+    &:hover {
+      background-color: tokens.$color-accent;
+    }
+  }
+}
+
+.ellipsis {
+  padding: 0 tokens.$space-2;
+  color: tokens.$color-text-p2;
+}

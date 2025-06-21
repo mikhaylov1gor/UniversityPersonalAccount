@@ -10,7 +10,7 @@
 
   &__avatar {
     width: 100%;
-    max-width: 20rem; // ~320px
+    max-width: 20rem;
     object-fit: cover;
 
     @media (min-width: 640px) {
