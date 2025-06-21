@@ -75,5 +75,12 @@
     "certificates": "Certificates",
     "usefulServices": "Useful Services",
     "events": "Events"
+  },
+  "titles": {
+    "profile": "Profile",
+    "administration": "Administration",
+    "certificates": "Certificates",
+    "usefulServices": "Useful Services",
+    "events": "Events"
   }
 }

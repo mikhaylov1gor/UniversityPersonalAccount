@@ -8,3 +8,8 @@ interface ImportMeta {
         options?: { eager?: boolean; import?: string }
     ) => Record<string, never>;
 }
+
+declare module "*.png" {
+    const value: string;
+    export default value;
+}

@@ -15,7 +15,6 @@
 }
 
 .header {
-  //background-color: #fff;
   padding: tokens.$space-2 tokens.$space-0;
   z-index: 10;
 
@@ -36,7 +35,6 @@
     color: tokens.$color-text-p2;
   }
   &__right {
-    /* селектор языка */
   }
 
   &__innerMobileTop {

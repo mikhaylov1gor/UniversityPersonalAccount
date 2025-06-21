@@ -6,6 +6,8 @@ import { ProfilePage } from "@/pages/profile";
 import { AdminPage } from "@/pages/admin"
 import {Layout} from "@/pages/layout/Layout";
 import {Error404, Error500} from "@/pages/errors";
+import UsersPage from "@/pages/admin/users/ui/UsersPage.tsx";
+import {ProfilePageForAdmin} from "@/pages/admin/userProfile/ui/ProfilePageForAdmin.tsx";
 
 function AppRouter() {
     const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
@@ -47,7 +49,7 @@ function AppRouter() {
                 element={
                     <ProtectedRoute>
                         <Layout
-                            title="Профиль"
+                            title="Полезные сервисы"
                         >
                             <ProfilePage />
                         </Layout>
@@ -60,7 +62,7 @@ function AppRouter() {
                 element={
                     <ProtectedRoute>
                         <Layout
-                            title="Профиль"
+                            title="Справки"
                         >
                             <ProfilePage />
                         </Layout>
@@ -89,6 +91,32 @@ function AppRouter() {
                             title="Администрирование"
                         >
                             <AdminPage />
+                        </Layout>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path={RouteName.ADMIN_PAGE_USERS}
+                element={
+                    <ProtectedRoute>
+                        <Layout
+                            title="Администрирование"
+                        >
+                            <UsersPage />
+                        </Layout>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/admin/user/:id"
+                element={
+                    <ProtectedRoute>
+                        <Layout
+                            title="Администрирование"
+                        >
+                            <ProfilePageForAdmin/>
                         </Layout>
                     </ProtectedRoute>
                 }

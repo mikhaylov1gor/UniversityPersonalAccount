@@ -5,9 +5,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Icon } from "@/shared/ui/atoms/Icon/Icon";
 import { Menu, X } from "lucide-react";
 import styles from "./NavbarMenu.module.scss";
+import defaultAvatar from "@/shared/assets/test/photo_profile.png";
 
 interface NavbarMenuProps {
-    avatarUrl: string;
+    avatarUrl: string | null;
     open: boolean;
     mobileOverlay: boolean;
     onToggleOpen: () => void;
@@ -89,15 +90,13 @@ export function NavbarMenu({
                     .join(" ")}
             >
                 <div className={styles.sidebar__header}>
+
                     <img
-                        src={avatarUrl}
+                        src={avatarUrl || defaultAvatar}
                         alt="avatar"
                         className={styles.sidebar__avatar}
-                        onError={(e) => {
-                            (e.target as HTMLImageElement).src =
-                                "src/shared/assets/test/photo_profile.png";
-                        }}
                     />
+
                     {isDesktop && (
                         <button
                             onClick={onToggleOpen}
@@ -105,9 +104,9 @@ export function NavbarMenu({
                             aria-label={open ? "Свернуть меню" : "Развернуть меню"}
                         >
                             {open ? (
-                                <Icon name="chevron-left-red" size={26} fill={"none"} />
+                                <Icon name="chevron-left-red" size={26} fill={"none"}/>
                             ) : (
-                                <Icon name="chevron-right-red" size={26} fill={"none"} />
+                                <Icon name="chevron-right-red" size={26} fill={"none"}/>
                             )}
                         </button>
                     )}

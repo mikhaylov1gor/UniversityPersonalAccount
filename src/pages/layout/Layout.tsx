@@ -50,7 +50,7 @@ export function Layout({title, breadcrumbs, children}: LayoutProps) {
     return (
         <div className={styles.layoutRoot}>
             <NavbarMenu
-                avatarUrl="src/shared/assets/test/photo_profile.png"
+                avatarUrl={null}
                 open={sidebarOpen}
                 mobileOverlay={mobileOverlay}
                 onToggleOpen={() => setSidebarOpen((o) => !o)}
@@ -85,7 +85,7 @@ export function Layout({title, breadcrumbs, children}: LayoutProps) {
                         )}
                         {!isDesktop && (
                             <div className={styles.header__innerMobileBottom}>
-                                <h1 className={styles.header__title}>{title}</h1>
+                                <h1>{title}</h1>
                                 {breadcrumbs && (
                                     <nav className={styles.header__breadcrumbs}>
                                         {breadcrumbs}
