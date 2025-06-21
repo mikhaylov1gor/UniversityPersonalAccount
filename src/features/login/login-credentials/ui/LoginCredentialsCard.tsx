@@ -33,7 +33,7 @@ export function LoginCredentialsCard(){
                 localStorage.setItem('refreshToken', response.refreshToken);
                 toast.success("Вход выполнен успешно");
 
-                navigate(RouteName.PROFILE_PAGE)
+                navigate(RouteName.EVENTS_PAGE)
             }
             else{
                 toast.error("Неверный логин или пароль");

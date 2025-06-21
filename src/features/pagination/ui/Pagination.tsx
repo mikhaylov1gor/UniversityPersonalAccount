@@ -28,7 +28,6 @@ export const Pagination: React.FC<PaginationProps> = ({
         onPageChange(page);
     };
 
-    // Вычисляем диапазон страниц для отображения
     const pages: (number | 'ellipsis')[] = [];
     const startPage = Math.max(1, currentPage - pageRangeDisplayed);
     const endPage = Math.min(totalPages, currentPage + pageRangeDisplayed);
@@ -39,7 +38,6 @@ export const Pagination: React.FC<PaginationProps> = ({
             pages.push('ellipsis');
         }
     } else if (startPage > 1) {
-        // всегда показываем 1, ... перед диапазоном
         pages.push(1, 'ellipsis');
     }
 
@@ -64,7 +62,6 @@ export const Pagination: React.FC<PaginationProps> = ({
                 disabled={currentPage === 1}
                 aria-label="Previous page"
             >
-                {/* Можно заменить на Icon */}
                 <Icon name="chevron-left-black" size={20} fill="none" />
             </button>
             {pages.map((p, idx) => {

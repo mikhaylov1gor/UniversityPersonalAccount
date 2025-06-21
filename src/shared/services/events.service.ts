@@ -24,8 +24,8 @@ export const EventsStoreApi = {
             page: page == null ? 1 : page,
             pageSize: pageSize == null ? 5 : pageSize
         }
-        let data: EventShortDtoPagedListWithMetadata = await axiosInstance.get(`${eventsController}/public`, {params})
-        return data;
+        let response = await axiosInstance.get<EventShortDtoPagedListWithMetadata>(`${eventsController}/public`, {params})
+        return response.data;
     },
 
     getPublicEventsWithAuth: async(name: string, eventDate: string,  timezoneOffset: number, page: number, pageSize: number) =>{
@@ -36,8 +36,8 @@ export const EventsStoreApi = {
             page: page == null ? 1 : page,
             pageSize: pageSize == null ? 5 : pageSize
         }
-        const data: EventShortDtoPagedListWithMetadata = await axiosInstance.get(`${eventsController}/public/auth`, {params})
-        return data;
+        const response = await axiosInstance.get<EventShortDtoPagedListWithMetadata>(`${eventsController}/public/auth`, {params})
+        return response.data;
     },
 
     getPublicEventDetails: async (id: string)=>{

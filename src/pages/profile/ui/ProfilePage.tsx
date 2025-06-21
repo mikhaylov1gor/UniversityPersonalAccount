@@ -10,7 +10,7 @@ import {useTranslation} from "react-i18next";
 export function ProfilePage() {
     const [profileData, setProfileData] = useState<ProfileDto | null>(null);
     const [loading, setLoading] = useState(true);
-    const { t } = useTranslation();
+    const {t} = useTranslation();
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -30,21 +30,21 @@ export function ProfilePage() {
         fetchProfile();
     }, []);
 
-    if (loading){
+    if (loading) {
         return <div>
             <h1> Загрузка</h1>
         </div>
     }
 
     return (
-<>
+        <>
 
             <div className="max-w-6xl py-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div className="md:col-span-1 space-y-3">
 
                     <ProfileHeader
                         mobileOnly
-                        fullName={ `${profileData.lastName == null ? "undefined" : profileData.lastName} 
+                        fullName={`${profileData.lastName == null ? "undefined" : profileData.lastName} 
                                     ${profileData.firstName == null ? "undefined" : profileData.firstName} 
                                     ${profileData.patronymic == null ? "undefined" : profileData.patronymic}`}
                     />
@@ -61,7 +61,7 @@ export function ProfilePage() {
                     />
 
                     <ContactsCard
-                        contacts ={profileData.contacts}
+                        contacts={profileData.contacts}
                         address={profileData.address}
                     />
                 </div>
@@ -69,7 +69,7 @@ export function ProfilePage() {
                 <div className="md:col-span-2 space-y-3">
                     <ProfileHeader
                         desktopOnly
-                        fullName={ `${profileData.lastName == null ? "undefined" : profileData.lastName} 
+                        fullName={`${profileData.lastName == null ? "undefined" : profileData.lastName} 
                                     ${profileData.firstName == null ? "undefined" : profileData.firstName} 
                                     ${profileData.patronymic == null ? "undefined" : profileData.patronymic}`}
                     />
@@ -81,6 +81,6 @@ export function ProfilePage() {
                     />
                 </div>
             </div>
-</>
+        </>
     );
 }

@@ -1,0 +1,1 @@
+export {EventsPage} from "@/pages/events/main/ui/EventsPage";

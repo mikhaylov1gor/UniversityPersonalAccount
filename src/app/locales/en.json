@@ -6,6 +6,12 @@
     "rememberMe": "Remember me",
     "loginButton": "LOG IN"
   },
+  "events": {
+    "title": "Events",
+    "name": "Event name",
+    "date": "Date of the event",
+    "search": "Search"
+  },
   "profilePage": {
     "title": "Profile",
     "personalData": {
@@ -61,12 +67,16 @@
   },
   "admin": {
     "nav": {
-      "users": "Users",
-      "usefulServices": "Useful services",
-      "events": "Events",
-      "usersDesc": "View users and update their personal information",
-      "usefulServicesDesc": "Manage the useful services page: add, remove, and update services",
-      "eventsDesc": "Manage the events page: view, edit, and create new events"
+      "users": "Пользователи",
+      "usefulServices": "Полезные сервисы",
+      "events": "Мероприятия",
+      "usersDesc": "Просматривайте пользователей, обновляйте их личные данные",
+      "usefulServicesDesc": "Управляйте страницей полезных сервисов: добавляйте, удаляйте и обновляйте сервисы",
+      "eventsDesc": "Управляйте страницей мероприятий: просматривайте, редактируйте и создавайте новые мероприятия"
+    },
+    "users": {
+      "input": "Enter your name or email address",
+      "search": "Search"
     }
   },
   "menu": {

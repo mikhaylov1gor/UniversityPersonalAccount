@@ -6,7 +6,7 @@ import {toast} from "@/app/providers/Toast/ToastController.ts";
 
 const axiosInstance = axios.create({
     baseURL: '/',
-    timeout: 10000,
+    timeout: 20000,
     headers: { 'Content-Type': 'application/json' },
 } as AxiosRequestConfig);
 

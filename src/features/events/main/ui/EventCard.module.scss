@@ -1,0 +1,44 @@
+.card {
+  display: flex;
+  height: 100%;
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  gap: 1.25rem;
+}
+
+.image {
+  width: 220px;
+  height: 150px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 12px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #222;
+}
+
+.infoBlock {
+  margin-bottom: 0.5rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.value {
+  font-size: 0.95rem;
+  color: #000;
+}
