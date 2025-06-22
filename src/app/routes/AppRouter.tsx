@@ -9,6 +9,7 @@ import {Error404, Error500} from "@/pages/errors";
 import UsersPage from "@/pages/admin/users/ui/UsersPage.tsx";
 import {EventDetailsPage, EventsPage} from "@/pages/events";
 import {ProfilePageForAdmin} from "@/pages/admin/userProfile/ui/ProfilePageForAdmin.tsx";
+import UsefulServicesPage from "@/pages/usefulservices/ui/UsefulServicesPage.tsx";
 
 function AppRouter() {
     const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
@@ -48,13 +49,11 @@ function AppRouter() {
             <Route
                 path={RouteName.USEFUL_SERVICES_PAGE}
                 element={
+                <Layout title="Полезные сервисы">
                     <ProtectedRoute>
-                        <Layout
-                            title="Полезные сервисы"
-                        >
-                            <ProfilePage />
-                        </Layout>
+                            <UsefulServicesPage />
                     </ProtectedRoute>
+                </Layout>
                 }
             />
 

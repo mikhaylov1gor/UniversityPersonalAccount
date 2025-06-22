@@ -7,6 +7,6 @@ export interface UsefulServiceDto {
     title: string | null,
     description: string | null,
     link: string | null,
-    termsOfDistribution: string | null,
+    termsOfDisctribution: string | null,
     logo: FileDto,
 }

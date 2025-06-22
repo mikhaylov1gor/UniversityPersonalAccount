@@ -79,6 +79,10 @@
     "users": {
       "input": "Введите имя или email",
       "search": "Найти"
+    },
+    "usefulServices": {
+      "button": "Перейти на сайт",
+      "serviceTerms": "Условия предоставления"
     }
   },
   "toast": {

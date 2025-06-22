@@ -2,7 +2,7 @@ import React, {ReactNode, useState} from 'react';
 import LanguageSelector from "@/features/language-selector/ui/LanguageSelect";
 import styles from './Layout.module.scss';
 import {NavbarMenu} from "@/features/menu/ui/NavbarMenu";
-import {useWindowWidth} from "@/shared/hooks/helpersHooks.ts";
+import {useWindowWidth} from "@/shared/hooks/useLayoutHook.ts";
 
 interface LayoutProps {
     title: string;

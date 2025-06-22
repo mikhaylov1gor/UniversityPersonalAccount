@@ -24,6 +24,7 @@ export function EventDetailsPage() {
     const [descriptionTab, setDescriptionTab] = useState<boolean>(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
+
     useEffect(() => {
         const fetchEvent = async () => {
             try {
@@ -138,7 +139,7 @@ export function EventDetailsPage() {
             <div className="bg-white rounded-xl shadow-lg p-8">
                 <div className={styles.card}>
                     <div>
-                        <div className={styles.header} onClick={() => setDescriptionTab(!descriptionTab)}>
+                        <div className={styles.header} style={{cursor: "pointer"}} onClick={() => setDescriptionTab(!descriptionTab)}>
                             <div className={styles.headerContent}>
                                 <div className={styles.headerInfo}>
                                     <strong>{t("events.details.description")}</strong>
