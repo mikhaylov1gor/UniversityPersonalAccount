@@ -15,7 +15,7 @@ export function EventsPage() {
 
     const [events, setEvents] = useState([]);
     const [meta, setMeta] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const {t} = useTranslation();
     const [error, setError] = useState(null);
 

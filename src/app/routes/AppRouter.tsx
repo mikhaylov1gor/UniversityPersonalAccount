@@ -7,8 +7,8 @@ import { AdminPage } from "@/pages/admin"
 import {Layout} from "@/pages/layout/Layout";
 import {Error404, Error500} from "@/pages/errors";
 import UsersPage from "@/pages/admin/users/ui/UsersPage.tsx";
+import {EventDetailsPage, EventsPage} from "@/pages/events";
 import {ProfilePageForAdmin} from "@/pages/admin/userProfile/ui/ProfilePageForAdmin.tsx";
-import {EventsPage} from "@/pages/events";
 
 function AppRouter() {
     const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
@@ -78,6 +78,17 @@ function AppRouter() {
                             title="Мероприятия"
                         >
                             <EventsPage />
+                        </Layout>
+                }
+            />
+
+            <Route
+                path="/event/:id"
+                element={
+                        <Layout
+                            title="Мероприятия"
+                        >
+                            <EventDetailsPage />
                         </Layout>
                 }
             />

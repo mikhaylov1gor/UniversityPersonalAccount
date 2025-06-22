@@ -29,19 +29,19 @@ interface EventsGridViewProps {
 }
 
 export function EventsGridView({ events }: EventsGridViewProps) {
-    const navigate = useNavigate();
-
     return (
         <Row align="stretch" gutterWidth={20}>
             {events.map((event) => (
                 <Col key={event.id} xl={6} style={{ display: 'flex' }}>
                     <div style={{ marginBottom: 20, width: '100%' }}>
                         <EventCard
+                            eventId={event.id}
                             imageId={event.picture.id}
                             title={event.title}
                             dateFrom={event.dateTimeFrom}
                             dateTo={event.dateTimeTo}
                             format={event.format.toString()}
+                            status={event.status as string}
                         />
                     </div>
                 </Col>

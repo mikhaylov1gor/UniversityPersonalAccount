@@ -41,16 +41,16 @@ export const EventsStoreApi = {
     },
 
     getPublicEventDetails: async (id: string)=>{
-        const data: EventDto = await axiosInstance.get(`${eventsController}/public/${id}`)
-        return data;
+        const response = await axiosInstance.get<EventDto>(`${eventsController}/public/${id}`)
+        return response.data;
     },
 
     checkIsUserParticipantOfEvent: async (id: string)=>{
-        const data = await axiosInstance.get(`${eventsController}/is_participant/${id}`)
-        return data;
+        const response = await axiosInstance.get(`${eventsController}/is_participant/${id}`)
+        return response.data;
     },
 
-    registerToEventAsInner: async (dto: EventInnerRegisterDto)=>{
+    registerToEventAsInner: async (dto: string)=>{
         return await axiosInstance.post(`${eventsController}/register/inner`, dto,{
             headers: {
                 'Content-Type': 'application/json'
