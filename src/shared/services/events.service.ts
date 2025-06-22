@@ -47,10 +47,10 @@ export const EventsStoreApi = {
 
     checkIsUserParticipantOfEvent: async (id: string)=>{
         const response = await axiosInstance.get(`${eventsController}/is_participant/${id}`)
-        return response.data;
+        return response.data.isParticipating;
     },
 
-    registerToEventAsInner: async (dto: string)=>{
+    registerToEventAsInner: async (dto: EventInnerRegisterDto)=>{
         return await axiosInstance.post(`${eventsController}/register/inner`, dto,{
             headers: {
                 'Content-Type': 'application/json'

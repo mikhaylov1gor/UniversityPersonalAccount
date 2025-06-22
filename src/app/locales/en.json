@@ -17,7 +17,9 @@
       "registrationDate": "Registration end date",
       "address": "Address",
       "format": "Event format",
-      "link": "Link"
+      "link": "Link",
+      "participate": "I WILL PARTICIPATE",
+      "alreadyParticipating": "ALREADY PARTICIPATING"
     }
   },
   "profilePage": {

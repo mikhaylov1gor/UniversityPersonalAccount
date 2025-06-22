@@ -17,7 +17,17 @@
       "date": "Дата(ы) проведения",
       "format": "Формат мероприятия",
       "link": "Ссылка",
-      "address": "Адрес"
+      "address": "Адрес",
+      "participate": "БУДУ УЧАСТВОВАТЬ",
+      "alreadyParticipating": "УЖЕ УЧАСТНИК",
+
+      "modal": {
+        "title": "Регистрация на мероприятие",
+        "name": "ФИО",
+        "email": "Email",
+        "phone": "Телефон",
+        "additionalInfo": "Дополнительная информация"
+      }
     }
   },
   "profilePage": {
@@ -104,5 +114,9 @@
     "certificates": "Справки",
     "usefulServices": "Полезные сервисы",
     "events": "Мероприятия"
+  },
+  "common": {
+    "save": "СОХРАНИТЬ",
+    "cancel": "ОТМЕНИТЬ"
   }
 }

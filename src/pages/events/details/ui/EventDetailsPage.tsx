@@ -1,238 +1,227 @@
-import {useParams} from "react-router-dom";
-import {useTranslation} from "react-i18next";
-import React, {useEffect, useState} from "react";
-import {EventsStoreApi} from "@/shared/services/events.service.ts";
-import {EventDto} from "@/shared/models/responses/event/eventDto.ts";
-import styles from "./EventDetailsPage.module.scss"
-import defaultPhoto from "@/shared/assets/test/default_event_photo.gif";
-import {FilesStoreApi} from "@/shared/services/files.service.ts";
+import React, { useEffect, useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+import { EventsStoreApi } from "@/shared/services/events.service.ts";
+import { FilesStoreApi } from "@/shared/services/files.service.ts";
+import { EventDto } from "@/shared/models/responses/event/eventDto.ts";
+
+import { Icon } from "@/shared/ui/atoms/Icon/Icon.tsx";
 import Button from "@/shared/ui/atoms/Button/Button.tsx";
-import {Icon} from "@/shared/ui/atoms/Icon/Icon.tsx";
-import {formatDateRange} from "@/features/events/main/ui/EventCard.tsx";
 import MapComponent from "@/features/map/ui/MapComponent.tsx";
+import { formatDateRange } from "@/features/events/main/ui/EventCard.tsx";
+
+import styles from "./EventDetailsPage.module.scss";
+import defaultPhoto from "@/shared/assets/test/default_event_photo.gif";
+import {ExternalRegisterModal} from "@/features/events/details/ui/ExternalRegisterModal.tsx";
 
 export function EventDetailsPage() {
-    const {id} = useParams<{ id: string }>();
-    const [loading, setLoading] = useState(false);
-    const {t} = useTranslation();
-    const [error, setError] = useState(null);
+    const { id } = useParams<{ id: string }>();
+    const { t } = useTranslation();
 
     const [event, setEvent] = useState<EventDto | null>(null);
-    const [bannerUrl, setBannerUrl] = useState<string>(null);
-    const isAuthorized = localStorage.getItem("accessToken") !== null;
-    const [isParticipant, setIsParticipant] = useState(false);
-    const [descriptionTab, setDescriptionTab] = useState<boolean>(true);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [bannerUrl, setBannerUrl] = useState<string | null>(null);
+    const [isParticipant, setIsParticipant] = useState(null);
+    const [descriptionTab, setDescriptionTab] = useState(true);
+
+    const isAuthorized = Boolean(localStorage.getItem("accessToken"));
+
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
 
-    useEffect(() => {
-        const fetchEvent = async () => {
-            try {
-                setLoading(true);
-                setError(null);
-
-                const data = await EventsStoreApi.getPublicEventDetails(id);
-                setEvent(data);
-            } catch (err) {
-                console.error(err);
-                setError('Произошла ошибка при получении подробностей мероприятия');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchEvent();
+    const fetchEvent = useCallback(async () => {
+        try {
+            setLoading(true);
+            const data = await EventsStoreApi.getPublicEventDetails(id);
+            setEvent(data);
+        } catch (err) {
+            console.error(err);
+            setError("Произошла ошибка при получении подробностей мероприятия");
+        } finally {
+            setLoading(false);
+        }
     }, [id]);
 
-    useEffect(() => {
-        if (!event?.picture?.id) return;
-
-        const fetchBanner = async () => {
-            try {
-                const response = await FilesStoreApi.getFileById(event.picture.id);
-                const blob = new Blob([response.data], {
-                    type: response.headers['content-type'] || 'image/jpeg'
-                });
-                const url = URL.createObjectURL(blob);
-                setBannerUrl(url);
-            } catch (e) {
-                console.error(`Ошибка загрузки картинки для события ${event.id}`, e);
-            }
-        };
-
-        fetchBanner();
-
-        return () => {
-            if (bannerUrl) {
-                URL.revokeObjectURL(bannerUrl);
-                setBannerUrl(null);
-            }
-        };
-    }, [event]);
-
-    useEffect(() => {
-        const checkParticipating = async () => {
-            try {
-                const data = await EventsStoreApi.checkIsUserParticipantOfEvent(event.id)
-                setIsParticipant(data);
-            } catch (e) {
-                console.error(`Ошибка проверки участия для события ${event.id}`, e);
-            }
-        }
-
-        if (event) {
-            checkParticipating();
-        }
-    }, [event]);
-
-    const register = async (eventId: string) => {
+    // Проверка участия
+    const checkParticipation = useCallback(async (eventId: string) => {
         try {
-            if (isAuthorized) {
-                const response = await EventsStoreApi.registerToEventAsInner(eventId);
-                setIsParticipant(!isParticipant);
+            if(localStorage.getItem("accessToken")){
+                const isJoined = await EventsStoreApi.checkIsUserParticipantOfEvent(eventId);
+                console.log("Проверка участия: ", isJoined)
+                setIsParticipant(isJoined);
             }
             else{
-                setIsModalOpen(true);
+                const registered = JSON.parse(localStorage.getItem("guestRegisteredEvents") || "[]");
+                console.log(true);
+                if (registered.includes(eventId)) {
+                    setIsParticipant(true);
+                }
+                else {
+                    setIsParticipant(false);
+                }
             }
-
         } catch (e) {
-            console.error(`Ошибка при регистрации на мероприятие`, e);
+            console.error(`Ошибка проверки участия`, e);
         }
-    }
+    }, []);
 
-    if (loading) {
-        return <h1>Загрузка...</h1>;
-    }
+    // Получение баннера
+    const fetchBanner = useCallback(async (fileId: string) => {
+        try {
+            const response = await FilesStoreApi.getFileById(fileId);
+            const blob = new Blob([response.data], {
+                type: response.headers["content-type"] || "image/jpeg"
+            });
+            const url = URL.createObjectURL(blob);
+            setBannerUrl(url);
+        } catch (e) {
+            console.error("Ошибка загрузки картинки", e);
+        }
+    }, []);
 
-    if (error) {
-        return <div style={{color: 'red'}}>{error}</div>;
-    }
+    useEffect(() => {
+        fetchEvent();
+    }, [fetchEvent]);
 
-    if (!event) {
-        return <div>Мероприятие не найдено</div>;
-    }
+    useEffect(() => {
+        if (!event) return;
+        if (event.picture?.id) fetchBanner(event.picture.id);
+        checkParticipation(event.id);
+        return () => bannerUrl && URL.revokeObjectURL(bannerUrl);
+    }, [event, fetchBanner, checkParticipation]);
+
+    const handleRegister = async () => {
+        if (!event) return;
+
+        if (isAuthorized) {
+            try {
+                await EventsStoreApi.registerToEventAsInner({ eventId: event.id });
+                setIsParticipant(prev => !prev);
+            } catch (e) {
+                console.error("Ошибка при регистрации", e);
+            }
+        } else {
+            setIsModalOpen(true);
+        }
+    };
+
+    const renderRegistrationButton = () => {
+        if (!event?.isRegistrationRequired) return null;
+
+        return isParticipant ? (
+            <Button variant="outline" onClick={handleRegister}>
+                {t("events.details.alreadyParticipating")}
+            </Button>
+        ) : (
+            <Button variant="primary" onClick={handleRegister}>
+                {t("events.details.participate")}
+            </Button>
+        );
+    };
+
+    if (loading) return <h1>Загрузка...</h1>;
+    if (error) return <div style={{ color: "red" }}>{error}</div>;
+    if (!event) return <div>{t("events.details.notFound")}</div>;
 
     return (
         <div>
             <div className={styles.header}>
                 <h2>{event.title}</h2>
-                {event.isRegistrationRequired ? (
-                    isParticipant ? (
-                        <Button
-                            variant="primary"
-                            onClick={() => register(event.id)}
-                            style={{width: '236px', height: '48px', marginTop: '10px'}}
-                        >
-                            БУДУ УЧАСТВОВАТЬ
-                        </Button>
-                    ) : (
-                        <Button
-                            variant="outline"
-                            style={{width: '236px', height: '48px', marginTop: '10px'}}
-                        >
-                            УЧАСТВУЮ
-                        </Button>
-                    )
-                ) : null}
-
+                {isParticipant !==null && (
+                    renderRegistrationButton()
+                )}
             </div>
+
             <div className="bg-white rounded-xl shadow-lg p-8">
                 <div className={styles.card}>
-                    <div>
-                        <div className={styles.header} style={{cursor: "pointer"}} onClick={() => setDescriptionTab(!descriptionTab)}>
-                            <div className={styles.headerContent}>
-                                <div className={styles.headerInfo}>
-                                    <strong>{t("events.details.description")}</strong>
-                                    <Icon
-                                        name={descriptionTab ? "caret-down-md-black" : "caret-up-md-black"}
-                                        size={30}
-                                        fill="none"
-                                        style={{marginLeft: "auto"}}
-                                    />
-                                </div>
-                            </div>
+                    <div className={styles.header} onClick={() => setDescriptionTab(!descriptionTab)}>
+                        <div className={styles.headerInfo}>
+                            <strong>{t("events.details.description")}</strong>
+                            <Icon
+                                name={descriptionTab ? "caret-down-md-black" : "caret-up-md-black"}
+                                size={30}
+                                style={{ marginLeft: "auto" }}
+                            />
                         </div>
-
-                        {descriptionTab && (
-                            <div className={styles.eventDescription} style={{marginTop: 10}}
-                                 dangerouslySetInnerHTML={{__html: event.description || ''}}/>
-                        )}
                     </div>
+
+                    {descriptionTab && (
+                        <div
+                            className={styles.eventDescription}
+                            dangerouslySetInnerHTML={{ __html: event.description || "" }}
+                        />
+                    )}
+
                     <img
-                        src={bannerUrl || defaultPhoto as string}
-                        alt={event.picture.name}
+                        src={bannerUrl || defaultPhoto}
+                        alt={event.picture?.name || ""}
                         className={styles.banner}
                     />
 
+                    {/* Дата окончания регистрации */}
                     {event.isRegistrationRequired && (
                         <div className={styles.rowGroup}>
                             <div className={styles.row}>
                                 <div className={styles.label}>{t("events.details.registrationDate")}</div>
-                                <div className={styles.value}>
-                                    {event.registrationLastDate}
-                                </div>
+                                <div className={styles.value}>{formatDateRange(event.registrationLastDate, null)}</div>
                             </div>
                         </div>
                     )}
 
-                    {event.format.toString() == "Offline" ? (
-                        <>
-                            <div className={styles.rowGroup}>
-                                <div className={styles.row}>
-                                    <div className={styles.label}>{t("events.details.date")}</div>
-                                    <div className={styles.value}>
-                                        {formatDateRange(event.dateTimeFrom, event.dateTimeTo)}
-                                    </div>
-                                </div>
-                                <div className={styles.row}>
-                                    <div className={styles.label}>{t("events.details.format")}</div>
-                                    <div className={styles.value}>
-                                        {event.format}
-                                    </div>
-                                </div>
+                    {/* Формат и дата */}
+                    <div className={styles.rowGroup}>
+                        <div className={styles.row}>
+                            <div className={styles.label}>{t("events.details.date")}</div>
+                            <div className={styles.value}>
+                                {formatDateRange(event.dateTimeFrom, event.dateTimeTo)}
                             </div>
-                            <div className={styles.rowGroup} style={{borderBottom: '0px'}}>
-                                    <div className={styles.addressBlock}>
-                                        <div className={styles.label}>{t("events.details.address")}</div>
-                                        <div className={styles.value}>
-                                            {event.addressName}
-                                        </div>
-                                    </div>
-                                    <div className={styles.mapWrapper}>
-                                        <MapComponent latitude={event.latitude} longitude={event.longitude} zoom={10}/>
-                                    </div>
+                        </div>
+                        <div className={styles.row}>
+                            <div className={styles.label}>{t("events.details.format")}</div>
+                            <div className={styles.value}>{event.format}</div>
+                        </div>
+                    </div>
 
+                    {/* Адрес и карта или ссылка */}
+                    {event.format === "Offline" ? (
+                        <div className={styles.rowGroup} style={{ borderBottom: 0 }}>
+                            <div className={styles.addressBlock}>
+                                <div className={styles.label}>{t("events.details.address")}</div>
+                                <div className={styles.value}>{event.addressName}</div>
                             </div>
-                        </>
+                            <div className={styles.mapWrapper}>
+                                <MapComponent
+                                    latitude={event.latitude}
+                                    longitude={event.longitude}
+                                    zoom={10}
+                                />
+                            </div>
+                        </div>
                     ) : (
-                        <>
-                            <div className={styles.rowGroup}>
-                                <div className={styles.row}>
-                                    <div className={styles.label}>{t("events.details.date")}</div>
-                                    <div className={styles.value}>
-                                        {formatDateRange(event.dateTimeFrom, event.dateTimeTo)}
-                                    </div>
+                        <div className={styles.rowGroup}>
+                            <div className={styles.row}>
+                                <div className={styles.label}>{t("events.details.link")}</div>
+                                <div className={styles.value}>
+                                    <a href={`http://${event.link}`} target="_blank" rel="noreferrer">
+                                        {event.link}
+                                    </a>
                                 </div>
                             </div>
-                            <div className={styles.rowGroup}>
-                                <div className={styles.row}>
-                                    <div className={styles.label}>{t("events.details.format")}</div>
-                                    <div className={styles.value}>
-                                        {event.format}
-                                    </div>
-                                </div>
-                                <div className={styles.row}>
-                                    <div className={styles.label}>{t("events.details.link")}</div>
-                                    <div className={styles.value}>
-                                        `https://${event.link}`
-                                    </div>
-                                </div>
-                            </div>
-                        </>
+                        </div>
                     )}
                 </div>
-
             </div>
+
+            {/* Модальное окно */}
+            <ExternalRegisterModal
+                isOpen={isModalOpen}
+                eventId={event.id}
+                onClose={() => setIsModalOpen(false)}
+                onSuccess={() => {
+                    setIsParticipant(!isParticipant)
+                }}
+            />
         </div>
-    )
+    );
 }

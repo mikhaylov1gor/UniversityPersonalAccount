@@ -91,7 +91,7 @@ export const EventCard: React.FC<EventCardProps> = ({eventId, imageId, title, da
     );
 };
 
-export function formatDateRange(dateTimeFromStr, dateTimeToStr) {
+export function formatDateRange(dateTimeFromStr, dateTimeToStr?) {
     const from = new Date(dateTimeFromStr);
     const to = new Date(dateTimeToStr);
 
@@ -100,14 +100,16 @@ export function formatDateRange(dateTimeFromStr, dateTimeToStr) {
     const dayFrom = pad(from.getDate());
     const monthFrom = pad(from.getMonth() + 1);
     const yearFrom = from.getFullYear();
+    const fromHours = pad(from.getHours());
+    const fromMinutes = pad(from.getMinutes());
+
+    if (!dateTimeToStr){
+        return `${dayFrom}.${monthFrom}.${yearFrom} (${fromHours}:${fromMinutes})`;
+    }
 
     const dayTo = pad(to.getDate());
     const monthTo = pad(to.getMonth() + 1);
     const yearTo = to.getFullYear();
-
-    const fromHours = pad(from.getHours());
-    const fromMinutes = pad(from.getMinutes());
-
     const toHours = pad(to.getHours());
     const toMinutes = pad(to.getMinutes());
 
