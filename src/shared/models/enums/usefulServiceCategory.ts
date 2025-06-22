@@ -1,5 +1,5 @@
 export enum UsefulServiceCategory{
-    ForAll,
-    Students,
-    Employees
+    ForAll= 'ForAll',
+    Students = 'Students',
+    Employees = 'Employees',
 }
