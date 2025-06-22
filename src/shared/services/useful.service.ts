@@ -1,21 +1,28 @@
 import axiosInstance from '../api/axiosInstance';
 import {usefulServicesController} from "@/shared/api/endpoints.ts";
-import {UsefulServiceCategory} from "@/shared/models/enums/usefulServiceCategory.ts";
 import {
     UsefulServiceDtoPagedListWithMetadata
 } from "@/shared/models/responses/usefulService/usefulServiceDtoPagedListWithMetadata.ts";
 import {UsefulServiceEditCreateDto} from "@/shared/models/requests/usefulServiceEditCreateDto.ts";
+import {UsefulServiceCategory} from "@/shared/models/enums/usefulServiceCategory";
 
 export const usefulServiceStoreApi = {
-    getListByOfServices: async (categories: UsefulServiceCategory[], page: number, pageSize: number) => {
-        const params = {
-            categories: categories,
-            page: page == null ? 1 : page,
-            pageSize: pageSize == null ? 5 : pageSize,
+    getListByOfServices: async (categories: UsefulServiceCategory[] | null, page: number, pageSize: number) => {
+        const params = new URLSearchParams();
+
+        if (categories) {
+            categories
+                .map(c => UsefulServiceCategory[c])
+                .forEach(str => params.append('categories', str));
         }
 
-        const data: UsefulServiceDtoPagedListWithMetadata = await axiosInstance.get(`${usefulServicesController}`, {params})
-        return data;
+        params.append('page', String(page));
+        params.append('pageSize', String(pageSize));
+
+        const response = await axiosInstance.get<UsefulServiceDtoPagedListWithMetadata>(
+            `${usefulServicesController}?${params.toString()}`
+        );
+        return response.data
     },
 
     createServiceForAdmin: async (dto: UsefulServiceEditCreateDto)=>{

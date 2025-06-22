@@ -97,9 +97,13 @@ export function formatDateRange(dateTimeFromStr, dateTimeToStr) {
 
     const pad = (n) => n.toString().padStart(2, '0');
 
-    const day = pad(from.getDate());
-    const month = pad(from.getMonth() + 1);
-    const year = from.getFullYear();
+    const dayFrom = pad(from.getDate());
+    const monthFrom = pad(from.getMonth() + 1);
+    const yearFrom = from.getFullYear();
+
+    const dayTo = pad(to.getDate());
+    const monthTo = pad(to.getMonth() + 1);
+    const yearTo = to.getFullYear();
 
     const fromHours = pad(from.getHours());
     const fromMinutes = pad(from.getMinutes());
@@ -107,5 +111,10 @@ export function formatDateRange(dateTimeFromStr, dateTimeToStr) {
     const toHours = pad(to.getHours());
     const toMinutes = pad(to.getMinutes());
 
-    return `${day}.${month}.${year} (${fromHours}:${fromMinutes} - ${toHours}:${toMinutes})`;
+    if (dayFrom == dayTo && monthFrom == monthTo && yearFrom == yearTo){
+        return `${dayFrom}.${monthFrom}.${yearFrom} (${fromHours}:${fromMinutes} - ${toHours}:${toMinutes})`;
+    }
+    else{
+        return `${dayFrom}.${monthFrom}.${yearFrom} (${fromHours}:${fromMinutes}) - ${dayTo}.${monthTo}.${yearTo} (${toHours}:${toMinutes})`
+    }
 }

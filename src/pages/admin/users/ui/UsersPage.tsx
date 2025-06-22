@@ -33,30 +33,31 @@ export function UsersPage() {
         setPage(Number(searchParams.get('page') || '1'));
     }, [searchParams]);
 
-    const loadUsers = useCallback(async () => {
-        try {
-            setLoading(true);
-            setError(null);
-            const data = await UserStoreApi.getProfilesForAdmin(
-                null,
-                search.trim(),
-                filterLetter || '',
-                page,
-                pageSize
-            );
-            setUsers(data.results || []);
-            setMeta(data.metaData || null);
-        } catch (err) {
-            console.error(err);
-            setError('Произошла ошибка при получении пользователей');
-        } finally {
-            setLoading(false);
+    useEffect(() => {
+        const loadUsers = async () => {
+            try {
+                setLoading(true);
+                setError(null);
+                const data = await UserStoreApi.getProfilesForAdmin(
+                    null,
+                    search.trim(),
+                    filterLetter || '',
+                    page,
+                    pageSize
+                );
+                setUsers(data.results || []);
+                setMeta(data.metaData || null);
+            } catch (err) {
+                console.error(err);
+                setError('Произошла ошибка при получении пользователей');
+            } finally {
+                setLoading(false);
+            }
         }
+
+        loadUsers();
     }, [search, filterLetter, page, pageSize]);
 
-    useEffect(() => {
-        loadUsers();
-    }, [loadUsers]);
 
     const updateParams = (newParams: {
         search?: string;
@@ -74,14 +75,14 @@ export function UsersPage() {
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
 
-    const submitSearch = () => updateParams({ search, filterLastName: filterLetter, page: 1 });
+    const submitSearch = () => updateParams({ search: search, filterLastName: filterLetter, page: 1, pageSize: DEFAULT_PAGE_SIZE });
 
     const toggleLetterFilter = (letter: string) => {
         const newFilter = filterLetter === letter ? null : letter;
         updateParams({ search, filterLastName: newFilter, page: 1 });
     };
 
-    const switchPage = (p: number) => updateParams({ search, filterLastName: filterLetter, page: p });
+    const switchPage = (p: number) => updateParams({ search: search, filterLastName: filterLetter, page: p, pageSize: DEFAULT_PAGE_SIZE });
 
     return (
         <div className={styles.usersPage}>
