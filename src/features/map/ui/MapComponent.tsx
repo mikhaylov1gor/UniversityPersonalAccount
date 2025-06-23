@@ -1,39 +1,24 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import React from "react";
+import { YMaps, Map, Placemark } from "react-yandex-maps";
+interface MapComponentProps {
+    latitude: number;
+    longitude: number;
+    zoom?: number;
+}
 
-const FixMapSize = () => {
-    const map = useMap();
-    React.useEffect(() => {
-        setTimeout(() => {
-            map.invalidateSize();
-        }, 0);
-    }, [map]);
-    return null;
-};
-
-const MapComponent = ({ latitude, longitude, zoom = 13 }) => {
+const MapComponent: React.FC<MapComponentProps> = ({
+                                                       latitude,
+                                                       longitude,
+                                                       zoom = 13,
+                                                   }) => {
+    const mapState = { center: [latitude, longitude], zoom };
+    console.log(latitude, longitude)
     return (
-        <MapContainer
-            center={[latitude, longitude]}
-            zoom={zoom}
-            style={{ height: '100%', width: '100%' }}
-            dragging={false}
-            zoomControl={false}
-            scrollWheelZoom={false}
-            doubleClickZoom={false}
-            touchZoom={false}
-            keyboard={false}
-            boxZoom={false}
-        >
-            <TileLayer
-                attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[latitude, longitude]}>
-                <Popup>Местоположение: {latitude}, {longitude}</Popup>
-            </Marker>
-            <FixMapSize />
-        </MapContainer>
+        <YMaps>
+            <Map state={mapState} width={'100%'} height={'200px'}>
+                <Placemark geometry={[latitude, longitude]}/>
+            </Map>
+        </YMaps>
     );
 };
 

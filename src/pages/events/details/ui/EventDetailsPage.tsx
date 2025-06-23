@@ -191,11 +191,7 @@ export function EventDetailsPage() {
                                 <div className={styles.value}>{event.addressName}</div>
                             </div>
                             <div className={styles.mapWrapper}>
-                                <MapComponent
-                                    latitude={event.latitude}
-                                    longitude={event.longitude}
-                                    zoom={10}
-                                />
+                                <MapComponent latitude={event.latitude} longitude={event.longitude} zoom={17} />
                             </div>
                         </div>
                     ) : (

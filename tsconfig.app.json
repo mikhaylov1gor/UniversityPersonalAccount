@@ -29,5 +29,9 @@
     "noUncheckedSideEffectImports": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "node_modules/@yandex/ymaps3-types/index.d.ts",
+    "node_modules/@yandex/ymaps3-types/index.d.ts"
+  ]
 }
