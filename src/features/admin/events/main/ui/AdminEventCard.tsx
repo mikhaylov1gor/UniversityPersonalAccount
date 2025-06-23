@@ -1,0 +1,154 @@
+import React, {useEffect, useState} from 'react';
+import styles from './AdminEventCard.module.scss';
+import {FilesStoreApi} from "@/shared/services/files.service.ts";
+import defaultPhoto from "@/shared/assets/test/default_event_photo.gif";
+import {useNavigate} from "react-router-dom";
+import {RouteName} from "@/shared/config/router";
+import {useTranslation} from "react-i18next";
+import {EventDto} from "@/shared/models/responses/event/eventDto.ts";
+import {Icon} from "@/shared/ui/atoms/Icon/Icon.tsx";
+interface AdminEventCardProps {
+    event: EventDto
+}
+
+export const AdminEventCard: React.FC<AdminEventCardProps> = ({event}) => {
+    const navigate = useNavigate();
+    const [url,setUrl] = useState<string | null>(null);
+    const {t} = useTranslation();
+
+    useEffect(() => {
+        const loadImage = async () => {
+            if (event.picture.id){
+                try {
+                    const response = await FilesStoreApi.getFileById(event.picture.id);
+                    const blob = new Blob([response.data], {
+                        type: response.headers['content-type'] || 'image/jpeg'
+                    });
+                    const url = URL.createObjectURL(blob);
+                    setUrl(url);
+                } catch (e) {
+                    console.error(`Ошибка загрузки картинки для события ${event.id}`, e);
+                }
+            }
+        };
+
+        loadImage();
+    }, []);
+
+    const getStatusClass = (statusStr: string): string => {
+        switch (statusStr) {
+            case 'Draft':
+                return styles.statusDraft;
+            case 'Actual':
+                return styles.statusActual;
+            case 'Finished':
+                return styles.statusFinished;
+            case 'Archive':
+                return styles.statusArchive;
+            default:
+                return '';
+        }
+    };
+
+    return (
+        <div className={styles.card}>
+            <img
+                src={url || defaultPhoto as string}
+                alt={event.title}
+                className={styles.image}
+            />
+            <div className={styles.content}>
+                <div className={styles.header}>
+                    <h3 className={styles.title}>{event.title}</h3>
+
+                    <Icon
+                        style={{marginLeft: "auto", cursor: "pointer"}}
+                        onClick={() => navigate(RouteName.EVENT_PAGE(event.id))}
+                        name="edit-pencil-line01-black"
+                        size={24}
+                        fill={"none"}/>
+                    <Icon
+                        style={{marginLeft: "5px", cursor: "pointer"}}
+                        name="trash-full-black"
+                        size={24}
+                        fill={"none"}/>
+                </div>
+                <div className={`${styles.status} ${getStatusClass(event.status.toString())}`}>
+                    {event.status}
+                </div>
+
+                <div className={styles.rowGroup}>
+                    <div className={styles.row}>
+                        <div className={styles.label}>{t("admin.events.main.type")}</div>
+                        <div className={styles.value}>{event.type}</div>
+                    </div>
+
+                    <div className={styles.row}>
+                        <div className={styles.label}>{t("admin.events.main.auditory")}</div>
+                        <div className={styles.value}>{event.auditory}</div>
+                    </div>
+                </div>
+
+                <div className={styles.rowGroup}>
+                    <div className={styles.row}>
+                        <div className={styles.label}>{t("admin.events.main.date2")}</div>
+                        <div className={styles.value}>{formatDateRange(event.dateTimeFrom, event.dateTimeTo)}</div>
+                    </div>
+
+                    <div className={styles.row}>
+                        <div className={styles.label}>{t("admin.events.main.format")}</div>
+                        <div className={styles.value}>{event.format}</div>
+                    </div>
+                </div>
+
+                {/*<div className={styles.infoBlock}>
+                    <div className={styles.label}>
+                        <p2>Дата(ы) проведения</p2>
+                    </div>
+                    <div className={styles.value}>
+                        <p1>{formatDateRange(dateFrom, dateTo)}</p1>
+                    </div>
+
+                    <div className={styles.infoBlock}>
+                        <div className={styles.label}>
+                            <p2>Формат мероприятия</p2>
+                        </div>
+                        <div className={styles.value}>
+                            <p1>{format}</p1>
+                        </div>
+                    </div>
+                </div>*/}
+            </div>
+        </div>
+    );
+};
+
+export function formatDateRange(dateTimeFromStr, dateTimeToStr?) {
+    const from = new Date(dateTimeFromStr);
+    const to = new Date(dateTimeToStr);
+
+    const pad = (n) => n.toString().padStart(2, '0');
+
+    const dayFrom = pad(from.getDate());
+    const monthFrom = pad(from.getMonth() + 1);
+    const yearFrom = from.getFullYear();
+    const fromHours = pad(from.getHours());
+    const fromMinutes = pad(from.getMinutes());
+
+    if (!dateTimeToStr) {
+        return `${dayFrom}.${monthFrom}.${yearFrom} (${fromHours}:${fromMinutes})`;
+    }
+
+    const dayTo = pad(to.getDate());
+    const monthTo = pad(to.getMonth() + 1);
+    const yearTo = to.getFullYear();
+    const toHours = pad(to.getHours());
+    const toMinutes = pad(to.getMinutes());
+
+    if (dayFrom == dayTo && monthFrom == monthTo && yearFrom == yearTo){
+        return `${dayFrom}.${monthFrom}.${yearFrom} (${fromHours}:${fromMinutes} - ${toHours}:${toMinutes})`;
+    }
+    else{
+        return `${dayFrom}.${monthFrom}.${yearFrom} (${fromHours}:${fromMinutes}) - ${dayTo}.${monthTo}.${yearTo} (${toHours}:${toMinutes})`
+    }
+}

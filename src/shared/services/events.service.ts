@@ -66,7 +66,7 @@ export const EventsStoreApi = {
         })
     },
 
-    retrievesEventsForAdmin: async (status: EventStatus, eventType: EventType, name: string, format: EventFormat,
+    retrievesEventsForAdmin: async (status: string, eventType: string, name: string, format: string,
                                     eventDate: string, timezoneOffset: number, page: number, pageSize: number)=>{
         const params = {
             status: status,
@@ -79,8 +79,8 @@ export const EventsStoreApi = {
             pageSize: pageSize == null ? 5 : pageSize
         }
 
-        const data: EventShortDtoPagedListWithMetadata = await axiosInstance.get(`${eventsController}`, {params})
-        return data;
+        const response = await axiosInstance.get<EventShortDtoPagedListWithMetadata>(`${eventsController}`, {params})
+        return response.data;
     },
 
     createEventForAdmin: async (dto: EventCreateDto)=>{

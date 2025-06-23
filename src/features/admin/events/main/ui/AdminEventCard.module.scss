@@ -9,33 +9,56 @@
   gap: 1rem;
 }
 
+.header{
+  display: flex;
+  flex-direction: row;
+}
+
 .image {
-  width: 40%;
-  height: 220px;
+  width: 25%;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   flex-shrink: 0;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .content {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .title {
+  margin-bottom: 0.75rem;
   color: #3A3A3A;
 }
 
-.infoBlock {
-  margin-bottom: 0.5rem;
+.rowGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 0.3rem;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.row {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 200px;
 }
 
 .label {
+  font-size: 0.85rem;
   color: #666666;
 }
 
 .value {
+  font-size: 1rem;
   color: #3A3A3A;
+  margin-bottom: 2px;
 }
 
 .status {
