@@ -11,6 +11,7 @@ import {EventDetailsPage, EventsPage} from "@/pages/events";
 import {ProfilePageForAdmin} from "@/pages/admin/userProfile/ui/ProfilePageForAdmin.tsx";
 import UsefulServicesPage from "@/pages/usefulservices/ui/UsefulServicesPage.tsx";
 import {AdminEventsPage} from "@/pages/admin/events/main/ui/AdminEventsPage.tsx";
+import {CreateUpdateEventPage} from "@/pages/admin/events/createUpdateEventPage/ui/CreateUpdateEventPage.tsx";
 
 function AppRouter() {
     const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
@@ -141,6 +142,32 @@ function AppRouter() {
                             title="Администрирование"
                         >
                             <AdminEventsPage />
+                        </Layout>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/admin/event/update/:id"
+                element={
+                    <ProtectedRoute>
+                        <Layout
+                            title="Администрирование"
+                        >
+                            <CreateUpdateEventPage />
+                        </Layout>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path={RouteName.ADMIN_PAGE_CREATE_EVENT}
+                element={
+                    <ProtectedRoute>
+                        <Layout
+                            title="Администрирование"
+                        >
+                            <CreateUpdateEventPage />
                         </Layout>
                     </ProtectedRoute>
                 }

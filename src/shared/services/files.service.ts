@@ -24,5 +24,20 @@ export const FilesStoreApi = {
         );
 
         return response.data;
+    },
+
+    postFileFormData: async (file: FormData) => {
+
+        const response = await axiosInstance.post<FileResultDto>(
+            `${filesController}`,
+            file,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        );
+
+        return response.data;
     }
 };

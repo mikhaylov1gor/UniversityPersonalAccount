@@ -1,5 +1,5 @@
 export enum EventAuditory{
-    All,
-    Students,
-    Employees
+    All= "All",
+    Students = "Students",
+    Employees = "Employees"
 }

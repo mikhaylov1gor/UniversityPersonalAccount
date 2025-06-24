@@ -1,4 +1,4 @@
 export enum EventType{
-    Open,
-    Close
+    Open = "Open",
+    Close = "Close"
 }

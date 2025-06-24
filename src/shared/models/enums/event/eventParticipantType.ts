@@ -1,4 +1,4 @@
 export enum EventParticipantType{
-    Inner,
-    External
+    Inner= "Inner",
+    External = "External"
 }

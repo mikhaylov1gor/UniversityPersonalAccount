@@ -15,7 +15,6 @@ export function LoginCredentialsCard(){
     const { t } = useTranslation();
     const navigate = useNavigate();
 
-
     const submit = async (e: React.FormEvent) => {
         e.preventDefault();
 

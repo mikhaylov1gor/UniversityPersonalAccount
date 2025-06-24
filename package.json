@@ -18,12 +18,13 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^0.515.0",
     "postcss": "^8.4.31",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "quill": "^2.0.3",
+    "react": "^18.3.1",
+    "react-dadata": "^2.28.0-beta.0",
+    "react-dom": "^18.3.1",
     "react-easy-crop": "^5.4.2",
     "react-grid-system": "^8.2.1",
     "react-i18next": "^15.4.1",
-    "react-leaflet": "^5.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.4.1",
     "react-toastify": "^11.0.5",
@@ -46,10 +47,11 @@
     "globals": "^15.15.0",
     "i": "^0.3.7",
     "npm": "^11.4.2",
-    "react-simple-maps": "^3.0.0",
+    "react-quill": "^2.0.0",
     "react-yandex-maps": "^4.6.0",
     "sass-embedded": "^1.89.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.8"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

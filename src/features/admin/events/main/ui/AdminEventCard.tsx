@@ -7,6 +7,7 @@ import {RouteName} from "@/shared/config/router";
 import {useTranslation} from "react-i18next";
 import {EventDto} from "@/shared/models/responses/event/eventDto.ts";
 import {Icon} from "@/shared/ui/atoms/Icon/Icon.tsx";
+import {formatDateRange} from "@/features/events/main/ui/EventCard.tsx";
 interface AdminEventCardProps {
     event: EventDto
 }
@@ -51,19 +52,27 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({event}) => {
     };
 
     return (
-        <div className={styles.card}>
+        <div className={styles.card}
+        >
             <img
+                style={{cursor: "pointer"}}
+                onClick={() => navigate(RouteName.EVENT_PAGE(event.id))}
                 src={url || defaultPhoto as string}
                 alt={event.title}
                 className={styles.image}
             />
             <div className={styles.content}>
                 <div className={styles.header}>
-                    <h3 className={styles.title}>{event.title}</h3>
+                    <h3 className={styles.title}
+                        style={{cursor: "pointer"}}
+                        onClick={() => navigate(RouteName.EVENT_PAGE(event.id))}
+                    >{event.title}</h3>
 
                     <Icon
                         style={{marginLeft: "auto", cursor: "pointer"}}
-                        onClick={() => navigate(RouteName.EVENT_PAGE(event.id))}
+                        onClick={() => navigate(RouteName.ADMIN_PAGE_UPDATE_EVENT(event.id), {
+                            state: { isCreate: false, eventId: event.id }
+                        })}
                         name="edit-pencil-line01-black"
                         size={24}
                         fill={"none"}/>
@@ -100,55 +109,7 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({event}) => {
                         <div className={styles.value}>{event.format}</div>
                     </div>
                 </div>
-
-                {/*<div className={styles.infoBlock}>
-                    <div className={styles.label}>
-                        <p2>Дата(ы) проведения</p2>
-                    </div>
-                    <div className={styles.value}>
-                        <p1>{formatDateRange(dateFrom, dateTo)}</p1>
-                    </div>
-
-                    <div className={styles.infoBlock}>
-                        <div className={styles.label}>
-                            <p2>Формат мероприятия</p2>
-                        </div>
-                        <div className={styles.value}>
-                            <p1>{format}</p1>
-                        </div>
-                    </div>
-                </div>*/}
             </div>
         </div>
     );
 };
-
-export function formatDateRange(dateTimeFromStr, dateTimeToStr?) {
-    const from = new Date(dateTimeFromStr);
-    const to = new Date(dateTimeToStr);
-
-    const pad = (n) => n.toString().padStart(2, '0');
-
-    const dayFrom = pad(from.getDate());
-    const monthFrom = pad(from.getMonth() + 1);
-    const yearFrom = from.getFullYear();
-    const fromHours = pad(from.getHours());
-    const fromMinutes = pad(from.getMinutes());
-
-    if (!dateTimeToStr) {
-        return `${dayFrom}.${monthFrom}.${yearFrom} (${fromHours}:${fromMinutes})`;
-    }
-
-    const dayTo = pad(to.getDate());
-    const monthTo = pad(to.getMonth() + 1);
-    const yearTo = to.getFullYear();
-    const toHours = pad(to.getHours());
-    const toMinutes = pad(to.getMinutes());
-
-    if (dayFrom == dayTo && monthFrom == monthTo && yearFrom == yearTo){
-        return `${dayFrom}.${monthFrom}.${yearFrom} (${fromHours}:${fromMinutes} - ${toHours}:${toMinutes})`;
-    }
-    else{
-        return `${dayFrom}.${monthFrom}.${yearFrom} (${fromHours}:${fromMinutes}) - ${dayTo}.${monthTo}.${yearTo} (${toHours}:${toMinutes})`
-    }
-}

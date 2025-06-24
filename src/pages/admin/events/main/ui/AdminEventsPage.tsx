@@ -68,13 +68,16 @@ export function AdminEventsPage() {
         } finally {
             setLoading(false);
         }
-    }, [name, eventDate, page, pageSize]);
+    }, [status, eventType, eventFormat, name, eventDate, page, pageSize]);
 
     useEffect(() => {
         loadEvents();
     }, [loadEvents]);
 
     const updateParams = (newParams: {
+        status?: string,
+        eventType?: string,
+        eventFormat?: string
         name?: string;
         eventDate?: string | null;
         timezoneOffset: number;
@@ -84,18 +87,26 @@ export function AdminEventsPage() {
         const params = new URLSearchParams();
         if (newParams.name) params.set('name', newParams.name);
         if (newParams.eventDate) params.set('eventDate', newParams.eventDate);
+        if (newParams.status) params.set('status', newParams.status);
+        if (newParams.eventType) params.set('eventType', newParams.eventType);
+        if (newParams.eventFormat) params.set('eventFormat', newParams.eventFormat)
         params.set('page', (newParams.page || 1).toString());
         params.set('pageSize', (newParams.pageSize || pageSize).toString());
         setSearchParams(params);
     };
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
-    const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => setStatus(e.target.value);
-    const handleEventTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => setEventType(e.target.value);
-    const handleEventFormatChange = (e: React.ChangeEvent<HTMLInputElement>) => setEventFormat(e.target.value);
+    const handleStatusChange = (value: string) => setStatus(value);
+
+    const handleEventTypeChange = (value: string) => setEventType(value);
+    const handleEventFormatChange = (value: string) => setEventFormat(value);
+
     const handleEventDateChange = (e: React.ChangeEvent<HTMLInputElement>) => setEventDate(e.target.value);
 
     const submitSearch = () => updateParams({
+        status,
+        eventType,
+        eventFormat,
         name,
         eventDate,
         timezoneOffset: 420,
@@ -104,6 +115,9 @@ export function AdminEventsPage() {
     });
 
     const switchPage = (p: number) => updateParams({
+        status,
+        eventType,
+        eventFormat,
         name,
         eventDate,
         timezoneOffset: 420,
@@ -114,12 +128,15 @@ export function AdminEventsPage() {
     return (
         <>
             <div>
-                <h2 style={{marginBottom: '1rem'}}>{t("admin.events.main.title")}</h2>
+                <h2 style={{marginBottom: '1rem'}}>{t("admin.events.main.title" as any)}</h2>
                 <Button
                     variant="outline"
                     style={{minWidth: '100%', marginBottom: '1rem'}}
-                    onClick={() => navigate('/123') }>
-                    {t("admin.events.main.addButton")} ＋
+                    onClick={() => navigate(RouteName.ADMIN_PAGE_CREATE_EVENT, {
+                        state: { isCreate: true }
+                    })}
+                >
+                    {t("admin.events.main.addButton" as any)} ＋
                 </Button>
                 <AdminEventsSearchBar name={name}
                                       status={status}

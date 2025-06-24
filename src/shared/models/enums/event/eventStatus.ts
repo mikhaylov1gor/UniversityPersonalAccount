@@ -1,6 +1,6 @@
 export enum EventStatus{
-    Draft,
-    Actual,
-    Finished,
-    Archive
+    Draft= "Draft",
+    Actual = "Actual",
+    Finished = "Finished",
+    Archive = "Archive"
 }

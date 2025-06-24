@@ -14,7 +14,6 @@ export function ProfilePageForAdmin() {
     const { t } = useTranslation();
     const { id } = useParams<{ id: string }>();
 
-    console.log(id);
     useEffect(() => {
         const fetchProfile = async () => {
             try {

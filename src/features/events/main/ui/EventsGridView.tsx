@@ -1,9 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Col, Row } from 'react-grid-system';
-import { useNavigate } from 'react-router-dom';
-import { RouteName } from '@/shared/config/router';
-import { Button } from '@/shared/ui/atoms/Button/Button';
-import styles from '@/pages/admin/users/ui/UsersPage.module.scss';
+
 import {FileDto} from "@/shared/models/responses/fileDto.ts";
 import {EventType} from "@/shared/models/enums/event/eventType.ts";
 import {EventFormat} from "@/shared/models/enums/event/eventFormat.ts";
@@ -35,13 +32,13 @@ export function EventsGridView({ events }: EventsGridViewProps) {
                 <Col key={event.id} xl={6} style={{ display: 'flex' }}>
                     <div style={{ marginBottom: 20, width: '100%' }}>
                         <EventCard
-                            eventId={event.id}
-                            imageId={event.picture.id}
-                            title={event.title}
-                            dateFrom={event.dateTimeFrom}
-                            dateTo={event.dateTimeTo}
-                            format={event.format.toString()}
-                            status={event.status as string}
+                            eventId={event?.id}
+                            imageId={event.picture?.id}
+                            title={event?.title}
+                            dateFrom={event?.dateTimeFrom}
+                            dateTo={event?.dateTimeTo}
+                            format={event?.format.toString()}
+                            status={event?.status as string}
                         />
                     </div>
                 </Col>
