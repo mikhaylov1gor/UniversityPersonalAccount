@@ -317,7 +317,6 @@ export const CreateUpdateEventPage = () => {
                                     }}
                                     inputProps={{
                                         placeholder: t("admin.events.createUpdate.address" as any),
-/*                                        className: styles.addressInput,*/
                                     }}
                                 />
                             </div>

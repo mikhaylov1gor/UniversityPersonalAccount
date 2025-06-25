@@ -2,11 +2,9 @@ import React, {useCallback, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {EventsStoreApi} from "@/shared/services/events.service.ts";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {EventsSearchBar} from "@/features/events/main/ui/EventsSearchBar.tsx";
 
 import {Col, Row} from "react-grid-system";
 import Pagination from "@/features/pagination/ui/Pagination.tsx";
-import {EventsGridView} from "@/features/events/main/ui/EventsGridView.tsx";
 import {AdminEventsSearchBar} from "@/features/admin/events/main/ui/AdminEventsSearchBar.tsx";
 import Button from "@/shared/ui/atoms/Button/Button.tsx";
 import {RouteName} from "@/shared/config/router";

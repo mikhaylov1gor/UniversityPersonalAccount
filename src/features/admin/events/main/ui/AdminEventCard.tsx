@@ -10,8 +10,6 @@ import {Icon} from "@/shared/ui/atoms/Icon/Icon.tsx";
 import {formatDateRange} from "@/features/events/main/ui/EventCard.tsx";
 import {EventsStoreApi} from "@/shared/services/events.service.ts";
 import {toast} from "@/app/providers/Toast/ToastController.ts";
-import {Browser} from "leaflet";
-import win = Browser.win;
 
 interface AdminEventCardProps {
     event: EventDto
@@ -56,18 +54,18 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({event}) => {
         }
     };
 
-    const deleteEvent = async () =>{
+    const deleteEvent = async (id: string) =>{
         try{
-            await EventsStoreApi.deleteEventByIdForAdmin(event.id);
+            await EventsStoreApi.deleteEventByIdForAdmin(id);
             toast.success("Мероприятие удалено")
         }
         catch (error){
             console.log("Ошибка при удалении");
         }
     }
-    const handleDelete = async () => {
+    const handleDelete = async (id: string) => {
         if (!window.confirm(t("common.alertMessage" as any))) return;
-        await deleteEvent()
+        await deleteEvent(id)
         window.location.reload();
     };
 
@@ -76,7 +74,7 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({event}) => {
         >
             <img
                 style={{cursor: "pointer"}}
-                onClick={() => navigate(RouteName.EVENT_PAGE(event.id))}
+                onClick={() => navigate(RouteName.ADMIN_PAGE_EVENT(event.id))}
                 src={url || defaultPhoto as string}
                 alt={event.title}
                 className={styles.image}
@@ -85,7 +83,7 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({event}) => {
                 <div className={styles.header}>
                     <h3 className={styles.title}
                         style={{cursor: "pointer"}}
-                        onClick={() => navigate(RouteName.EVENT_PAGE(event.id))}
+                        onClick={() => navigate(RouteName.ADMIN_PAGE_EVENT(event.id))}
                     >{event.title}</h3>
 
                     <Icon
@@ -99,7 +97,7 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({event}) => {
                     <Icon
                         style={{marginLeft: "5px", cursor: "pointer"}}
                         name="trash-full-black"
-                        onClick={() => handleDelete()}
+                        onClick={() => handleDelete(event.id)}
                         size={24}
                         fill={"none"}/>
                 </div>

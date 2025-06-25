@@ -11,6 +11,7 @@ export const RouteName = {
     ADMIN_PAGE_EVENTS: '/admin/events',
     ADMIN_PAGE_UPDATE_EVENT: (id: string | number) => `/admin/event/update/${id}`,
     ADMIN_PAGE_CREATE_EVENT: `/admin/event/create`,
+    ADMIN_PAGE_EVENT: (id: string | number) => `/admin/event/${id}`,
     ERROR500: '/500',
     ERROR404: '*'
 }

@@ -1,5 +1,5 @@
 import {Gender} from "@/shared/models/enums/gender.ts";
-import {FileDto} from "@/shared/api/models/responses/fileDto.ts";
+import {FileDto} from "@/shared/models/responses/fileDto.ts";
 
 export interface UserShortDto{
     id: string,

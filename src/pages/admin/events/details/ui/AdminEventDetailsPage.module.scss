@@ -5,9 +5,20 @@
   align-items: center;
 }
 
+.headerButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .card{
   padding: 20px;
   margin: 20px;
+}
+
+.icon{
+  margin-top: 9px;
+  cursor: pointer;
 }
 
 .headerContent {
@@ -72,6 +83,33 @@
   width: 50%;
 }
 
+.statusButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #a3e635;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  }
+
+  &--dropdownOpen {
+    border-radius: 6px 6px 0 0;
+  }
+}
 
 
 .event-description{

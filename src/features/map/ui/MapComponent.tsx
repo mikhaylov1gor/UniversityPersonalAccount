@@ -1,5 +1,6 @@
 import React from "react";
-import { YMaps, Map, Placemark } from "react-yandex-maps";
+import {YMaps, Map, Placemark} from "react-yandex-maps";
+
 interface MapComponentProps {
     latitude: number;
     longitude: number;
@@ -11,13 +12,14 @@ const MapComponent: React.FC<MapComponentProps> = ({
                                                        longitude,
                                                        zoom = 13,
                                                    }) => {
-    const mapState = { center: [latitude, longitude], zoom };
-    console.log(latitude, longitude)
+    const mapState = {center: [latitude, longitude], zoom};
     return (
         <YMaps>
-            <Map state={mapState} width={'100%'} height={'200px'}>
-                <Placemark geometry={[latitude, longitude]}/>
-            </Map>
+            <div className="my-map-wrapper" style={{width: "100%", height: "100%"}}>
+                <Map state={mapState} width={'100%'} height={'100%'}>
+                    <Placemark geometry={[latitude, longitude]} options={{ preset: "islands#redDotIcon" }}/>
+                </Map>
+            </div>
         </YMaps>
     );
 };

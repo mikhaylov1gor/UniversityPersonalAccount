@@ -12,3 +12,11 @@
     height: 48px;
     width: 48px;
 }
+
+.my-map-wrapper ymaps.ymaps-2-1-79-map {
+    display: none !important;
+}
+
+.my-map-wrapper ymaps.ymaps-2-1-79-map:last-of-type {
+    display: block !important;
+}

@@ -1,17 +1,18 @@
-import {type JSX } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { RouteName } from "@/shared/config/router";
-import { LoginPage } from "@/pages/login";
-import { ProfilePage } from "@/pages/profile";
-import { AdminPage } from "@/pages/admin"
+import {type JSX} from 'react';
+import {Routes, Route, Navigate} from 'react-router-dom';
+import {RouteName} from "@/shared/config/router";
+import {LoginPage} from "@/pages/login";
+import {ProfilePage} from "@/pages/profile";
 import {Layout} from "@/pages/layout/Layout";
 import {Error404, Error500} from "@/pages/errors";
-import UsersPage from "@/pages/admin/users/ui/UsersPage.tsx";
 import {EventDetailsPage, EventsPage} from "@/pages/events";
 import {ProfilePageForAdmin} from "@/pages/admin/userProfile/ui/ProfilePageForAdmin.tsx";
-import UsefulServicesPage from "@/pages/usefulservices/ui/UsefulServicesPage.tsx";
 import {AdminEventsPage} from "@/pages/admin/events/main/ui/AdminEventsPage.tsx";
-import {CreateUpdateEventPage} from "@/pages/admin/events/createUpdateEventPage/ui/CreateUpdateEventPage.tsx";
+import UserUsefulServicesPage from "@/pages/usefulservices/UserUsefulServicesPage";
+import AdminPage from "@/pages/admin/AdminPage";
+import UsersPage from "@/pages/admin/UsersPage";
+import AdminUsefulServicesPage from "@/pages/admin/AdminUsefulServicesPage";
+import {CreateUpdateEventPage} from "@/pages/admin/events/CreateUpdateEventPage";
 
 function AppRouter() {
     const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
@@ -143,6 +144,15 @@ function AppRouter() {
                         >
                             <AdminEventsPage />
                         </Layout>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path={RouteName.ADMIN_PAGE_USEFUL_SERVICES}
+                element={
+                    <ProtectedRoute>
+                        <AdminUsefulServicesPage/>
                     </ProtectedRoute>
                 }
             />

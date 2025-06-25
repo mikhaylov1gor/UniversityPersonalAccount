@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.participant {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #DFDFDF;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.name {
+  font-weight: 500;
+  color: #3A3A3A;
+}
+
+.infoText {
+  color: #666666;
+  font-size: 0.9rem;
+}
