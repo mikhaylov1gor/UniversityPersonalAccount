@@ -107,8 +107,8 @@ export const EventsStoreApi = {
     },
 
     retrieveFullDetailsForAdmin: async (id: string)=>{
-        const data: EventDto = await axiosInstance.get(`${eventsController}/${id}`)
-        return data;
+        const response = await axiosInstance.get<EventDto>(`${eventsController}/${id}`)
+        return response.data;
     },
 
     editEventStatusForAdmin: async (dto: EventEditStatusDto)=>{

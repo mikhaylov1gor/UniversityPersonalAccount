@@ -3229,6 +3229,11 @@ quill@^2.0.3:
     parchment "^3.0.0"
     quill-delta "^5.1.0"
 
+react-confirm-alert@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/react-confirm-alert/-/react-confirm-alert-3.0.6.tgz#f7552ec839c1e189370cef02ffed3035e7ca2e22"
+  integrity sha512-rplP6Ed9ZSNd0KFV5BUzk4EPQ77BxsrayllBXGFuA8xPXc7sbBjgU5KUrNpl7aWFmP7mXRlVXfuy1IT5DbffYw==
+
 react-dadata@^2.28.0-beta.0:
   version "2.28.0-beta.0"
   resolved "https://registry.yarnpkg.com/react-dadata/-/react-dadata-2.28.0-beta.0.tgz#063a53cc32502452e744a7c1c528298c95e89b9e"

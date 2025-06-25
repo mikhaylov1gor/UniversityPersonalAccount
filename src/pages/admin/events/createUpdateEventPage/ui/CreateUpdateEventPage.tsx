@@ -32,18 +32,18 @@ export const CreateUpdateEventPage = () => {
     const [event, setEvent] = useState<EventDto>(null);
 
     // Параметры
-    const [title, setTitle] = useState<string>();
-    const [dateFrom, setDateFrom] = useState<string>();
+    const [title, setTitle] = useState<string>(null);
+    const [dateFrom, setDateFrom] = useState<string>(null);
     const [isDateFromRequired, setIsDateFromRequired] = useState<boolean>(false);
-    const [dateTo, setDateTo] = useState<string >();
+    const [dateTo, setDateTo] = useState<string >(null);
     const [isDateToRequired, setIsDateToRequired] = useState<boolean>(false);
     const [eventType, setEventType] = useState<EventType>(EventType.Open);
     const [targetAudience, setTargetAudience] = useState<EventAuditory>(EventAuditory.All);
-    const [registrationDateTo, setRegistrationDateTo] = useState<string>();
+    const [registrationDateTo, setRegistrationDateTo] = useState<string>(null);
     const [isRegistrationRequired, setIsRegistrationRequired] = useState<boolean>(false);
     const [eventFormat, setEventFormat] = useState<EventFormat>(EventFormat.Offline);
     const [link, setLink] = useState<string>("https://");
-    const [address, setAddress] = useState<string>();
+    const [address, setAddress] = useState<string>(null);
     const [latitude, setLatitude] = useState<number | null>(null);
     const [longitude, setLongitude] = useState<number | null>(null);
     const [isDigest, setIsDigest] = useState<boolean>(false)
@@ -60,8 +60,8 @@ export const CreateUpdateEventPage = () => {
             try {
                 setLoading(true);
                 if (id) {
-                    const data = await EventsStoreApi.getPublicEventDetails(id);
-
+                    const data = await EventsStoreApi.retrieveFullDetailsForAdmin(id);
+                    console.log("Запрос на получения подробностей мероприятия", data)
                     setEvent(data);
                     setTitle(data?.title)
                     setIsDateFromRequired(data?.isTimeFromNeeded)
@@ -95,23 +95,16 @@ export const CreateUpdateEventPage = () => {
 
     const submit = async () =>{
         try{
-            if (!file && !event.picture?.id){
-                console.log(1);
-                toast.warning("Загрузите баннер мероприятия")
-                return;
+            console.log(event?.picture?.id);
+            let pictureId = event?.picture?.id == null ? null : event.picture.id;
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file, file.name);
+                const fileDto = await FilesStoreApi.postFileFormData(formData);
+                pictureId = fileDto.id;
             }
 
             if( id ){
-                let pictureId = event.picture?.id;
-                if (file) {
-                    console.log(1);
-                    const formData = new FormData();
-                    formData.append("file", file);
-                    console.log(formData);
-                    const fileDto = await FilesStoreApi.postFileFormData(formData);
-                    pictureId = fileDto?.id;
-                }
-
                 const eventEditDto: EventEditDto = {
                     id: id!,
                     title,
@@ -142,17 +135,6 @@ export const CreateUpdateEventPage = () => {
                 navigate(RouteName.ADMIN_PAGE_EVENTS);
             }
             else{
-                let pictureId = event.picture?.id;
-                if (file) {
-                    const formData = new FormData();
-                    formData.append('file', file, file.name);
-                    const fileDto = await FilesStoreApi.postFileFormData(formData);
-                    if (fileDto) {
-                        pictureId = fileDto.id;
-                    }
-                }
-
-
                 const eventCreateDto: EventCreateDto = {
                     title,
                     description,
@@ -164,10 +146,10 @@ export const CreateUpdateEventPage = () => {
                     dateTimeTo: dateTo,
                     link,
                     addressName: address,
-                    latitude: latitude ?? null,
-                    longitude: longitude ?? null,
+                    latitude: latitude,
+                    longitude: longitude,
                     isRegistrationRequired,
-                    registrationLastDate: registrationDateTo ?? null,
+                    registrationLastDate: registrationDateTo,
                     isDigestNeeded: isDigest,
                     notificationText: notification,
                     type: eventType,
@@ -182,7 +164,9 @@ export const CreateUpdateEventPage = () => {
             }
         }
         catch (error){
+
             console.log("Ошибка при изменении/создании мероприятия")
+            toast.warning("Ошибка при изменении/создании мероприятия: ")
         }
     }
 

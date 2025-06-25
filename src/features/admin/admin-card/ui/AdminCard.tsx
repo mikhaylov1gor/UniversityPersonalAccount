@@ -28,7 +28,7 @@ export const AdminCard: React.FC<AdminCardProps> = ({
                 <div className={styles.card__icon}>
                     <Icon name={iconName} size={36} fill="none"/>
                 </div>
-                <h3 className={styles.card__title}>{title}</h3>
+                <h3>{title}</h3>
             </div>
             <p className={styles.card__description}>{description}</p>
         </div>

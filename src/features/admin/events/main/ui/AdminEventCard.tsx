@@ -8,6 +8,11 @@ import {useTranslation} from "react-i18next";
 import {EventDto} from "@/shared/models/responses/event/eventDto.ts";
 import {Icon} from "@/shared/ui/atoms/Icon/Icon.tsx";
 import {formatDateRange} from "@/features/events/main/ui/EventCard.tsx";
+import {EventsStoreApi} from "@/shared/services/events.service.ts";
+import {toast} from "@/app/providers/Toast/ToastController.ts";
+import {Browser} from "leaflet";
+import win = Browser.win;
+
 interface AdminEventCardProps {
     event: EventDto
 }
@@ -51,6 +56,21 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({event}) => {
         }
     };
 
+    const deleteEvent = async () =>{
+        try{
+            await EventsStoreApi.deleteEventByIdForAdmin(event.id);
+            toast.success("Мероприятие удалено")
+        }
+        catch (error){
+            console.log("Ошибка при удалении");
+        }
+    }
+    const handleDelete = async () => {
+        if (!window.confirm(t("common.alertMessage" as any))) return;
+        await deleteEvent()
+        window.location.reload();
+    };
+
     return (
         <div className={styles.card}
         >
@@ -79,6 +99,7 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({event}) => {
                     <Icon
                         style={{marginLeft: "5px", cursor: "pointer"}}
                         name="trash-full-black"
+                        onClick={() => handleDelete()}
                         size={24}
                         fill={"none"}/>
                 </div>
