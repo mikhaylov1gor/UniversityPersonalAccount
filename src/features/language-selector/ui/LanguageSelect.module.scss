@@ -1,0 +1,28 @@
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+}
+
+.select {
+  opacity: 0;
+  margin-right: 0.5rem;
+  margin-top: 1rem;
+}
+
+.flag {
+  pointer-events: none;
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.chevron {
+  pointer-events: none;
+  position: absolute;
+  left: 5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
