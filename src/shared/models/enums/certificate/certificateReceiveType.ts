@@ -1,4 +1,4 @@
 export enum CertificateReceiveType{
-    Electronic,
-    Paper
+    Electronic = "Electronic",
+    Paper = "Paper"
 }

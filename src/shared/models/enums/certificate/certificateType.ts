@@ -1,4 +1,4 @@
 export enum CertificateType{
-    ForPlaceWhereNeeded,
-    PensionForKazakhstan
+    ForPlaceWhereNeeded= "ForPlaceWhereNeeded",
+    PensionForKazakhstan = "PensionForKazakhstan"
 }

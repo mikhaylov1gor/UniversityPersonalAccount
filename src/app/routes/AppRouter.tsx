@@ -14,6 +14,7 @@ import {CreateUpdateEventPage} from "@/pages/admin/events/createUpdateEventPage/
 import {AdminPage, UsersPage} from "@/pages/admin";
 import {useTranslation} from "react-i18next";
 import {AdminEventDetailsPage} from "@/pages/admin/events/details/ui/AdminEventDetailsPage.tsx";
+import {CertificatesPage} from "@/pages/certificates/ui/CertificatesPage.tsx";
 function AppRouter() {
     const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
         const token = localStorage.getItem('accessToken');
@@ -71,7 +72,7 @@ function AppRouter() {
                         <Layout
                             title={t("menu.certificates" as any)}
                         >
-                            <ProfilePage />
+                            <CertificatesPage />
                         </Layout>
                     </ProtectedRoute>
                 }

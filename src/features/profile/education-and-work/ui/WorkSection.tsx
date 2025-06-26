@@ -20,13 +20,6 @@ export function WorkSection({employee}: WorkSectionProps) {
         );
     };
 
-    const formatDepartments = (departments: Array<{name: string}> | undefined) => {
-        if (!departments || departments.length === 0) {
-            return t("profilePage.tabs.workTab.noDepartments");
-        }
-        return departments.map(dept => dept.name).join(', ');
-    };
-
     if (!employee.posts) {
         return (
             <>
@@ -144,102 +137,9 @@ export function WorkSection({employee}: WorkSectionProps) {
     );
 }
 
-/*<div className={styles.entryList}>
-
-            <div key={educationEntry.id} className={styles.entry}>
-                <div className={styles.header} onClick={() => toggle(index)}>
-
-                    <div className={styles.headerContent}>
-                        <div className={styles.headerInfo}>
-                            <strong>{educationEntry.educationLevel?.name}</strong>
-                        </div>
-                        <div className={styles.headerInfo}>
-                            <strong>{educationEntry.educationStatus?.name}</strong>
-                            <Icon
-                                name={isOpen ? "caret-down-md-black" : "caret-up-md-black"}
-                                size={30}
-                                fill="none"
-                                style={{marginLeft: "auto"}}
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                {isOpen && (
-                    <div className={styles.entryBody}>
-                        <div className={styles.rowGroup}>
-                            <div className={styles.row}>
-                                <div
-                                    className={styles.label}>{t("profilePage.tabs.educationTab.educationYears")}</div>
-                                <div className={styles.value}>{educationEntry.educationYears?.name}</div>
-                            </div>
-
-                            <div className={styles.row}>
-                                <div
-                                    className={styles.label}>{t("profilePage.tabs.educationTab.creditBookNumber")}</div>
-                                <div className={styles.value}>{educationEntry.creditBooknumber ?? "—"}</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.rowGroup}>
-                            <div className={styles.row}>
-                                <div
-                                    className={styles.label}>{t("profilePage.tabs.educationTab.educationForm")}</div>
-                                <div className={styles.value}>{educationEntry.educationForm?.name}</div>
-                            </div>
-
-                            <div className={styles.row}>
-                                <div
-                                    className={styles.label}>{t("profilePage.tabs.educationTab.educationBase")}</div>
-                                <div className={styles.value}>{educationEntry.educationBase?.name}</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.rowGroup}>
-                            <div className={styles.row}>
-                                <div
-                                    className={styles.label}>{t("profilePage.tabs.educationTab.faculty")}</div>
-                                <div className={styles.value}>{educationEntry.faculty?.name}</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.rowGroup}>
-                            <div className={styles.row}>
-                                <div
-                                    className={styles.label}>{t("profilePage.tabs.educationTab.educationDirection")}</div>
-                                <div className={styles.value}>{educationEntry.educationDirection?.name}</div>
-                            </div>
-                        </div>
-
-
-                        <div className={styles.rowGroup}>
-                            <div className={styles.row}>
-                                <div
-                                    className={styles.label}>{t("profilePage.tabs.educationTab.educationProfile")}</div>
-                                <div className={styles.value}>{educationEntry.educationProfile?.name}</div>
-                            </div>
-                        </div>
-
-
-                        <div className={styles.rowGroup}>
-                            <div className={styles.row}>
-                                <div
-                                    className={styles.label}>{t("profilePage.tabs.educationTab.course")}</div>
-                                <div className={styles.value}>{educationEntry.course ?? "—"}</div>
-                            </div>
-                        </div>
-
-
-                        <div className={styles.rowGroup}>
-                            <div className={styles.row}>
-                                <div
-                                    className={styles.label}>{t("profilePage.tabs.educationTab.group")}</div>
-                                <div className={styles.value}>{educationEntry.group.name}</div>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
-        )
-    })}
-</div>*/
+export const formatDepartments = (departments: Array<{name: string}> | undefined) => {
+    if (!departments || departments.length === 0) {
+        return t("profilePage.tabs.workTab.noDepartments");
+    }
+    return departments.map(dept => dept.name).join(', ');
+};

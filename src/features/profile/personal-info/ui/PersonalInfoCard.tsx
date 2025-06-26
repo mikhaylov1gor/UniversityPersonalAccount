@@ -34,8 +34,6 @@ export function PersonalInfoCard({ userId, gender, birthDate, citizenship, snils
                 const url = URL.createObjectURL(blob);
 
                 setAvatarUrl(url);
-                localStorage.setItem("avatarUrl", url);
-
             } catch (error) {
                 console.error("Avatar loading error:", error);
             } finally {

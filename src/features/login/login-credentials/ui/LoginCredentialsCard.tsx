@@ -42,9 +42,9 @@ export function LoginCredentialsCard(){
                 const url = URL.createObjectURL(blob);
 
                 localStorage.setItem("avatarUrl", url);
-                if (data.userTypes.length == 0){
-                    localStorage.setItem("role", "admin")
-                }
+                const roles = data.userTypes.length === 0 ? ["admin"] : data.userTypes;
+                localStorage.setItem("roles", JSON.stringify(roles));
+
                 navigate(RouteName.PROFILE_PAGE)
             }
             else{

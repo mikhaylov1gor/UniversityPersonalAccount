@@ -6,9 +6,9 @@ import {CertificateCreateDto} from "@/shared/models/requests/certificateCreateDt
 
 
 export const CertificatesStoreApi = {
-    getCurrentCertificates: async (userType: UserType, ownerId: string) =>{
-        const data: CertificateDto[] = await axiosInstance.get(`${certificatesController}/userType/${userType}/entity/${ownerId}`)
-        return data;
+    getCurrentCertificates: async (userType: string, ownerId: string) =>{
+        const response = await axiosInstance.get<CertificateDto>(`${certificatesController}/userType/${userType}/entity/${ownerId}`)
+        return response.data;
     },
 
     createCertificate: async (dto: CertificateCreateDto) =>{
