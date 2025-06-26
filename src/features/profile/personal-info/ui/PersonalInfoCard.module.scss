@@ -10,12 +10,10 @@
 
   &__avatar {
     width: 100%;
-    max-width: 20rem;
     object-fit: cover;
+    border-radius: 8px;
+    min-width: 200px;
 
-    @media (min-width: 640px) {
-      max-width: 28rem; // ~448px
-    }
   }
 
   &__content {

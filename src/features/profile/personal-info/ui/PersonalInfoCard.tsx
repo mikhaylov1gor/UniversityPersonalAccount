@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { FilesStoreApi } from "@/shared/services/files.service.ts";
 import styles from "./PersonalInfoCard.module.scss";
-import defaultAvatar from '@/shared/assets/test/photo_profile.png';
+import defaultAvatar from '@/shared/assets/test/default_event_photo.gif';
 import {UserStoreApi} from "@/shared/services/user.service.ts";
 import {AvatarCropper} from "@/features/profile/avatar-cropper/ui/AvatarCropper.tsx";
 import {ProfileStoreApi} from "@/shared/services/profile.service.ts";
@@ -29,7 +29,6 @@ export function PersonalInfoCard({ userId, gender, birthDate, citizenship, snils
     useEffect(() => {
         const loadAvatar = async () => {
             try {
-                setLoading(true);
                 const response = await FilesStoreApi.getFileById(avatarId);
                 const blob = new Blob([response.data], {type: response.headers['content-type'] || 'image/jpeg'});
                 const url = URL.createObjectURL(blob);
@@ -40,7 +39,6 @@ export function PersonalInfoCard({ userId, gender, birthDate, citizenship, snils
             } catch (error) {
                 console.error("Avatar loading error:", error);
             } finally {
-                setLoading(false);
             }
         };
 
