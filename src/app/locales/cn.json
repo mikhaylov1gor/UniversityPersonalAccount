@@ -1,0 +1,197 @@
+{
+  "loginPage": {
+    "title": "登录账户",
+    "email": "电子邮箱",
+    "password": "密码",
+    "rememberMe": "记住我",
+    "loginButton": "登录"
+  },
+  "events": {
+    "title": "活动",
+    "name": "活动名称",
+    "date": "活动日期",
+    "search": "搜索",
+    "details": {
+      "description": "描述",
+      "registrationDate": "报名截止日期",
+      "date": "举办日期",
+      "format": "活动形式",
+      "link": "链接",
+      "address": "地址",
+      "participate": "我要参加",
+      "alreadyParticipating": "已参加",
+      "registrationRequired": "需要注册",
+      "type": "活动类型",
+      "targetAudience": "目标受众",
+      "isDigest": "加入简报",
+      "digestTest": "简报内容",
+      "author": "活动创建者",
+      "latitude": "经度",
+      "longitude": "纬度",
+      "inner": "内部参与者",
+      "external": "外部参与者",
+      "additionalInfo": "附加信息",
+
+      "modal": {
+        "title": "活动报名",
+        "name": "姓名",
+        "email": "电子邮箱",
+        "phone": "电话",
+        "additionalInfo": "附加信息"
+      }
+    }
+  },
+  "profilePage": {
+    "title": "个人资料",
+    "personalData": {
+      "title": "个人信息",
+      "gender": "性别",
+      "birthDate": "出生日期",
+      "citizenship": "国籍",
+      "snils": "个人编号",
+      "email": "电子邮箱"
+    },
+    "contacts": {
+      "title": "联系方式",
+      "phone": "电话",
+      "phone2": "备用电话",
+      "additionalEmail": "备用邮箱",
+      "address": "地址",
+      "socialMedia": "社交媒体",
+      "noAddress": "地址未填写"
+    },
+    "tabs": {
+      "education": "教育背景",
+      "work": "工作经历",
+
+      "educationTab": {
+        "educationYears": "就学年限",
+        "creditBookNumber": "学号",
+        "educationForm": "学习形式",
+        "educationBase": "教育基础",
+        "faculty": "学院",
+        "educationDirection": "专业方向",
+        "educationProfile": "专业",
+        "course": "年级",
+        "group": "班级"
+      },
+
+      "workTab": {
+        "experience": "工作年限",
+        "dateStart": "入职日期",
+        "dateEnd": "离职日期",
+        "employmentType": "就业类型",
+        "rate": "岗位比例",
+        "workPlace": "工作单位",
+        "noDepartments": "工作单位未填写",
+        "workType": "职位类型"
+      }
+    }
+  },
+  "admin": {
+    "admin": "管理",
+    "nav": {
+      "users": "用户",
+      "usefulServices": "实用服务",
+      "events": "活动",
+      "usersDesc": "查看和编辑用户个人资料",
+      "usefulServicesDesc": "管理实用服务页面：添加、删除和更新服务",
+      "eventsDesc": "管理活动页面：查看、编辑和创建新活动"
+    },
+    "users": {
+      "input": "输入姓名或电子邮箱",
+      "search": "搜索"
+    },
+    "usefulServices": {
+      "button": "访问网站",
+      "serviceTerms": "服务条款",
+      "addButton": "添加服务",
+      "modal": {
+        "name": "添加服务",
+        "title": "服务名称",
+        "link": "链接",
+        "type": "类型",
+        "description": "描述",
+        "conditions": "服务条款",
+        "are_u_sure": "确定要删除所选服务吗？"
+      }
+    },
+    "events": {
+      "main": {
+        "title": "活动",
+        "addButton": "添加活动",
+        "searchPanel": "搜索面板",
+        "filters": "筛选条件",
+        "name": "活动名称",
+        "status": "状态",
+        "type": "活动类型",
+        "format": "活动形式",
+        "date": "活动日期",
+        "auditory": "受众",
+        "date2": "举办日期"
+      },
+      "createUpdate": {
+        "titles": {
+          "create": "创建活动",
+          "update": "编辑活动"
+        },
+        "name": "活动名称",
+        "description": "活动描述",
+        "dateFrom": "开始日期",
+        "dateTo": "结束日期",
+        "time": "时间",
+        "type": "活动类型",
+        "targetAudience": "目标受众",
+        "isRegistrationRequired": "需要注册",
+        "registrationEndDate": "报名截止日期",
+        "format": "活动形式",
+        "link": "链接",
+        "address": "地址",
+        "addressTitle": "活动地址",
+        "latitude": "经度",
+        "longitude": "纬度",
+        "eventNotification": "活动通知",
+        "isDigest": "加入简报",
+        "files": "文件",
+        "loadImage": "上传图片"
+      }
+    }
+  },
+  "toast": {
+    "info": "信息",
+    "success": "成功",
+    "error": "错误",
+    "warning": "警告"
+  },
+  "menu": {
+    "profile": "个人资料",
+    "administration": "管理",
+    "admin": "管理",
+    "certificates": "证明",
+    "usefulServices": "实用服务",
+    "events": "活动"
+  },
+  "titles": {
+    "admin": "管理",
+    "profile": "个人资料",
+    "administration": "管理",
+    "certificates": "证明",
+    "usefulServices": "实用服务",
+    "events": "活动"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "search": "搜索",
+    "delete": "删除",
+    "yes": "是",
+    "no": "否",
+    "loadImage": "上传图片",
+    "enterText": "输入文本...",
+    "loading": "加载中...",
+    "noDate": "无数据",
+    "alertMessage": "你确定要删除吗？",
+    "logout": "登出",
+    "login": "登入"
+  }
+}

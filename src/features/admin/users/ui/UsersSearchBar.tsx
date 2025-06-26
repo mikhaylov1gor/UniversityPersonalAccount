@@ -19,14 +19,14 @@ export function UsersSearchBar({ value, onChange, onSearch }: UsersSearchBarProp
                 <Input
                     width="100%"
                     value={value}
-                    placeholder={t("admin.users.input")}
+                    placeholder={t("admin.users.input" as any)}
                     iconLeft="search-magnifying-glass-black"
                     onInput={onChange}
                 />
             </Col>
             <Col lg={4} xl={3}  style={{ padding: '10px' }}>
                 <Button width="100%" variant="primary" onClick={onSearch}>
-                    {t("admin.users.search")}
+                    {t("admin.users.search" as any)}
                 </Button>
             </Col>
         </Row>

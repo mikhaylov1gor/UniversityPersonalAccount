@@ -50,7 +50,6 @@ export function Layout({title, breadcrumbs, children}: LayoutProps) {
     return (
         <div className={styles.layoutRoot}>
             <NavbarMenu
-                avatarUrl={null}
                 open={sidebarOpen}
                 mobileOverlay={mobileOverlay}
                 onToggleOpen={() => setSidebarOpen((o) => !o)}

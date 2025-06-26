@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { RouteName } from "@/shared/config/router";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -6,9 +6,10 @@ import { Icon } from "@/shared/ui/atoms/Icon/Icon";
 import { Menu, X } from "lucide-react";
 import styles from "./NavbarMenu.module.scss";
 import defaultAvatar from "@/shared/assets/test/photo_profile.png";
+import {AuthStoreApi} from "@/shared/services/auth.service.ts";
+import {toast} from "@/app/providers/Toast/ToastController.ts";
 
 interface NavbarMenuProps {
-    avatarUrl: string | null;
     open: boolean;
     mobileOverlay: boolean;
     onToggleOpen: () => void;
@@ -17,44 +18,90 @@ interface NavbarMenuProps {
 }
 
 export function NavbarMenu({
-                               avatarUrl,
                                open,
                                mobileOverlay,
                                onToggleOpen,
                                onToggleMobileOverlay,
                                isDesktop,
                            }: NavbarMenuProps) {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
+
+    const avatarUrl = localStorage.getItem("avatarUrl");
+    const accessToken = localStorage.getItem("accessToken");
+    const isAdmin = localStorage.getItem("role")
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const handleLogout = async () => {
+        console.log("Logout logic here");
+        try{
+            await AuthStoreApi.logout();
+        } catch (error){
+            console.log("Ошибка логаута")
+        } finally {
+            toast.success("Выход выполнен успешно")
+            localStorage.clear();
+            navigate(RouteName.EVENTS_PAGE);
+        }
+    };
+    const handleLogin = () =>{
+        navigate(RouteName.LOGIN_PAGE)
+    }
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(e.target as Node)
+            ) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     const menuItems = [
         {
             iconName: "user-black",
-            label: t("menu.profile"),
-            path: RouteName.PROFILE_PAGE
+            label: t("menu.profile" as any),
+            path: RouteName.PROFILE_PAGE,
+            authRequired: true,
+            adminRequired: false
         },
         {
             iconName: "administrator-black",
-            label: t("menu.administration"),
-            path: RouteName.ADMIN_PAGE
+            label: t("menu.administration" as any),
+            path: RouteName.ADMIN_PAGE,
+            authRequired: true,
+            adminRequired: true
         },
         {
             iconName: "document-black",
-            label: t("menu.certificates"),
-            path: RouteName.CERTIFICATES_PAGE
+            label: t("menu.certificates" as any),
+            path: RouteName.CERTIFICATES_PAGE,
+            authRequired: true,
+            adminRequired: false
         },
         {
             iconName: "link-black",
-            label: t("menu.usefulServices"),
-            path: RouteName.USEFUL_SERVICES_PAGE
+            label: t("menu.usefulServices" as any),
+            path: RouteName.USEFUL_SERVICES_PAGE,
+            authRequired: true,
+            adminRequired: false
         },
         {
             iconName: "map-black",
-            label: t("menu.events"),
-            path: RouteName.EVENTS_PAGE
+            label: t("menu.events" as any),
+            path: RouteName.EVENTS_PAGE,
+            authRequired: false,
+            adminRequired: false
         },
     ];
+
 
     return (
         <>
@@ -64,7 +111,7 @@ export function NavbarMenu({
                     aria-label={mobileOverlay ? "Закрыть меню" : "Открыть меню"}
                     onClick={onToggleMobileOverlay}
                 >
-                    {mobileOverlay ? <X /> : <Menu />}
+                    {mobileOverlay ? <X/> : <Menu/>}
                 </button>
             )}
 
@@ -89,13 +136,30 @@ export function NavbarMenu({
                     .filter(Boolean)
                     .join(" ")}
             >
-                <div className={styles.sidebar__header}>
-
+                <div className={styles.sidebar__header} ref={dropdownRef}>
                     <img
                         src={avatarUrl || defaultAvatar}
                         alt="avatar"
                         className={styles.sidebar__avatar}
+                        onClick={() => setIsDropdownOpen((prev) => !prev)}
+                        style={{cursor: "pointer"}}
                     />
+
+                    {isDropdownOpen && (
+                        <div className={styles.dropdown}>
+                            {accessToken !== null ? (
+                                <button onClick={handleLogout} className={styles.dropdownButton}>
+                                    {t("common.logout" as any)}
+                                    <Icon name="log-out-black" size={20} fill='none' />
+                                </button>
+                            ) : (
+                                <button onClick={handleLogin} className={styles.dropdownButton}>
+                                    {t("common.login" as any)}
+                                    <Icon name="log-in-black" size={20} fill='none'/>
+                                </button>
+                            )}
+                        </div>
+                    )}
 
                     {isDesktop && (
                         <button
@@ -113,7 +177,13 @@ export function NavbarMenu({
                 </div>
 
                 <ul className={styles.sidebar__menu}>
-                    {menuItems.map((item, idx) => {
+                    {menuItems
+                        .filter(item => {
+                            if (item.authRequired && !accessToken) return false;
+                            if (item.adminRequired && isAdmin !== "admin") return false;
+                            return true;
+                        })
+                        .map((item, idx) => {
                         const isActive = location.pathname === item.path;
                         const iconName = item.iconName.replace(
                             "-black",
@@ -135,12 +205,12 @@ export function NavbarMenu({
                                         ? open
                                             ? styles["sidebar__menuItem--expanded"]
                                             : styles["sidebar__menuItem--collapsed"]
-                                        : styles["sidebar__menuItem--expanded"], // mobile overlay — покажем икон+текст
+                                        : styles["sidebar__menuItem--expanded"],
                                 ]
                                     .filter(Boolean)
                                     .join(" ")}
                             >
-                                <Icon name={iconName} size={40} fill="none" />
+                                <Icon name={iconName} size={40} fill="none"/>
                                 {(isDesktop ? open : true) && (
                                     <span className={styles.sidebar__menuLabel}>
                                         {item.label}

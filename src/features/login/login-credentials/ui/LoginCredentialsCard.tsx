@@ -7,6 +7,9 @@ import {RouteName} from "@/shared/config/router";
 import Input from "@/shared/ui/atoms/Input/Input";
 import Button from "@/shared/ui/atoms/Button/Button";
 import {toast} from "@/app/providers/Toast/ToastController.ts";
+import {UserStoreApi} from "@/shared/services/user.service.ts";
+import {ProfileStoreApi} from "@/shared/services/profile.service.ts";
+import {FilesStoreApi} from "@/shared/services/files.service.ts";
 
 export function LoginCredentialsCard(){
     const [rememberMe, setRememberMe] = useState(false);
@@ -32,7 +35,16 @@ export function LoginCredentialsCard(){
                 localStorage.setItem('refreshToken', response.refreshToken);
                 toast.success("Вход выполнен успешно");
 
-                navigate(RouteName.EVENTS_PAGE)
+                const data = await ProfileStoreApi.getCurrentUserProfile();
+                const avatar = await FilesStoreApi.getFileById(data.avatar.id)
+                const blob = new Blob([avatar.data], {type: avatar.headers['content-type'] || 'image/jpeg'});
+                const url = URL.createObjectURL(blob);
+                console.log(data);
+
+                if (data.userTypes.length == 0){
+                    localStorage.setItem("role", "admin")
+                }
+                navigate(RouteName.PROFILE_PAGE)
             }
             else{
                 toast.error("Неверный логин или пароль");
@@ -47,7 +59,7 @@ export function LoginCredentialsCard(){
             <div className="w-full md:w-1/2 bg-white rounded-xl shadow-lg p-8">
                 <div className="relative">
                     <div style={{margin: '2rem'}}>
-                        <h1 className="text-2xl text-center mb-6">{t("loginPage.title")}</h1>
+                        <h1 className="text-2xl text-center mb-6">{t("loginPage.title" as any)}</h1>
                     </div>
                 </div>
 
@@ -57,7 +69,7 @@ export function LoginCredentialsCard(){
                             <Input value={email}
                                    onInput={(e: React.FormEvent<HTMLInputElement>) =>
                                        setEmail(e.currentTarget.value)
-                                   } label={t("loginPage.email")}>
+                                   } label={t("loginPage.email" as any)}>
                             </Input>
                         </div>
                     </div>
@@ -67,7 +79,7 @@ export function LoginCredentialsCard(){
                             <Input value={password} type="password"
                                    onInput={(e: React.FormEvent<HTMLInputElement>) =>
                                        setPassword(e.currentTarget.value)
-                                   } label={t("loginPage.password")}>
+                                   } label={t("loginPage.password" as any)}>
                             </Input>
                         </div>
                     </div>
@@ -102,7 +114,7 @@ export function LoginCredentialsCard(){
                         />
                         </button>
                         <label className="ml-3 block text-sm text-gray-700">
-                            {t("loginPage.rememberMe")}
+                            {t("loginPage.rememberMe" as any)}
                         </label>
                     </div>
 
@@ -114,7 +126,7 @@ export function LoginCredentialsCard(){
                                 variant="primary"
                                 width="100%"
                             >
-                                {t("loginPage.loginButton")}
+                                {t("loginPage.loginButton" as any)}
                             </Button>
                         </div>
                     </div>

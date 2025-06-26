@@ -55,26 +55,26 @@ export const ExternalRegisterModal: React.FC<Props> = ({ isOpen, eventId, onClos
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
                 <button className={styles.closeButton} onClick={onClose}>×</button>
-                <h3>{t("events.details.modal.title")}</h3>
+                <h3>{t("events.details.modal.title" as any)}</h3>
 
                 <Input
                     name="name"
                     width="100%"
-                    label={t("events.details.modal.name")}
+                    label={t("events.details.modal.name" as any)}
                     value={formData.name || ""}
                     onInput={handleChange}
                 />
                 <Input
                     name="phone"
                     width="100%"
-                    label={t("events.details.modal.phone")}
+                    label={t("events.details.modal.phone" as any)}
                     value={formData.phone || ""}
                     onInput={handleChange}
                 />
                 <Input
                     name="email"
                     width="100%"
-                    label={t("events.details.modal.email")}
+                    label={t("events.details.modal.email" as any)}
                     value={formData.email || ""}
                     onInput={handleChange}
                 />
@@ -83,15 +83,15 @@ export const ExternalRegisterModal: React.FC<Props> = ({ isOpen, eventId, onClos
                     name="additionalInfo"
                     value={formData.additionalInfo || ""}
                     onChange={handleChange}
-                    placeholder={t("events.details.modal.additionalInfo")}
+                    placeholder={t("events.details.modal.additionalInfo" as any)}
                 />
 
                 <div className={styles.buttons}>
                     <Button variant="primary" style={{minWidth: '50%'}} onClick={handleSubmit} disabled={loading}>
-                        {t("common.save")}
+                        {t("common.save" as any)}
                     </Button>
                     <Button variant="outline" style={{minWidth: '50%'}} onClick={onClose}>
-                        {t("common.cancel")}
+                        {t("common.cancel" as any)}
                     </Button>
                 </div>
             </div>

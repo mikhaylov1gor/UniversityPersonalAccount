@@ -21,14 +21,14 @@ export function EventsSearchBar({ name, eventDate, onNameChange, onEventDateChan
                     <Col md={6} lg={7} xl={8}>
                         <Input
                             width="100%"
-                            label={t("events.name")}
+                            label={t("events.name" as any)}
                             value={name}
                             onInput={onNameChange}
                         />
                     </Col>
                     <Col md={6} lg={5} xl={4} style={{padding: '10px'}}>
                         <Button width="100%" variant="primary" onClick={onSearch}>
-                            {t("events.search")}
+                            {t("events.search" as any)}
                         </Button>
                     </Col>
                 </Row>
@@ -37,7 +37,7 @@ export function EventsSearchBar({ name, eventDate, onNameChange, onEventDateChan
                         <Input
                             type={"date"}
                             width="100%"
-                            label={t("events.date")}
+                            label={t("events.date" as any)}
                             value={eventDate}
                             onInput={onEventDateChange}
                         />

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Col, Row } from 'react-grid-system';
 
 import {AdminEventCard} from "@/features/admin/events/main/ui/AdminEventCard.tsx";

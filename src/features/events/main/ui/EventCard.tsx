@@ -79,7 +79,7 @@ export const EventCard: React.FC<EventCardProps> = ({eventId, imageId, title, da
 
                     <div className={styles.infoBlock}>
                         <div className={styles.label}>
-                            <p2>{t("admin.events.main.format")}</p2>
+                            <p2>{t("admin.events.main.format" as any)}</p2>
                         </div>
                         <div className={styles.value}>
                             <p1>{format}</p1>

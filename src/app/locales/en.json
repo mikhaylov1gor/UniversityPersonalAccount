@@ -188,6 +188,8 @@
     "enterText": "Enter the text...",
     "loading": "Loading...",
     "noDate": "No data",
-    "alertMessage": "Are you sure?"
+    "alertMessage": "Are you sure?",
+    "logout": "Logout",
+    "login": "Log in"
   }
 }

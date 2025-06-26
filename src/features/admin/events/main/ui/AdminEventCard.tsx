@@ -107,24 +107,24 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({event}) => {
 
                 <div className={styles.rowGroup}>
                     <div className={styles.row}>
-                        <div className={styles.label}>{t("admin.events.main.type")}</div>
+                        <div className={styles.label}>{t("admin.events.main.type" as any)}</div>
                         <div className={styles.value}>{event.type}</div>
                     </div>
 
                     <div className={styles.row}>
-                        <div className={styles.label}>{t("admin.events.main.auditory")}</div>
+                        <div className={styles.label}>{t("admin.events.main.auditory" as any)}</div>
                         <div className={styles.value}>{event.auditory}</div>
                     </div>
                 </div>
 
                 <div className={styles.rowGroup}>
                     <div className={styles.row}>
-                        <div className={styles.label}>{t("admin.events.main.date2")}</div>
+                        <div className={styles.label}>{t("admin.events.main.date2" as any)}</div>
                         <div className={styles.value}>{formatDateRange(event.dateTimeFrom, event.dateTimeTo)}</div>
                     </div>
 
                     <div className={styles.row}>
-                        <div className={styles.label}>{t("admin.events.main.format")}</div>
+                        <div className={styles.label}>{t("admin.events.main.format" as any)}</div>
                         <div className={styles.value}>{event.format}</div>
                     </div>
                 </div>

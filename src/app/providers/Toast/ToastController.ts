@@ -1,4 +1,3 @@
-// toastController.ts
 import { TFunction } from "i18next";
 
 type ToastType = "info" | "success" | "error" | "warning";
