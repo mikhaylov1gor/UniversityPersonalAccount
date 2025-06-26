@@ -1,15 +1,16 @@
-export function Banner(){
-    return(
+import styles from "./Banner.module.scss"
+
+export function Banner() {
+    return (
         <>
-            <div className="w-full md:w-1/2 bg-transparent ">
-                <div className="flex items-center justify-center p-4">
-                    <img
-                        src="/src/shared/assets/images/welcome-banner.svg"
-                        alt="Welcome"
-                        className="w-full max-w-lg object-contain"
-                        onError={(e) => {
-                            (e.target as HTMLImageElement).src = "https://via.placeholder.com/500x400?text=Welcome+Illustration";
-                        }}
+            <div className={styles.bannerWrapper}>
+                <div className={styles.bannerInner}>
+                    <img className={styles.bannerImage} alt={"Banner"}
+                         src="/src/shared/assets/images/welcome-banner.svg"
+                         alt="Welcome"
+                         onError={(e) => {
+                             (e.target as HTMLImageElement).src = "https://via.placeholder.com/500x400?text=Welcome+Illustration";
+                         }}
                     />
                 </div>
             </div>

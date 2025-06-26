@@ -27,12 +27,21 @@ export function NavbarMenu({
     const {t} = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
-
-    const avatarUrl = localStorage.getItem("avatarUrl");
     const accessToken = localStorage.getItem("accessToken");
     const isAdmin = localStorage.getItem("role")
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const [avatarUrl, setAvatarUrl] = useState<string | null>(localStorage.getItem("avatarUrl"));
+
+    useEffect(() => {
+        const handleStorage = () => {
+            setAvatarUrl(localStorage.getItem("avatarUrl"));
+        };
+
+        window.addEventListener("storage", handleStorage);
+        return () => window.removeEventListener("storage", handleStorage);
+    }, []);
 
     const handleLogout = async () => {
         console.log("Logout logic here");
@@ -136,7 +145,7 @@ export function NavbarMenu({
                     .filter(Boolean)
                     .join(" ")}
             >
-                <div className={styles.sidebar__header} ref={dropdownRef}>
+                <div className={styles.sidebar__header} style={{zIndex: '20'}} ref={dropdownRef}>
                     <img
                         src={avatarUrl || defaultAvatar}
                         alt="avatar"

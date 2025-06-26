@@ -7,9 +7,10 @@ import {RouteName} from "@/shared/config/router";
 import Input from "@/shared/ui/atoms/Input/Input";
 import Button from "@/shared/ui/atoms/Button/Button";
 import {toast} from "@/app/providers/Toast/ToastController.ts";
-import {UserStoreApi} from "@/shared/services/user.service.ts";
 import {ProfileStoreApi} from "@/shared/services/profile.service.ts";
 import {FilesStoreApi} from "@/shared/services/files.service.ts";
+import styles from "./LoginCredentials.module.scss"
+import {Switcher} from "@/shared/ui/atoms/Switcher/Switcher.tsx";
 
 export function LoginCredentialsCard(){
     const [rememberMe, setRememberMe] = useState(false);
@@ -39,8 +40,8 @@ export function LoginCredentialsCard(){
                 const avatar = await FilesStoreApi.getFileById(data.avatar.id)
                 const blob = new Blob([avatar.data], {type: avatar.headers['content-type'] || 'image/jpeg'});
                 const url = URL.createObjectURL(blob);
-                console.log(data);
 
+                localStorage.setItem("avatarUrl", url);
                 if (data.userTypes.length == 0){
                     localStorage.setItem("role", "admin")
                 }
@@ -56,80 +57,45 @@ export function LoginCredentialsCard(){
 
     return(
         <>
-            <div className="w-full md:w-1/2 bg-white rounded-xl shadow-lg p-8">
-                <div className="relative">
-                    <div style={{margin: '2rem'}}>
-                        <h1 className="text-2xl text-center mb-6">{t("loginPage.title" as any)}</h1>
-                    </div>
-                </div>
+            <div className={styles.cardWrapper}>
+                <h1 className={styles.title}>{t("loginPage.title" as any)}</h1>
 
-                <form className="space-y-5" onSubmit={submit}>
-                    <div className="relative">
-                        <div style={{margin: '2rem'}}>
-                            <Input value={email}
-                                   onInput={(e: React.FormEvent<HTMLInputElement>) =>
-                                       setEmail(e.currentTarget.value)
-                                   } label={t("loginPage.email" as any)}>
-                            </Input>
-                        </div>
-                    </div>
 
-                    <div className="relative">
-                        <div style={{margin: '2rem'}}>
-                            <Input value={password} type="password"
-                                   onInput={(e: React.FormEvent<HTMLInputElement>) =>
-                                       setPassword(e.currentTarget.value)
-                                   } label={t("loginPage.password" as any)}>
-                            </Input>
-                        </div>
-                    </div>
-
-                    <div className="flex items-center" style={{margin: '2rem'}}>
-                        <button
-                            type="button"
-                            onClick={() => setRememberMe(!rememberMe)}
-                            style={{
-                                position: 'relative',
-                                width: '40px',
-                                height: '20px',
-                                borderRadius: '9999px',
-                                backgroundColor: rememberMe ? '#2563eb' : '#e5e7eb',
-                                border: 'none',
-                                transition: 'background-color 0.3s ease',
-                                cursor: 'pointer',
-                                padding: 0,
-                            }}
-                        >
-                        <span
-                            style={{
-                                position: 'absolute',
-                                top: '2px',
-                                left: rememberMe ? '22px' : '2px',
-                                width: '16px',
-                                height: '16px',
-                                backgroundColor: 'white',
-                                borderRadius: '50%',
-                                transition: 'left 0.2s ease',
-                            }}
+                <form className={styles.formSection} onSubmit={submit}>
+                    <div style={{marginBottom: "1rem"}}>
+                        <Input
+                            value={email}
+                            onInput={(e: React.FormEvent<HTMLInputElement>) =>
+                                setEmail(e.currentTarget.value)
+                            }
+                            label={t("loginPage.email" as any)}
                         />
-                        </button>
-                        <label className="ml-3 block text-sm text-gray-700">
-                            {t("loginPage.rememberMe" as any)}
-                        </label>
                     </div>
 
+                    <Input
+                        value={password}
+                        type="password"
+                        onInput={(e: React.FormEvent<HTMLInputElement>) =>
+                            setPassword(e.currentTarget.value)
+                        }
+                        label={t("loginPage.password" as any)}
+                    />
 
-                    <div className="relative">
-                        <div style={{margin: '2rem'}}>
-                            <Button
-                                type="submit"
-                                variant="primary"
-                                width="100%"
-                            >
-                                {t("loginPage.loginButton" as any)}
-                            </Button>
-                        </div>
+                    <div className={styles.switchContainer}>
+                        <Switcher
+                            isOn={rememberMe}
+                            onToggle={() => setRememberMe(!rememberMe)}
+                        />
+                        <p className={styles.rememberLabel}>{t("loginPage.rememberMe" as any)}</p>
                     </div>
+
+                    <Button
+                        type="submit"
+                        variant="primary"
+                        width="100%"
+                    >
+                        {t("loginPage.loginButton" as any)}
+                    </Button>
                 </form>
             </div>
         </>

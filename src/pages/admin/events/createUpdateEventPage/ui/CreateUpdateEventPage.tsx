@@ -28,7 +28,6 @@ export const CreateUpdateEventPage = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState<boolean>(false);
 
-    // Подгрузка
     const [event, setEvent] = useState<EventDto>(null);
 
     // Параметры
@@ -92,6 +91,20 @@ export const CreateUpdateEventPage = () => {
         };
         fetchEvent();
     }, []);
+
+    function formatDateForInput(value: string, withTime: boolean): string {
+        if (!value) return '';
+        const date = new Date(value);
+
+        if (withTime) {
+
+            const isoString = date.toISOString();
+            return isoString.substring(0, 16);
+        } else {
+            // формат для date: 'YYYY-MM-DD'
+            return date.toISOString().split('T')[0];
+        }
+    }
 
     const submit = async () =>{
         try{
@@ -177,7 +190,7 @@ export const CreateUpdateEventPage = () => {
                 {t(`admin.events.createUpdate.titles.${id == null ? 'create' : 'update'}` as any)}
             </h1>
             <div className={styles.card}>
-                <div style={{zIndex: 1000}} className={styles.toolbar}>
+                <div style={{zIndex: 9}} className={styles.toolbar}>
                     <Input
                         width="100%"
                         label={t("admin.events.createUpdate.name" as any)}
@@ -195,13 +208,12 @@ export const CreateUpdateEventPage = () => {
                 <Row>
                     <Col md={6} className={styles.row}>
                         <Input
-                            type={"date"}
+                            type={isDateFromRequired ? "datetime-local" : "date"}
                             width="100%"
                             label={t("admin.events.createUpdate.dateFrom" as any)}
-                            value={dateFrom ? new Date(dateFrom).toISOString().split('T')[0] : ''}
+                            value={dateFrom ? formatDateForInput(dateFrom, isDateFromRequired) : ''}
                             onInput={(e: React.FormEvent<HTMLInputElement>) =>
                                 setDateFrom(e.currentTarget.value)}
-                            disabled={!isDateFromRequired}
                         />
                         <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
                             <p style={{margin: 0}}>{t("admin.events.createUpdate.time" as any)}</p>
@@ -214,13 +226,14 @@ export const CreateUpdateEventPage = () => {
 
                     <Col style={{display: 'flex', flexDirection: 'row', gap: '1rem'}} md={6}>
                         <Input
-                            type={"date"}
+                            type={isDateToRequired ? "datetime-local" : "date"}
                             width="100%"
                             label={t("admin.events.createUpdate.dateTo" as any)}
-                            value={dateTo ? new Date(dateTo).toISOString().split('T')[0] : ''}
+                            value={dateTo ? formatDateForInput(dateTo, isDateToRequired) : ''}
                             onInput={(e: React.FormEvent<HTMLInputElement>) =>
                                 setDateTo(e.currentTarget.value)}
-                            disabled={!isDateToRequired}
+                            min={dateFrom ? formatDateForInput(dateFrom, isDateToRequired) : undefined}
+
                         />
                         <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
                             <p style={{margin: 0}}>{t("admin.events.createUpdate.time" as any)}</p>

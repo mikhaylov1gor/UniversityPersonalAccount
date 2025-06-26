@@ -5,19 +5,37 @@ import {useTranslation} from "react-i18next";
 const modules = {
     toolbar: [
         [{ font: [] }],
-        ['bold', 'italic', 'underline'],
-        [{ align: [] }],
+        [{ color: [] }, { background: [] }],
+        ['bold', 'italic', 'underline', 'strike'],
         [{ list: 'ordered' }, { list: 'bullet' }],
-        ['link', 'code-block'],
-    ],
+        [{ indent: '-1' }, { indent: '+1' }],
+        [{ direction: 'rtl' }],
+        [{ align: [] }],
+        ['link', 'image', 'video'],
+        ['clean']
+    ]
 };
 
 const formats = [
+    'header',
     'font',
-    'bold', 'italic', 'underline',
+    'size',
+    'color',
+    'background',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'script',
+    'list',
+    'indent',
+    'direction',
     'align',
-    'list', 'bullet',
-    'link', 'code-block',
+    'link',
+    'image',
+    'video',
+    'code-block',
+    'clean'
 ];
 
 interface ToolBarProps {
