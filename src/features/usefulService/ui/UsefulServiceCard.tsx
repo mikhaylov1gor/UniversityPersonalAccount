@@ -10,7 +10,7 @@ interface Props {
     service: UsefulServiceDto;
 }
 
-const ExternalLinkButton: React.FC = () => {
+const ExternalLinkButton: React.FC = ({service}: Props) => {
     const { t } = useTranslation();
     return (
         <Button
@@ -20,7 +20,7 @@ const ExternalLinkButton: React.FC = () => {
             width="100%"
             onClick={() => window.open(service.link ?? '', '_blank')}
         >
-            {t("admin.usefulServices.button")}
+            {t("admin.usefulServices.button" as any)}
         </Button>
     );
 };
@@ -52,7 +52,7 @@ export const UsefulServiceCard: React.FC<Props> = ({ service }) => {
         <div className={styles.card}>
             <div className={styles.header}>
                 <h3 className={styles.title}>{service.title}</h3>
-                <div className={styles.headerBtn}>
+                <div>
                     <ExternalLinkButton />
                 </div>
             </div>
@@ -66,7 +66,6 @@ export const UsefulServiceCard: React.FC<Props> = ({ service }) => {
                     />
                 </div>
 
-                {/* Показывается только на мобилках */}
                 <h3 className={styles.titleMobile}>{service.title}</h3>
 
                 <div className={styles.info}>
@@ -79,7 +78,7 @@ export const UsefulServiceCard: React.FC<Props> = ({ service }) => {
                     {service.termsOfDisctribution && (
                         <>
                             <p className={styles.label}>
-                                {t("admin.usefulServices.serviceTerms")}
+                                {t("admin.usefulServices.serviceTerms" as any)}
                             </p>
                             <p className={styles.terms}>
                                 {service.termsOfDisctribution}

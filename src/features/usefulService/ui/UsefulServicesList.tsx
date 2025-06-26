@@ -38,7 +38,6 @@ export const UsefulServicesList: React.FC<Props> = ({
             <Col xs={12} md={12} lg={12} key={service.id}>
                 <UsefulServiceCard
                     service={service}
-                    // передаём редактирование и удаление, если есть
                     onEdit={isAdmin ? onEdit : undefined}
                     onDelete={isAdmin ? onDelete : undefined}
                     isAdmin={isAdmin}

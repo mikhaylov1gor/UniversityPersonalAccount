@@ -43,7 +43,6 @@ export function EventDetailsPage() {
         }
     }, [id]);
 
-    // Проверка участия
     const checkParticipation = useCallback(async (eventId: string) => {
         try {
             if(localStorage.getItem("accessToken")){
@@ -53,7 +52,6 @@ export function EventDetailsPage() {
             }
             else{
                 const registered = JSON.parse(localStorage.getItem("guestRegisteredEvents") || "[]");
-                console.log(true);
                 if (registered.includes(eventId)) {
                     setIsParticipant(true);
                 }
@@ -66,7 +64,6 @@ export function EventDetailsPage() {
         }
     }, []);
 
-    // Получение баннера
     const fetchBanner = useCallback(async (fileId: string) => {
         try {
             const response = await FilesStoreApi.getFileById(fileId);
@@ -111,18 +108,18 @@ export function EventDetailsPage() {
 
         return isParticipant ? (
             <Button variant="outline" onClick={handleRegister}>
-                {t("events.details.alreadyParticipating")}
+                {t("events.details.alreadyParticipating" as any)}
             </Button>
         ) : (
             <Button variant="primary" onClick={handleRegister}>
-                {t("events.details.participate")}
+                {t("events.details.participate" as any)}
             </Button>
         );
     };
 
     if (loading) return <h1>Загрузка...</h1>;
     if (error) return <div style={{ color: "red" }}>{error}</div>;
-    if (!event) return <div>{t("events.details.notFound")}</div>;
+    if (!event) return <div>{t("events.details.notFound" as any)}</div>;
 
     return (
         <div>
@@ -137,11 +134,12 @@ export function EventDetailsPage() {
                 <div className={styles.card}>
                     <div className={styles.header} onClick={() => setDescriptionTab(!descriptionTab)}>
                         <div className={styles.headerInfo}>
-                            <strong>{t("events.details.description")}</strong>
+                            <strong>{t("events.details.description" as any)}</strong>
                             <Icon
                                 name={descriptionTab ? "caret-down-md-black" : "caret-up-md-black"}
                                 size={30}
                                 style={{ marginLeft: "auto" }}
+                                fill='none'
                             />
                         </div>
                     </div>
@@ -159,26 +157,24 @@ export function EventDetailsPage() {
                         className={styles.banner}
                     />
 
-                    {/* Дата окончания регистрации */}
                     {event.isRegistrationRequired && (
                         <div className={styles.rowGroup}>
                             <div className={styles.row}>
-                                <div className={styles.label}>{t("events.details.registrationDate")}</div>
+                                <div className={styles.label}>{t("events.details.registrationDate" as any)}</div>
                                 <div className={styles.value}>{formatDateRange(event.registrationLastDate, null)}</div>
                             </div>
                         </div>
                     )}
 
-                    {/* Формат и дата */}
                     <div className={styles.rowGroup}>
                         <div className={styles.row}>
-                            <div className={styles.label}>{t("events.details.date")}</div>
+                            <div className={styles.label}>{t("events.details.date" as any)}</div>
                             <div className={styles.value}>
                                 {formatDateRange(event.dateTimeFrom, event.dateTimeTo)}
                             </div>
                         </div>
                         <div className={styles.row}>
-                            <div className={styles.label}>{t("events.details.format")}</div>
+                            <div className={styles.label}>{t("events.details.format" as any)}</div>
                             <div className={styles.value}>{event.format}</div>
                         </div>
                     </div>
@@ -187,7 +183,7 @@ export function EventDetailsPage() {
                     {event.format === "Offline" ? (
                         <div className={styles.rowGroup} style={{ borderBottom: 0 }}>
                             <div className={styles.addressBlock}>
-                                <div className={styles.label}>{t("events.details.address")}</div>
+                                <div className={styles.label}>{t("events.details.address" as any)}</div>
                                 <div className={styles.value}>{event.addressName}</div>
                             </div>
                             <div className={styles.mapWrapper}>
@@ -197,7 +193,7 @@ export function EventDetailsPage() {
                     ) : (
                         <div className={styles.rowGroup}>
                             <div className={styles.row}>
-                                <div className={styles.label}>{t("events.details.link")}</div>
+                                <div className={styles.label}>{t("events.details.link" as any)}</div>
                                 <div className={styles.value}>
                                     <a href={`http://${event.link}`} target="_blank" rel="noreferrer">
                                         {event.link}
@@ -209,7 +205,6 @@ export function EventDetailsPage() {
                 </div>
             </div>
 
-            {/* Модальное окно */}
             <ExternalRegisterModal
                 isOpen={isModalOpen}
                 eventId={event.id}

@@ -1,6 +1,6 @@
 {
   "loginPage": {
-    "title": "Account Login",
+    "title": "Login",
     "email": "Email",
     "password": "Password",
     "rememberMe": "Remember me",
@@ -9,63 +9,152 @@
   "events": {
     "title": "Events",
     "name": "Event name",
-    "date": "Date of the event",
+    "date": "Event date",
     "search": "Search",
     "details": {
       "description": "Description",
-      "date": "Dates of the event",
-      "registrationDate": "Registration end date",
-      "address": "Address",
+      "registrationDate": "Registration deadline",
+      "date": "Event date(s)",
       "format": "Event format",
       "link": "Link",
+      "address": "Address",
       "participate": "I WILL PARTICIPATE",
-      "alreadyParticipating": "ALREADY PARTICIPATING"
+      "alreadyParticipating": "ALREADY PARTICIPATING",
+      "registrationRequired": "Registration required",
+      "type": "Event type",
+      "targetAudience": "Target audience",
+      "isDigest": "Include in digest",
+      "digestTest": "Digest text",
+      "author": "Event creator",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "inner": "Inner participants",
+      "external": "External participants",
+      "additionalInfo": "Additional Information",
+
+      "modal": {
+        "title": "Event registration",
+        "name": "Full name",
+        "email": "Email",
+        "phone": "Phone",
+        "additionalInfo": "Additional information"
+      }
     }
   },
   "profilePage": {
     "title": "Profile",
     "personalData": {
-      "title": "Personal Information",
+      "title": "Personal data",
       "gender": "Gender",
-      "birthDate": "Date of Birth",
+      "birthDate": "Date of birth",
       "citizenship": "Citizenship",
-      "snils": "SNILS",
-      "email": "E-mail"
+      "snils": "SNILS (Russian pension ID)",
+      "email": "Email"
     },
     "contacts": {
       "title": "Contacts",
       "phone": "Phone",
       "phone2": "Phone 2",
-      "additionalEmail": "Additional E-mail",
+      "additionalEmail": "Additional email",
       "address": "Address",
-      "socialMedia": "Social Media",
-      "noAddress": "Address undefined"
+      "socialMedia": "Social media",
+      "noAddress": "No address specified"
     },
     "tabs": {
       "education": "Education",
       "work": "Work",
 
       "educationTab": {
-        "educationYears": "Education years",
-        "creditBookNumber": "Credit book number",
+        "educationYears": "Years of education",
+        "creditBookNumber": "Gradebook number",
         "educationForm": "Education form",
         "educationBase": "Base",
         "faculty": "Faculty",
-        "educationDirection": "Direction",
-        "educationProfile": "Profile",
+        "educationDirection": "Field of study",
+        "educationProfile": "Specialization",
         "course": "Course",
         "group": "Group"
       },
 
       "workTab": {
-        "experience": "Experience",
-        "dateStart": "Date of employment",
-        "dateEnd": "Date of dismissal",
-        "employmentType": "Type of employment",
+        "experience": "Work experience",
+        "dateStart": "Employment date",
+        "dateEnd": "Termination date",
+        "employmentType": "Employment type",
         "rate": "Rate",
-        "workPlace": "Place of work",
-        "noDepartments": "The place of work is not specified",
-        "workType": "Type of job position"
+        "workPlace": "Workplace",
+        "noDepartments": "No workplace specified",
+        "workType": "Position type"
+      }
+    }
+  },
+
+  "admin": {
+    "admin": "Administration",
+    "nav": {
+      "users": "Users",
+      "usefulServices": "Useful services",
+      "events": "Events",
+      "usersDesc": "View users, update their personal data",
+      "usefulServicesDesc": "Manage useful services: add, delete, and update services",
+      "eventsDesc": "Manage events: view, edit, and create new events"
+    },
+    "users": {
+      "input": "Enter name or email",
+      "search": "Search"
+    },
+    "usefulServices": {
+      "button": "Go to website",
+      "serviceTerms": "Terms of service",
+      "addButton": "Add service",
+      "modal": {
+        "name": "Add service",
+        "title": "Service name",
+        "link": "Link",
+        "type": "Type",
+        "description": "Description",
+        "conditions": "Terms of service",
+        "are_u_sure": "Are you sure you want to delete the selected service?"
+      }
+    },
+    "events": {
+      "main": {
+        "title": "Events",
+        "addButton": "Add event",
+        "searchPanel": "Search panel",
+        "filters": "Filters",
+        "name": "Event name",
+        "status": "Status",
+        "type": "Event type",
+        "format": "Event format",
+        "date": "Event date",
+        "auditory": "Audience",
+        "date2": "Event date(s)"
+      },
+      "createUpdate": {
+        "titles": {
+          "create": "Create event",
+          "update": "Edit event"
+        },
+        "name": "Event name",
+        "description": "Event description",
+        "dateFrom": "Start date",
+        "dateTo": "End date",
+        "time": "Time",
+        "type": "Event type",
+        "targetAudience": "Target audience",
+        "isRegistrationRequired": "Registration required",
+        "registrationEndDate": "Registration deadline",
+        "format": "Event format",
+        "link": "Link",
+        "address": "Address",
+        "addressTitle": "Event address",
+        "latitude": "Longitude",
+        "longitude": "Latitude",
+        "eventNotification": "Event notification",
+        "isDigest": "Include in digest",
+        "files": "Files",
+        "loadImage": "Upload image"
       }
     }
   },
@@ -75,36 +164,29 @@
     "error": "Error",
     "warning": "Warning"
   },
-  "admin": {
-    "nav": {
-      "users": "Users",
-      "usefulServices": "Useful services",
-      "events": "Events",
-      "usersDesc": "View users and update their personal information",
-      "usefulServicesDesc": "Manage the useful services page: add, remove, and update services",
-      "eventsDesc": "Manage the events page: view, edit, and create new events"
-    },
-    "users": {
-      "input": "Enter name or email address",
-      "search": "Search"
-    },
-    "usefulServices": {
-      "button": "Open website",
-      "serviceTerms": "Service terms"
-    }
-  },
   "menu": {
     "profile": "Profile",
     "administration": "Administration",
+    "admin": "Administration",
     "certificates": "Certificates",
-    "usefulServices": "Useful Services",
+    "usefulServices": "Useful services",
     "events": "Events"
   },
   "titles": {
     "profile": "Profile",
     "administration": "Administration",
     "certificates": "Certificates",
-    "usefulServices": "Useful Services",
+    "usefulServices": "Useful services",
     "events": "Events"
+  },
+  "common": {
+    "save": "SAVE",
+    "cancel": "CANCEL",
+    "search": "SEARCH",
+    "delete": "DELETE",
+    "loadImage": "Load image",
+    "enterText": "Enter the text...",
+    "loading": "Loading...",
+    "noDate": "No data"
   }
 }

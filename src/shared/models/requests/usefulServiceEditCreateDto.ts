@@ -5,6 +5,6 @@ export interface UsefulServiceEditCreateDto{
     title: string | null,
     description: string | null,
     link: string | null,
-    termsOfDistribution: string | null,
+    termsOfDisctribution: string | null,
     logoId: string | null,
 }

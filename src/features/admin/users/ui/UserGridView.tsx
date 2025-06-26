@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { RouteName } from '@/shared/config/router';
 import { Button } from '@/shared/ui/atoms/Button/Button';
 import styles from '@/pages/admin/users/ui/UsersPage.module.scss';
+import {useTranslation} from "react-i18next";
 
 interface UserGridViewProps {
     users: Array<{
@@ -18,6 +19,7 @@ interface UserGridViewProps {
 
 export function UserGridView({ users }: UserGridViewProps) {
     const navigate = useNavigate();
+    const {t} = useTranslation();
 
     return (
         <Row gutterWidth={16} style={{ alignItems: 'stretch' }}>
@@ -36,7 +38,7 @@ export function UserGridView({ users }: UserGridViewProps) {
                         </div>
                         <div className={styles.cardBody}>
                             <div>Email: {user.email}</div>
-                            {user.birthDate && <div>Дата рожд.: {user.birthDate}</div>}
+                            {user.birthDate && <div>{t("profilePage.personalData.birthDate" as any)}: {user.birthDate}</div>}
                         </div>
                         <div style={{ marginTop: 'auto' }}>
                             <Button

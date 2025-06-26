@@ -1,5 +1,6 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import {useTranslation} from "react-i18next";
 
 const modules = {
     toolbar: [
@@ -25,6 +26,7 @@ interface ToolBarProps {
 }
 
 export const ToolBar = ({ value, onChange }: ToolBarProps) => {
+    const {t} = useTranslation()
     return (
         <ReactQuill
             theme="snow"
@@ -32,7 +34,7 @@ export const ToolBar = ({ value, onChange }: ToolBarProps) => {
             onChange={onChange}
             modules={modules}
             formats={formats}
-            placeholder="Введите текст..."
+            placeholder={t("common.enterText" as any)}
         />
     );
 };

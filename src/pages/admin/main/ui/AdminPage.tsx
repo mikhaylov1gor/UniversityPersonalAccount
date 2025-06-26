@@ -9,20 +9,20 @@ export const AdminPage: React.FC = () => {
     const cards = [
         {
             iconName: 'user-black',
-            title: t('admin.nav.users'),
-            description: t('admin.nav.usersDesc'),
+            title: t('admin.nav.users' as any),
+            description: t('admin.nav.usersDesc' as any),
             to: '/admin/users',
         },
         {
             iconName: 'link-black',
-            title: t('admin.nav.usefulServices'),
-            description: t('admin.nav.usefulServicesDesc'),
+            title: t('admin.nav.usefulServices' as any),
+            description: t('admin.nav.usefulServicesDesc' as any),
             to: '/admin/services',
         },
         {
             iconName: 'map-black',
-            title: t('admin.nav.events'),
-            description: t('admin.nav.eventsDesc'),
+            title: t('admin.nav.events' as any),
+            description: t('admin.nav.eventsDesc' as any),
             to: '/admin/events',
         },
     ];

@@ -44,7 +44,6 @@ export function AdminEventDetailsPage() {
         try {
             setLoading(true);
             const data = await EventsStoreApi.retrieveFullDetailsForAdmin(id);
-            console.log(data);
             setEvent(data);
             setStatus(data.status);
         } catch (err) {

@@ -10,10 +10,12 @@ import {AlphabetFilter} from "@/features/admin/users/ui/AlphabetFilter.tsx";
 import {ViewToggle} from "@/features/admin/users/ui/ViewToggle.tsx";
 import {UserGridView} from "@/features/admin/users/ui/UserGridView.tsx";
 import {UserListView} from "@/features/admin/users/ui/UserListView.tsx";
+import {useTranslation} from "react-i18next";
 
 const DEFAULT_PAGE_SIZE = 10;
 
 export function UsersPage() {
+    const {t} = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [users, setUsers] = useState([]);
@@ -104,11 +106,11 @@ export function UsersPage() {
             <Row>
                 <Col xs={12}>
                     {loading ? (
-                        <div>Загрузка...</div>
+                        <div>{t("common.loading" as any)}</div>
                     ) : error ? (
                         <div style={{ color: 'red' }}>{error}</div>
                     ) : users.length === 0 ? (
-                        <div style={{ padding: 16 }}>Нет данных</div>
+                        <div style={{ padding: 16 }}>{t("common.noData" as any)}</div>
                     ) : view === 'list' ? (
                         <UserListView users={users} />
                     ) : (

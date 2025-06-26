@@ -1,7 +1,6 @@
 import React from 'react'
 import type { SVGProps } from 'react'
 
-// 1) Грузим все TSX-файлы из папки generated
 const modules = import.meta.glob(
     './generated/**/*.tsx',
     { eager: true }
@@ -10,28 +9,20 @@ const modules = import.meta.glob(
 const icons: Record<string, React.FC<SVGProps<SVGSVGElement>>> = {}
 
 Object.entries(modules).forEach(([filePath, mod]) => {
-    // filePath: './generated/Arrow/black/ArrowLeftMd.tsx'
-    // 1. Убираем префикс и расширение
     const rel = filePath
-        .replace(/^\.\/generated\//, '')  // 'Arrow/black/ArrowLeftMd.tsx'
-        .replace(/\.tsx$/, '')             // 'Arrow/black/ArrowLeftMd'
+        .replace(/^\.\/generated\//, '')
+        .replace(/\.tsx$/, '')
 
-    // 2. Разбиваем на части [category, color, fileName]
     const [category, color, fileName] = rel.split('/')
 
-    // 3. Конвертим CamelCase → kebab-case
     const base = fileName
         .replace(/([a-z])([A-Z])/g, '$1-$2')
         .toLowerCase()                     // 'arrow-left-md'
 
-    // 4. Ключ — базовое имя + дефис + цвет
     const key = `${base}-${color.toLowerCase()}`
 
     icons[key] = mod.default
 })
-
-/*console.log('Available icons:', Object.keys(icons))*/
-// → ['arrow-left-md-black','arrow-left-md-red', …]
 
 export type IconName = keyof typeof icons
 

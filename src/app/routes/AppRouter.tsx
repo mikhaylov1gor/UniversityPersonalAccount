@@ -8,12 +8,12 @@ import {Error404, Error500} from "@/pages/errors";
 import {EventDetailsPage, EventsPage} from "@/pages/events";
 import {ProfilePageForAdmin} from "@/pages/admin/userProfile/ui/ProfilePageForAdmin.tsx";
 import {AdminEventsPage} from "@/pages/admin/events/main/ui/AdminEventsPage.tsx";
-import UserUsefulServicesPage from "@/pages/usefulservices/UserUsefulServicesPage";
-import AdminPage from "@/pages/admin/AdminPage";
-import UsersPage from "@/pages/admin/UsersPage";
-import AdminUsefulServicesPage from "@/pages/admin/AdminUsefulServicesPage";
-import {CreateUpdateEventPage} from "@/pages/admin/events/CreateUpdateEventPage";
-
+import UsefulServicesPage from "@/pages/usefulservices/ui/UsefulServicesPage.tsx";
+import AdminUsefulServicesPage from "@/pages/admin/useful-services/main/ui/AdminUsefulServicesPage.tsx";
+import {CreateUpdateEventPage} from "@/pages/admin/events/createUpdateEventPage/ui/CreateUpdateEventPage.tsx";
+import {AdminPage, UsersPage} from "@/pages/admin";
+import {useTranslation} from "react-i18next";
+import {AdminEventDetailsPage} from "@/pages/admin/events/details/ui/AdminEventDetailsPage.tsx";
 function AppRouter() {
     const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
         const token = localStorage.getItem('accessToken');
@@ -24,6 +24,8 @@ function AppRouter() {
 
         return children;
     };
+
+    const{t} = useTranslation();
 
     return (
         <Routes>
@@ -41,7 +43,7 @@ function AppRouter() {
                 element={
                     <ProtectedRoute>
                         <Layout
-                            title="Профиль"
+                            title={t("menu.profile" as any)}
                         >
                             <ProfilePage />
                         </Layout>
@@ -52,7 +54,9 @@ function AppRouter() {
             <Route
                 path={RouteName.USEFUL_SERVICES_PAGE}
                 element={
-                <Layout title="Полезные сервисы">
+                <Layout
+                    title={t("menu.usefulServices" as any)}
+                >
                     <ProtectedRoute>
                             <UsefulServicesPage />
                     </ProtectedRoute>
@@ -65,7 +69,7 @@ function AppRouter() {
                 element={
                     <ProtectedRoute>
                         <Layout
-                            title="Справки"
+                            title={t("menu.certificates" as any)}
                         >
                             <ProfilePage />
                         </Layout>
@@ -77,7 +81,7 @@ function AppRouter() {
                 path={RouteName.EVENTS_PAGE}
                 element={
                         <Layout
-                            title="Мероприятия"
+                            title={t("menu.events" as any)}
                         >
                             <EventsPage />
                         </Layout>
@@ -88,7 +92,7 @@ function AppRouter() {
                 path="/event/:id"
                 element={
                         <Layout
-                            title="Мероприятия"
+                            title={t("menu.events" as any)}
                         >
                             <EventDetailsPage />
                         </Layout>
@@ -100,7 +104,7 @@ function AppRouter() {
                 element={
                     <ProtectedRoute>
                         <Layout
-                            title="Администрирование"
+                            title={t("menu.admin" as any)}
                         >
                             <AdminPage />
                         </Layout>
@@ -113,7 +117,7 @@ function AppRouter() {
                 element={
                     <ProtectedRoute>
                         <Layout
-                            title="Администрирование"
+                            title={t("menu.admin" as any)}
                         >
                             <UsersPage />
                         </Layout>
@@ -127,7 +131,7 @@ function AppRouter() {
                 element={
                     <ProtectedRoute>
                         <Layout
-                            title="Администрирование"
+                            title={t("menu.admin" as any)}
                         >
                             <ProfilePageForAdmin/>
                         </Layout>
@@ -140,7 +144,7 @@ function AppRouter() {
                 element={
                     <ProtectedRoute>
                         <Layout
-                            title="Администрирование"
+                            title={t("menu.admin" as any)}
                         >
                             <AdminEventsPage />
                         </Layout>
@@ -152,7 +156,11 @@ function AppRouter() {
                 path={RouteName.ADMIN_PAGE_USEFUL_SERVICES}
                 element={
                     <ProtectedRoute>
-                        <AdminUsefulServicesPage/>
+                        <Layout
+                            title={t("menu.admin" as any)}
+                        >
+                            <AdminUsefulServicesPage/>
+                        </Layout>
                     </ProtectedRoute>
                 }
             />
@@ -162,7 +170,7 @@ function AppRouter() {
                 element={
                     <ProtectedRoute>
                         <Layout
-                            title="Администрирование"
+                            title={t("menu.admin" as any)}
                         >
                             <CreateUpdateEventPage />
                         </Layout>
@@ -175,9 +183,22 @@ function AppRouter() {
                 element={
                     <ProtectedRoute>
                         <Layout
-                            title="Администрирование"
+                            title={t("menu.admin" as any)}
                         >
                             <CreateUpdateEventPage />
+                        </Layout>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/admin/event/:id"
+                element={
+                    <ProtectedRoute>
+                        <Layout
+                            title={t("menu.admin" as any)}
+                        >
+                            <AdminEventDetailsPage/>
                         </Layout>
                     </ProtectedRoute>
                 }

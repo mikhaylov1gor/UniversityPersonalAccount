@@ -100,11 +100,11 @@ export function EventsPage() {
                 <EventsSearchBar name={name} eventDate={eventDate}  onNameChange={handleNameChange} onEventDateChange={handleEventDateChange} onSearch={submitSearch} />
 
                 {loading ? (
-                    <div>Загрузка...</div>
+                    <h4>{t("common.loading" as any)}</h4>
                 ) : error ? (
                     <div style={{ color: 'red' }}>{error}</div>
                 ) : events.length === 0 ? (
-                    <div style={{ padding: 16 }}>Нет данных</div>
+                    <div style={{ padding: 16 }}>{t("common.noData" as any)}</div>
                 ) : (
                     <div style={{paddingTop: 20}}>
                         <EventsGridView events={events} />

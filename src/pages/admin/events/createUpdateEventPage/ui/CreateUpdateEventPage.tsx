@@ -95,7 +95,6 @@ export const CreateUpdateEventPage = () => {
 
     const submit = async () =>{
         try{
-            console.log(event?.picture?.id);
             let pictureId = event?.picture?.id == null ? null : event.picture.id;
             if (file) {
                 const formData = new FormData();
@@ -128,7 +127,6 @@ export const CreateUpdateEventPage = () => {
                     auditory: targetAudience
                 };
 
-                console.log(eventEditDto)
                 await EventsStoreApi.editEventForAdmin(eventEditDto);
 
                 toast.success("Страница успешно отредактирована");

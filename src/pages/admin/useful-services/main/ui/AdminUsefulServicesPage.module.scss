@@ -1,0 +1,11 @@
+@use "@/shared/ui/design/_tokens" as tokens;
+
+.topBar {
+  margin-bottom: tokens.$space-4;
+  display: flex;
+  justify-content: flex-start;
+
+  button {
+    min-width: 200px;
+  }
+}

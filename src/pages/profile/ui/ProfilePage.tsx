@@ -38,7 +38,6 @@ export function ProfilePage() {
 
     return (
         <>
-
             <div className="max-w-6xl py-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div className="md:col-span-1 space-y-3">
 

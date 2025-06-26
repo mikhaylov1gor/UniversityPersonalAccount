@@ -1,0 +1,103 @@
+@use "@/shared/ui/design/_tokens" as tokens;
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: tokens.$space-2;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 64px 40px 40px 40px;
+  border-radius: 8px;
+  width: 568px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$space-2;
+}
+
+.closeButton {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  gap: tokens.$space-2;
+  margin-top: tokens.$space-4;
+  //width: auto;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: none;
+  height: 80px;
+}
+
+@media (max-width: tokens.$bp-sm) {
+  .modalContent {
+    padding: 64px 40px 40px 40px;
+    border-radius: 8px;
+    width: 494px;
+    gap: 12px;
+  }
+
+  .buttons{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;;
+    gap: 12px;
+  }
+}
+
+@media (max-width: tokens.$bp-xs) {
+  .modalContent {
+    padding: 64px 32px 32px 32px;
+    border-radius: 8px;
+    width: 343px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .closeButton {
+    top: 32px;
+    right: 32px;
+  }
+
+  .title {
+    margin-bottom: tokens.$space-1;
+  }
+
+  .buttons{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;;
+    gap: 12px;
+  }
+}
