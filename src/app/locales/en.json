@@ -187,6 +187,7 @@
     "loadImage": "Load image",
     "enterText": "Enter the text...",
     "loading": "Loading...",
-    "noDate": "No data"
+    "noDate": "No data",
+    "alertMessage": "Are you sure?"
   }
 }
