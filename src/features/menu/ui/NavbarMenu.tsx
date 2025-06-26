@@ -28,7 +28,9 @@ export function NavbarMenu({
     const location = useLocation();
     const navigate = useNavigate();
     const accessToken = localStorage.getItem("accessToken");
-    const isAdmin = localStorage.getItem("role")
+    const rolesJson = localStorage.getItem("roles");
+    const roles: string[] = rolesJson ? JSON.parse(rolesJson) : [];
+    const isAdmin = roles.includes("admin");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -189,7 +191,7 @@ export function NavbarMenu({
                     {menuItems
                         .filter(item => {
                             if (item.authRequired && !accessToken) return false;
-                            if (item.adminRequired && isAdmin !== "admin") return false;
+                            if (item.adminRequired && !isAdmin) return false;
                             return true;
                         })
                         .map((item, idx) => {
